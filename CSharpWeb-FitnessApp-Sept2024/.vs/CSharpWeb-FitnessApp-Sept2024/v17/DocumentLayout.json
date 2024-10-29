@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DEDCB5FB-1D04-40ED-9A73-3C100355D62B}|FitnessApp.Web\\FitnessApp.Web.csproj|c:\\users\\omen\\desktop\\github\\fitness-app\\csharpweb-fitnessapp-sept2024\\fitnessapp.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DEDCB5FB-1D04-40ED-9A73-3C100355D62B}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3AEE4741-E802-4314-9A35-9C6B01C0C6BA}|FitnessApp.Common\\FitnessApp.Common.csproj|c:\\users\\omen\\desktop\\github\\fitness-app\\csharpweb-fitnessapp-sept2024\\fitnessapp.common\\applicationsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3AEE4741-E802-4314-9A35-9C6B01C0C6BA}|FitnessApp.Common\\FitnessApp.Common.csproj|solutionrelative:fitnessapp.common\\applicationsconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1889FC2E-08BF-4C7C-B73C-619EFE0F3E58}|FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj|c:\\users\\omen\\desktop\\github\\fitness-app\\csharpweb-fitnessapp-sept2024\\fitnessapp.web.viewmodels\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1889FC2E-08BF-4C7C-B73C-619EFE0F3E58}|FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj|solutionrelative:fitnessapp.web.viewmodels\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEDCB5FB-1D04-40ED-9A73-3C100355D62B}|FitnessApp.Web\\FitnessApp.Web.csproj|c:\\users\\omen\\desktop\\github\\fitness-app\\csharpweb-fitnessapp-sept2024\\fitnessapp.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DEDCB5FB-1D04-40ED-9A73-3C100355D62B}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E7C27112-92A3-4398-A5DA-468C215B8390}|FitnessApp.Data\\FitnessApp.Data.csproj|c:\\users\\omen\\desktop\\github\\fitness-app\\csharpweb-fitnessapp-sept2024\\fitnessapp.data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E7C27112-92A3-4398-A5DA-468C215B8390}|FitnessApp.Data\\FitnessApp.Data.csproj|solutionrelative:fitnessapp.data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,57 +14,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ApplicationsConstants.cs",
-              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Common\\ApplicationsConstants.cs",
-              "RelativeDocumentMoniker": "FitnessApp.Common\\ApplicationsConstants.cs",
-              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Common\\ApplicationsConstants.cs",
-              "RelativeToolTip": "FitnessApp.Common\\ApplicationsConstants.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T07:30:59.864Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "FitnessApp.Web\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "FitnessApp.Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T07:04:40.74Z",
+              "WhenOpened": "2024-10-29T12:54:26.707Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web.ViewModels\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "FitnessApp.Web.ViewModels\\ErrorViewModel.cs",
-              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web.ViewModels\\ErrorViewModel.cs",
-              "RelativeToolTip": "FitnessApp.Web.ViewModels\\ErrorViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T07:04:00.885Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web\\Program.cs",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Program.cs",
-              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web\\Program.cs",
-              "RelativeToolTip": "FitnessApp.Web\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T06:52:41.76Z"
             }
           ]
         }

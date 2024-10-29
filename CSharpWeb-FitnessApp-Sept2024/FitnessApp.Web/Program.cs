@@ -1,4 +1,4 @@
-using FitnessApp.Web.Data;
+using FitnessApp.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

@@ -147,3 +147,14 @@ C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessAp
 C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\obj\Debug\net8.0\ref\FitnessApp.Web.dll
 C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Web.ViewModels.dll
 C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Web.ViewModels.pdb
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Common.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Data.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Data.Models.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Common.pdb
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Data.pdb
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web\bin\Debug\net8.0\FitnessApp.Data.Models.pdb
