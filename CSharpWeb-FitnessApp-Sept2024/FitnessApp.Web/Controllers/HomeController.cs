@@ -1,16 +1,14 @@
 using System.Diagnostics;
-using FitnessApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using FitnessApp.Web.ViewModels;
 
 namespace FitnessApp.Web.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
-
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController()
 		{
-			_logger = logger;
+
 		}
 
 		public IActionResult Index()

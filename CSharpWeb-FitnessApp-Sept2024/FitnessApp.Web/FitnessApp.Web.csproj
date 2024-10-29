@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,12 @@
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\bin\Debug\net8.0\FitnessApp.Web.ViewModels.deps.json
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\bin\Debug\net8.0\FitnessApp.Web.ViewModels.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\bin\Debug\net8.0\FitnessApp.Web.ViewModels.pdb
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.AssemblyInfoInputs.cache
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.AssemblyInfo.cs
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.sourcelink.json
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\refint\FitnessApp.Web.ViewModels.dll
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\FitnessApp.Web.ViewModels.pdb
+C:\Users\OMEN\Desktop\GitHub\Fitness-App\CSharpWeb-FitnessApp-Sept2024\FitnessApp.Web.ViewModels\obj\Debug\net8.0\ref\FitnessApp.Web.ViewModels.dll

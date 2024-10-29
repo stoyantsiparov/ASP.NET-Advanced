@@ -1671,6 +1671,16 @@
             "rid": "win"
           }
         }
+      },
+      "FitnessApp.Web.ViewModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/FitnessApp.Web.ViewModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FitnessApp.Web.ViewModels.dll": {}
+        }
       }
     }
   },
@@ -4540,10 +4550,16 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "FitnessApp.Web.ViewModels/1.0.0": {
+      "type": "project",
+      "path": "../FitnessApp.Web.ViewModels/FitnessApp.Web.ViewModels.csproj",
+      "msbuildProject": "../FitnessApp.Web.ViewModels/FitnessApp.Web.ViewModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "FitnessApp.Web.ViewModels >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 8.0.8",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 8.0.8",
       "Microsoft.AspNetCore.Identity.UI >= 8.0.8",
@@ -4583,7 +4599,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj": {
+              "projectPath": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
