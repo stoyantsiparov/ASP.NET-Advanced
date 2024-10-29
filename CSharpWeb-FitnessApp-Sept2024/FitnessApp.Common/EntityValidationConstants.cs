@@ -57,7 +57,7 @@ public static class EntityValidationConstants
 		public const int SpecializationMinLength = 2;
 	}
 
-	public static class SpaType
+	public static class SpaProcedure
 	{
 		public const int NameMaxLength = 50;
 		public const int NameMinLength = 2;

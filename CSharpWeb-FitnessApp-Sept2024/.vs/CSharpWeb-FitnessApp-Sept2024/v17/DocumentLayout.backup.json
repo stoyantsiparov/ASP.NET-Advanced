@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\Migrations\\20241029130358_CreatedFitnesAppDatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FitnessApp.Data\\Migrations\\20241029130358_CreatedFitnesAppDatabase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\Migrations\\20241029171618_AddedCommentsAndChangedSpaModelName.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FitnessApp.Data\\Migrations\\20241029171618_AddedCommentsAndChangedSpaModelName.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E7C27112-92A3-4398-A5DA-468C215B8390}|FitnessApp.Data\\FitnessApp.Data.csproj|c:\\users\\omen\\desktop\\github\\fitness-app\\csharpweb-fitnessapp-sept2024\\fitnessapp.data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,14 +23,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "20241029130358_CreatedFitnesAppDatabase.cs",
-              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\Migrations\\20241029130358_CreatedFitnesAppDatabase.cs",
-              "RelativeDocumentMoniker": "FitnessApp.Data\\Migrations\\20241029130358_CreatedFitnesAppDatabase.cs",
-              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\Migrations\\20241029130358_CreatedFitnesAppDatabase.cs",
-              "RelativeToolTip": "FitnessApp.Data\\Migrations\\20241029130358_CreatedFitnesAppDatabase.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAQwKwAAAApAAAAAAAAAA==",
+              "Title": "20241029171618_AddedCommentsAndChangedSpaModelName.cs",
+              "DocumentMoniker": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\Migrations\\20241029171618_AddedCommentsAndChangedSpaModelName.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Data\\Migrations\\20241029171618_AddedCommentsAndChangedSpaModelName.cs",
+              "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\Migrations\\20241029171618_AddedCommentsAndChangedSpaModelName.cs",
+              "RelativeToolTip": "FitnessApp.Data\\Migrations\\20241029171618_AddedCommentsAndChangedSpaModelName.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKQBAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T13:03:58.845Z",
+              "WhenOpened": "2024-10-29T17:16:18.147Z",
               "EditorCaption": ""
             },
             {
@@ -41,9 +41,9 @@
               "RelativeDocumentMoniker": "FitnessApp.Data\\ApplicationDbContext.cs",
               "ToolTip": "C:\\Users\\OMEN\\Desktop\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp-Sept2024\\FitnessApp.Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "FitnessApp.Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA8AAABJAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAAB8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-29T12:54:26.707Z",
+              "WhenOpened": "2024-10-29T17:15:43.704Z",
               "EditorCaption": ""
             }
           ]
