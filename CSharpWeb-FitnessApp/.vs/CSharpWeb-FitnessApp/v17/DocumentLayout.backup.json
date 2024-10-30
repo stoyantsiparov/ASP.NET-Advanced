@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|c:\\users\\omen\\source\\repos\\csharpweb-fitnessapp\\fitnessapp.web\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|c:\\users\\omen\\source\\repos\\csharpweb-fitnessapp\\fitnessapp.web\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "RelativeToolTip": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-30T12:09:51.16Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "RelativeToolTip": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAC8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-30T12:09:32.67Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
