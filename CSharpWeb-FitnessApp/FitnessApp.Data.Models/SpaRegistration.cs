@@ -8,17 +8,16 @@ namespace FitnessApp.Data.Models;
 
 public class SpaRegistration
 {
-	[ForeignKey(nameof(Member))]
-	public string MemberId { get; set; } = null!;
+    [ForeignKey(nameof(Member))]
+    public string MemberId { get; set; } = null!;
     public IdentityUser Member { get; set; } = null!;
 
-	[ForeignKey(nameof(SpaProcedure))]
-	public int SpaProcedureId { get; set; }
-	public SpaProcedure SpaProcedure { get; set; } = null!;
+    [ForeignKey(nameof(SpaProcedure))]
+    public int SpaProcedureId { get; set; }
+    public SpaProcedure SpaProcedure { get; set; } = null!;
 
-	[Required]
-	[Comment("Appointment date for the spa service")]
-	[DataType(DataType.Date)]
-	[DisplayFormat(DataFormatString = AppointmentDateTimeFormat, ApplyFormatInEditMode = true)]
-	public DateTime AppointmentDate { get; set; }
+    [Required]
+    [Comment("Appointment day for the spa service")]
+    [RegularExpression(TreatmentDayRegex, ErrorMessage = "Treatment day must be either Saturday or Sunday.")]
+    public string TreatmentDay { get; set; } = null!;
 }

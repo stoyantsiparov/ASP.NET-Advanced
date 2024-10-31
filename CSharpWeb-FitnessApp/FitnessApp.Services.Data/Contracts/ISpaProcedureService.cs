@@ -1,37 +1,44 @@
-﻿using System;
+﻿using System.Collections;
+using FitnessApp.Data.Models;
 using FitnessApp.Web.ViewModels.SpaProcedures;
 
-namespace FitnessApp.Services.Data.Contracts;
-
-public interface ISpaProcedureService
+namespace FitnessApp.Services.Data.Contracts
 {
-	/// <summary>
-	/// Get all spa procedures
-	/// </summary>
-	Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync();
+    public interface ISpaProcedureService
+    {
+        /// <summary>
+        /// Get all spa procedures
+        /// </summary>
+        Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync();
 
-	/// <summary>
-	/// Gets the spa treatments the user is signed up for.
-	/// </summary>
-	Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId);
+        /// <summary>
+        /// Get spa procedure by id
+        /// </summary>
+        Task<SpaProcedure?> GetSpaProceduresByIdAsync(int id);
 
-	/// <summary>
-	/// Get spa procedures by id
-	/// </summary>
-	Task<SpaProceduresViewModel?> GetSpaProceduresByIdAsync(int id);
-	
-	/// <summary>
-	/// Get spa procedures details by id
-	/// </summary>
-	Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id);
+        /// <summary>
+        /// Get all treatment days
+        /// </summary>
+        Task<List<string>> GetTreatmentDaysAsync();
 
-    /// <summary>
-    /// Add spa procedures to user's appointments
-    /// </summary>
-    Task AddToMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedures);
+        /// <summary>
+        /// Get spa procedure details by id
+        /// </summary>
+        Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id);
 
-    /// <summary>
-    /// Remove spa procedures from user's appointments
-    /// </summary>
-    Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedures);
+        /// <summary>
+        /// Get all spa procedures for the current user
+        /// </summary>
+        Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId);
+
+        /// <summary>
+        /// Add spa procedure to the current user's appointments
+        /// </summary>
+        Task AddToMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure, string treatmentDay);
+
+        /// <summary>
+        /// Remove spa procedure from the current user's appointments
+        /// </summary>
+        Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure);
+    }
 }

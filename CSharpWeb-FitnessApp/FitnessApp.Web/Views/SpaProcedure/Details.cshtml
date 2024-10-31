@@ -1,11 +1,7 @@
-﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model FitnessApp.Web.ViewModels.SpaProcedures.SpaProceduresDetailsViewModel
-@{
-    ViewData["Title"] = Model.Name;
-}
+﻿@model FitnessApp.Web.ViewModels.SpaProcedures.SpaProceduresDetailsViewModel
 
 <div class="d-flex justify-content-between align-items-center mb-3" style="margin-top: 20px;">
-    <h2>@ViewData["Title"]</h2>
+    <h2>@Model.Name</h2>
 </div>
 <hr />
 
@@ -30,18 +26,26 @@
             <p class="card-text">@Model.Description</p>
             <hr />
             <p class="card-text"><small class="text-muted">Duration: @Model.Duration minutes</small></p>
-        </div>
-        <div class="card-footer text-center">
-            <div class="d-flex justify-content-between align-items-center">
-                <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-warning d-flex justify-content-center align-items-center flex-fill mx-1">Back</a>
-                @if (User?.Identity?.IsAuthenticated == true)
-                {
-                    <form asp-controller="SpaProcedure" asp-action="AddToMySpaAppointments" method="post" class="d-flex justify-content-center align-items-center flex-fill mx-1">
-                        <input type="hidden" name="id" value="@Model.Id" />
-                        <button type="submit" class="btn btn-success w-100">Book Now</button>
-                    </form>
-                }
-            </div>
+            <hr />
+
+            <form asp-action="AddToMySpaAppointments" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+                <div class="form-group">
+                    <label for="treatmentDay">Select Treatment Day</label>
+                    <select name="treatmentDay" id="treatmentDay" class="form-control">
+                        @foreach (var day in Model.TreatmentDaysOptions)
+                        {
+                            <option value="@day">@day</option>
+                        }
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success mt-2 w-100">Book Now</button>
+                <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
+            </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -322,14 +322,14 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2")
-                        .HasComment("Appointment date for the spa service");
+                    b.Property<string>("TreatmentDay")
+                        .HasColumnType("nvarchar(450)")
+                        .HasComment("Appointment day for the spa service");
 
                     b.Property<int?>("MemberId1")
                         .HasColumnType("int");
 
-                    b.HasKey("SpaProcedureId", "MemberId");
+                    b.HasKey("SpaProcedureId", "MemberId", "TreatmentDay");
 
                     b.HasIndex("MemberId");
 

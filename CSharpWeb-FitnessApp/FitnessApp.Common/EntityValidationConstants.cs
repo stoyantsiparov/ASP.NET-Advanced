@@ -63,14 +63,14 @@ public static class EntityValidationConstants
 		public const int NameMinLength = 2;
 		public const int DescriptionMaxLength = 5000;
 		public const int DescriptionMinLength = 10;
-		public const int DurationMinValue = 30;
+        public const int DurationMinValue = 30;
 		public const int DurationMaxValue = 180;
 		public const decimal PriceMinValue = 99.00m;
 		public const decimal PriceMaxValue = 399.00m;
 	}
 
-	public static class SpaRegistration
-	{
-		public const string AppointmentDateTimeFormat = "dd-MM-yyyy HH:mm";
-	}
+    public static class SpaRegistration
+    {
+        public const string TreatmentDayRegex = "Saturday|Sunday";
+    }
 }

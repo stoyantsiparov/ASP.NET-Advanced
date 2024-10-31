@@ -14,15 +14,15 @@ public class SpaProcedure
 	[Comment("Spa type")]
 	[MaxLength(NameMaxLength)]
 	public string Name { get; set; } = null!;
-	
+
 	public string? ImageUrl { get; set; }
 
-	[Required]
+    [Required]
 	[Comment("Description of the spa procedure")]
 	[MaxLength(DescriptionMaxLength)]
 	public string Description { get; set; } = null!;
 
-	[Required]
+    [Required]
 	[Comment("Duration of the spa procedure in minutes")]
 	[Range(DurationMinValue, DurationMaxValue)]
 	public int Duration { get; set; }

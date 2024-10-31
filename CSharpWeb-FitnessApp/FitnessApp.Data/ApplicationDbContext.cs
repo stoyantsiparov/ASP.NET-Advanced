@@ -29,10 +29,10 @@ namespace FitnessApp.Data
 				.HasKey(er => new { er.EventId, er.MemberId });
 			builder.Entity<ClassRegistration>()
 				.HasKey(cr => new { cr.ClassId, cr.MemberId });
-			builder.Entity<SpaRegistration>()
-				.HasKey(sr => new { sr.SpaProcedureId, sr.MemberId });
+            builder.Entity<SpaRegistration>()
+                .HasKey(sr => new { sr.SpaProcedureId, sr.MemberId, sr.TreatmentDay });
 
-			builder.Entity<MembershipType>()
+            builder.Entity<MembershipType>()
 				.Property(mt => mt.Price)
 				.HasPrecision(18, 2);
 			builder.Entity<SpaProcedure>()
