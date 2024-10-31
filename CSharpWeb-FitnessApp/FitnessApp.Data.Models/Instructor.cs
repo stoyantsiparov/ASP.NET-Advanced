@@ -8,19 +8,22 @@ public class Instructor
 {
 	[Comment("Primary key")]
 	[Key]
-	public required int Id { get; set; }
+	public int Id { get; set; }
 
+	[Required]
 	[Comment("First name of the fitness instructor")]
 	[MaxLength(FirstNameMaxLength)]
-	public required string FirstName { get; set; }
+	public string FirstName { get; set; } = null!;
 
+	[Required]
 	[Comment("Last name of the fitness instructor")]
 	[MaxLength(LastNameMaxLength)]
-	public required string LastName { get; set; }
+	public string LastName { get; set; } = null!;
 
+	[Required]
 	[Comment("Specialization of the fitness instructor")]
 	[MaxLength(SpecializationMaxLength)]
-	public required string Specialization { get; set; }
+	public string Specialization { get; set; } = null!;
 
 	[Comment("Classes taught by the fitness instructor")]
 	public virtual ICollection<Class> Classes { get; set; } = new List<Class>();

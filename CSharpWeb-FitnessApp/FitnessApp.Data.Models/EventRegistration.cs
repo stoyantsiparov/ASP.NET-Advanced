@@ -5,10 +5,10 @@ namespace FitnessApp.Data.Models;
 public class EventRegistration
 {
 	[ForeignKey(nameof(Member))]
-	public required int MemberId { get; set; }
-	public required Member Member { get; set; }
+	public int MemberId { get; set; }
+	public Member Member { get; set; } = null!;
 
 	[ForeignKey(nameof(FitnessEvent))]
-	public required int EventId { get; set; }
-	public required FitnessEvent FitnessEvent { get; set; }
+	public int EventId { get; set; }
+	public FitnessEvent FitnessEvent { get; set; } = null!;
 }

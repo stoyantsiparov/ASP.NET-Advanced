@@ -986,7 +986,8 @@
       "FitnessApp.Data.Models/1.0.0": {
         "dependencies": {
           "FitnessApp.Common": "1.0.0",
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.10"
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.10",
+          "Microsoft.Extensions.Identity.Stores": "8.0.10"
         },
         "runtime": {
           "FitnessApp.Data.Models.dll": {

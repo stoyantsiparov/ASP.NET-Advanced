@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<FitnessApp.Web.ViewModels.SpaProcedures.AllSpaProceduresViewModel>
+@{
+	ViewBag.Title = "Available Spa Procedures";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="text-center row">
+	@foreach (var procedure in Model)
+	{
+		<div class="card col-4" style="width: 20rem;">
+			<div class="card-body">
+				<h5 class="card-title mt-1">@procedure.Name</h5>
+				<img class="card-img-top" src="@procedure.ImageUrl" alt="Spa Procedure Image">
+			</div>
+
+			<a asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id" class="btn btn-info mb-2 w-100 p-3 fw-bold">View Details</a>
+		</div>
+	}
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

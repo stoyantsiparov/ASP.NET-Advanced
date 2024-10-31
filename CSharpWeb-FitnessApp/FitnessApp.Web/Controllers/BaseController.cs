@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FitnessApp.Web.Controllers
 {
-	[Authorize]
-	public class BaseController : Controller
-	{
-		protected string GetUserId()
-		{
-			string id = string.Empty;
+    [Authorize]
+    public class BaseController : Controller
+    {
+        protected string GetUserId()
+        {
+            string userId = string.Empty;
 
-			if (User != null)
-			{
-				id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-			}
-			return id;
-		}
-	}
+            if (User != null)
+            {
+                userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+            return userId;
+        }
+    }
 }

@@ -3,19 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Web", "FitnessApp.Web\FitnessApp.Web.csproj", "{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Web", "FitnessApp.Web\FitnessApp.Web.csproj", "{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{4654680D-2D12-4EB8-BECE-BF90C6F9F118}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{3C3831BE-095A-4097-A81D-38C5E6E2C846}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Web.ViewModels", "FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj", "{09907140-36B7-4386-B91D-ABC17F6530D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Web.ViewModels", "FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj", "{09907140-36B7-4386-B91D-ABC17F6530D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Data", "FitnessApp.Data\FitnessApp.Data.csproj", "{95565B1D-5CB8-453E-956A-308C1B1BDF41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Data", "FitnessApp.Data\FitnessApp.Data.csproj", "{95565B1D-5CB8-453E-956A-308C1B1BDF41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Data.Models", "FitnessApp.Data.Models\FitnessApp.Data.Models.csproj", "{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Data.Models", "FitnessApp.Data.Models\FitnessApp.Data.Models.csproj", "{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Common", "FitnessApp.Common\FitnessApp.Common.csproj", "{BE888D40-F8EE-41F0-AF89-5B8682448060}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Common", "FitnessApp.Common\FitnessApp.Common.csproj", "{BE888D40-F8EE-41F0-AF89-5B8682448060}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B75E5CA2-B5BC-4ED7-866D-A610C0132035}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Services.Data", "FitnessApp.Services.Data\FitnessApp.Services.Data.csproj", "{70B9EA8C-744C-4208-9DA5-572B97AFC469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Services.Mapping", "FitnessApp.Services.Mapping\FitnessApp.Services.Mapping.csproj", "{32784B02-FABE-482F-8F70-1DEB6246030A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +49,14 @@ Global
 		{BE888D40-F8EE-41F0-AF89-5B8682448060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE888D40-F8EE-41F0-AF89-5B8682448060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE888D40-F8EE-41F0-AF89-5B8682448060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32784B02-FABE-482F-8F70-1DEB6246030A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32784B02-FABE-482F-8F70-1DEB6246030A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32784B02-FABE-482F-8F70-1DEB6246030A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32784B02-FABE-482F-8F70-1DEB6246030A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +66,8 @@ Global
 		{09907140-36B7-4386-B91D-ABC17F6530D3} = {4654680D-2D12-4EB8-BECE-BF90C6F9F118}
 		{95565B1D-5CB8-453E-956A-308C1B1BDF41} = {3C3831BE-095A-4097-A81D-38C5E6E2C846}
 		{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5} = {3C3831BE-095A-4097-A81D-38C5E6E2C846}
+		{70B9EA8C-744C-4208-9DA5-572B97AFC469} = {B75E5CA2-B5BC-4ED7-866D-A610C0132035}
+		{32784B02-FABE-482F-8F70-1DEB6246030A} = {B75E5CA2-B5BC-4ED7-866D-A610C0132035}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0942C8E5-B8BB-4B6C-BA7A-C8B81EAF35AD}

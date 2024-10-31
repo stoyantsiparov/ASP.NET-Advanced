@@ -8,19 +8,22 @@ public class MembershipType
 {
 	[Comment("Primary key")]
 	[Key]
-	public required int Id { get; set; }
+	public int Id { get; set; }
 
+	[Required]
 	[Comment("Membership type")]
 	[MaxLength(NameMaxLength)]
-	public required string Name { get; set; }
+	public string Name { get; set; } = null!;
 
+	[Required]
 	[Comment("Price of the membership type")]
 	[Range((double)PriceMinValue, (double)PriceMaxValue)]
-	public required decimal Price { get; set; }
+	public decimal Price { get; set; }
 
+	[Required]
 	[Comment("Duration of the membership type in days")]
 	[Range(DurationMinValue, DurationMaxValue)]
-	public required int Duration { get; set; }
+	public int Duration { get; set; }
 
 	[Comment("Members with this membership type")]
 	public virtual ICollection<Member> Members { get; set; } = new List<Member>();

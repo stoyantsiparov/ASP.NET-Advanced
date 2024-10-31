@@ -41,6 +41,9 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasComment("Duration of the fitness class in minutes");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("InstructorId")
                         .HasColumnType("int")
                         .HasComment("Instructor of the fitness class");
@@ -59,7 +62,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Classes", (string)null);
+                    b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ClassRegistration", b =>
@@ -74,7 +77,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("ClassesRegistrations", (string)null);
+                    b.ToTable("ClassesRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.EventRegistration", b =>
@@ -89,7 +92,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("EventRegistrations", (string)null);
+                    b.ToTable("EventRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.FitnessEvent", b =>
@@ -111,6 +114,9 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasComment("End date of the fitness event");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -129,7 +135,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FitnessEvents", (string)null);
+                    b.ToTable("FitnessEvents");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Instructor", b =>
@@ -161,7 +167,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors", (string)null);
+                    b.ToTable("Instructors");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Member", b =>
@@ -209,7 +215,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MembershipTypeId");
 
-                    b.ToTable("Members", (string)null);
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
@@ -238,7 +244,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MembershipTypes", (string)null);
+                    b.ToTable("MembershipTypes");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
@@ -260,6 +266,9 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasComment("Duration of the spa procedure in minutes");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -273,7 +282,36 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpaProcedures", (string)null);
+                    b.ToTable("SpaProcedures");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A soothing massage to relieve tension and stress.",
+                            Duration = 60,
+                            ImageUrl = "https://www.dshieldsusa.com/wp-content/uploads/2021/05/relaxing-massage-slide.jpg",
+                            Name = "Relaxing Massage",
+                            Price = 50.00m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "A rejuvenating facial to nourish and hydrate your skin.",
+                            Duration = 45,
+                            ImageUrl = "https://spamd.net/wp-content/uploads/2022/03/medications-facial-treatments.jpg",
+                            Name = "Facial Treatment",
+                            Price = 40.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A session using essential oils to promote relaxation and well-being.",
+                            Duration = 30,
+                            ImageUrl = "https://elementsmassage.com/files/shared/AZ%20-%20Elements%20Massage%205-1864269.jpg",
+                            Name = "Aromatherapy Session",
+                            Price = 30.00m
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaRegistration", b =>
@@ -281,18 +319,23 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<int>("SpaProcedureId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2")
                         .HasComment("Appointment date for the spa service");
 
+                    b.Property<int?>("MemberId1")
+                        .HasColumnType("int");
+
                     b.HasKey("SpaProcedureId", "MemberId");
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("SpaRegistrations", (string)null);
+                    b.HasIndex("MemberId1");
+
+                    b.ToTable("SpaRegistrations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -559,11 +602,15 @@ namespace FitnessApp.Web.Data.Migrations
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaRegistration", b =>
                 {
-                    b.HasOne("FitnessApp.Data.Models.Member", "Member")
-                        .WithMany("SpaRegistrations")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FitnessApp.Data.Models.Member", null)
+                        .WithMany("SpaRegistrations")
+                        .HasForeignKey("MemberId1");
 
                     b.HasOne("FitnessApp.Data.Models.SpaProcedure", "SpaProcedure")
                         .WithMany("SpaRegistrations")

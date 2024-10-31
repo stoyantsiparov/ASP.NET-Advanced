@@ -9,30 +9,35 @@ public class Class
 {
 	[Comment("Primary key")]
 	[Key]
-	public required int Id { get; set; }
+	public int Id { get; set; }
 
+	[Required]
 	[Comment("Name of the fitness class")]
 	[MaxLength(NameMaxLength)]
-	public required string Name { get; set; }
+	public string Name { get; set; } = null!;
 
+	public string? ImageUrl { get; set; }
+
+	[Required]
 	[Comment("Description of the fitness class")]
 	[MaxLength(DescriptionMaxLength)]
-	public required string Description { get; set; }
+	public string Description { get; set; } = null!;
 
+	[Required]
 	[Comment("Date and time of the fitness class")]
 	[DataType(DataType.Date)]
 	[DisplayFormat(DataFormatString = ScheduleDateTimeFormat, ApplyFormatInEditMode = true)]
-	public required DateTime Schedule { get; set; }
+	public DateTime Schedule { get; set; }
 
+	[Required]
 	[Comment("Duration of the fitness class in minutes")]
 	[Range(DurationMinValue, DurationMaxValue)]
-	public required int Duration { get; set; }
-
+	public int Duration { get; set; }
 
 	[Comment("Instructor of the fitness class")]
 	[ForeignKey(nameof(Instructor))]
-	public required int InstructorId { get; set; }
-	public required Instructor Instructor { get; set; }
+	public int InstructorId { get; set; }
+	public Instructor Instructor { get; set; } = null!;
 
 	[Comment("Members registered for the fitness class")]
 	public virtual ICollection<ClassRegistration> ClassesRegistrations { get; set; } = new List<ClassRegistration>();

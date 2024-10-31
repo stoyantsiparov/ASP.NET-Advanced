@@ -1,4 +1,5 @@
-﻿using FitnessApp.Data.Models;
+﻿using System.Reflection.Emit;
+using FitnessApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,6 +38,36 @@ namespace FitnessApp.Data
 			builder.Entity<SpaProcedure>()
 				.Property(sp => sp.Price)
 				.HasPrecision(18, 2);
+
+			// Seed data for SpaProcedures
+			builder.Entity<SpaProcedure>().HasData(
+				new SpaProcedure
+				{
+					Id = 1,
+					Name = "Relaxing Massage",
+					Description = "A soothing massage to relieve tension and stress.",
+					Duration = 60,
+					Price = 50.00m,
+					ImageUrl = "https://www.dshieldsusa.com/wp-content/uploads/2021/05/relaxing-massage-slide.jpg"
+				},
+				new SpaProcedure
+				{
+					Id = 2,
+					Name = "Facial Treatment",
+					Description = "A rejuvenating facial to nourish and hydrate your skin.",
+					Duration = 45,
+					Price = 40.00m,
+					ImageUrl = "https://spamd.net/wp-content/uploads/2022/03/medications-facial-treatments.jpg"
+				},
+				new SpaProcedure
+				{
+					Id = 3,
+					Name = "Aromatherapy Session",
+					Description = "A session using essential oils to promote relaxation and well-being.",
+					Duration = 30,
+					Price = 30.00m,
+					ImageUrl = "https://elementsmassage.com/files/shared/AZ%20-%20Elements%20Massage%205-1864269.jpg"
+				});
 		}
 	}
 }

@@ -10,7 +10,8 @@
         "dependencies": {
           "FitnessApp.Common": "1.0.0",
           "FitnessApp.Data": "1.0.0",
-          "FitnessApp.Data.Models": "1.0.0",
+          "FitnessApp.Services.Data": "1.0.0",
+          "FitnessApp.Services.Mapping": "1.0.0",
           "FitnessApp.Web.ViewModels": "1.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "8.0.10",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.10",
@@ -22,6 +23,17 @@
         },
         "runtime": {
           "FitnessApp.Web.dll": {}
+        }
+      },
+      "AutoMapper/13.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.2"
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.0"
+          }
         }
       },
       "Azure.Core/1.35.0": {
@@ -2197,7 +2209,8 @@
       "FitnessApp.Data.Models/1.0.0": {
         "dependencies": {
           "FitnessApp.Common": "1.0.0",
-          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.10"
+          "Microsoft.EntityFrameworkCore.Abstractions": "8.0.10",
+          "Microsoft.Extensions.Identity.Stores": "8.0.10"
         },
         "runtime": {
           "FitnessApp.Data.Models.dll": {
@@ -2206,7 +2219,36 @@
           }
         }
       },
+      "FitnessApp.Services.Data/1.0.0": {
+        "dependencies": {
+          "FitnessApp.Common": "1.0.0",
+          "FitnessApp.Data": "1.0.0",
+          "FitnessApp.Data.Models": "1.0.0",
+          "FitnessApp.Web.ViewModels": "1.0.0",
+          "Microsoft.Extensions.DependencyInjection": "8.0.1"
+        },
+        "runtime": {
+          "FitnessApp.Services.Data.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "FitnessApp.Services.Mapping/1.0.0": {
+        "dependencies": {
+          "AutoMapper": "13.0.1"
+        },
+        "runtime": {
+          "FitnessApp.Services.Mapping.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "FitnessApp.Web.ViewModels/1.0.0": {
+        "dependencies": {
+          "FitnessApp.Common": "1.0.0"
+        },
         "runtime": {
           "FitnessApp.Web.ViewModels.dll": {
             "assemblyVersion": "1.0.0",
@@ -2221,6 +2263,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "path": "automapper/13.0.1",
+      "hashPath": "automapper.13.0.1.nupkg.sha512"
     },
     "Azure.Core/1.35.0": {
       "type": "package",
@@ -3458,6 +3507,16 @@
       "sha512": ""
     },
     "FitnessApp.Data.Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FitnessApp.Services.Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FitnessApp.Services.Mapping/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

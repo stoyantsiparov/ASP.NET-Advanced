@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
+      "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
       "projectName": "FitnessApp.Common",
-      "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
+      "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
       "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\obj\\",
+      "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

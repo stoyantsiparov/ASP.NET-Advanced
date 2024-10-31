@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.SpaProcedures.AllSpaProceduresViewModel>
+
+@{
+    ViewData["Title"] = "My Spa Appointments";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var procedure in Model)
+        {
+            <li>
+                <img src="@procedure.ImageUrl" alt="@procedure.Name" style="width:100px;height:100px;" />
+                <strong>@procedure.Name</strong>
+                <a asp-action="RemoveFromToMySpaAppointment" asp-route-id="@procedure.Id">Cancel Appointment</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>You have no appointments scheduled.</p>
+}

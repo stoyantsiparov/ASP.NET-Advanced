@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "olc87uTn5RY=",
+  "success": true,
+  "projectFilePath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.Infrastructure\\FitnessApp.Web.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\OMEN\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

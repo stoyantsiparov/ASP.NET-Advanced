@@ -1,14 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\",
+  "WorkspaceRootPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|c:\\users\\omen\\source\\repos\\csharpweb-fitnessapp\\fitnessapp.web\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\areas\\identity\\pages\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\controllers\\spaprocedurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\controllers\\spaprocedurecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|c:\\users\\omen\\source\\repos\\csharpweb-fitnessapp\\fitnessapp.web\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\areas\\identity\\pages\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.services.data\\spaprocedureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|solutionrelative:fitnessapp.services.data\\spaprocedureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.services.data\\contracts\\ispaprocedureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|solutionrelative:fitnessapp.services.data\\contracts\\ispaprocedureservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5}|FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.data.models\\sparegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5}|FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj|solutionrelative:fitnessapp.data.models\\sparegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\controllers\\basecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SpaRegistration.cs",
+              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\SpaRegistration.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Data.Models\\SpaRegistration.cs",
+              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\SpaRegistration.cs",
+              "RelativeToolTip": "FitnessApp.Data.Models\\SpaRegistration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T11:35:16.887Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "ToolTip": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "RelativeToolTip": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB8AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-30T12:09:51.16Z",
+              "Title": "SpaProcedureController.cs",
+              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Controllers\\SpaProcedureController.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Web\\Controllers\\SpaProcedureController.cs",
+              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Controllers\\SpaProcedureController.cs",
+              "RelativeToolTip": "FitnessApp.Web\\Controllers\\SpaProcedureController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T12:45:06.251Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "ToolTip": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "RelativeToolTip": "FitnessApp.Web\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAC8AAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-30T12:09:32.67Z",
+              "Title": "SpaProcedureService.cs",
+              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\SpaProcedureService.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Services.Data\\SpaProcedureService.cs",
+              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\SpaProcedureService.cs",
+              "RelativeToolTip": "FitnessApp.Services.Data\\SpaProcedureService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T12:51:15.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ISpaProcedureService.cs",
+              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\Contracts\\ISpaProcedureService.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Services.Data\\Contracts\\ISpaProcedureService.cs",
+              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\Contracts\\ISpaProcedureService.cs",
+              "RelativeToolTip": "FitnessApp.Services.Data\\Contracts\\ISpaProcedureService.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwCEAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T12:50:03.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BaseController.cs",
+              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Controllers\\BaseController.cs",
+              "RelativeDocumentMoniker": "FitnessApp.Web\\Controllers\\BaseController.cs",
+              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Controllers\\BaseController.cs",
+              "RelativeToolTip": "FitnessApp.Web\\Controllers\\BaseController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T17:55:41.548Z",
               "EditorCaption": ""
             }
           ]

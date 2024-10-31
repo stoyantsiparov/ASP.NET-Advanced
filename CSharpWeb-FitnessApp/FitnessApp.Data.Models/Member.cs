@@ -10,33 +10,38 @@ public class Member
 {
 	[Comment("Primary key")]
 	[Key]
-	public required int Id { get; set; }
+	public int Id { get; set; }
 
+	[Required]
 	[Comment("First name of the member")]
 	[MaxLength(FirstNameMaxLength)]
-	public required string FirstName { get; set; }
+	public string FirstName { get; set; } = null!;
 
+	[Required]
 	[Comment("Last name of the member")]
 	[MaxLength(LastNameMaxLength)]
-	public required string LastName { get; set; }
+	public string LastName { get; set; } = null!;
 
+	[Required]
 	[Comment("Email of the member")]
 	[MaxLength(EmailMaxLength)]
-	public required string Email { get; set; }
+	public string Email { get; set; } = null!;
 
+	[Required]
 	[Comment("Phone number of the member")]
 	[MaxLength(PhoneNumberMaxLength)]
-	public required string Phone { get; set; }
+	public string Phone { get; set; } = null!;
 
+	[Required]
 	[Comment("Date whn the member joined the gym")]
 	[DataType(DataType.Date)]
 	[DisplayFormat(DataFormatString = JoinDateTimeFormat, ApplyFormatInEditMode = true)]
-	public required DateTime JoinDate { get; set; }
+	public DateTime JoinDate { get; set; }
 
 	[Comment("Membership type of the member")]
 	[ForeignKey(nameof(MembershipType))]
-	public required int MembershipTypeId { get; set; }
-	public required MembershipType MembershipType { get; set; }
+	public int MembershipTypeId { get; set; }
+	public MembershipType MembershipType { get; set; } = null!;
 
 	[Comment("Class registrations of the member")]
 	public virtual ICollection<ClassRegistration> ClassRegistrations { get; set; } = new List<ClassRegistration>();

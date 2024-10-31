@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj": {}
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
         "projectName": "FitnessApp.Common",
-        "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj",
         "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\obj\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj": {
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj",
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj",
         "projectName": "FitnessApp.Data.Models",
-        "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj",
         "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\obj\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -98,8 +98,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
               }
             }
           }
@@ -120,6 +120,10 @@
           "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.Extensions.Identity.Stores": {
               "target": "Package",
               "version": "[8.0.10, )"
             }
@@ -144,14 +148,14 @@
         }
       }
     },
-    "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj": {
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj",
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj",
         "projectName": "FitnessApp.Data",
-        "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj",
         "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data\\obj\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -173,11 +177,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
               },
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj"
               }
             }
           }
@@ -232,14 +236,98 @@
         }
       }
     },
-    "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj": {
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj",
-        "projectName": "FitnessApp.Web.ViewModels",
-        "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj",
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj",
+        "projectName": "FitnessApp.Services.Data",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj",
         "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\obj\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\OMEN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
+              },
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj"
+              },
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj"
+              },
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Mapping\\FitnessApp.Services.Mapping.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Mapping\\FitnessApp.Services.Mapping.csproj",
+        "projectName": "FitnessApp.Services.Mapping",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Mapping\\FitnessApp.Services.Mapping.csproj",
+        "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Mapping\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -277,6 +365,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -297,14 +391,14 @@
         }
       }
     },
-    "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj": {
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj",
-        "projectName": "FitnessApp.Web",
-        "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj",
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj",
+        "projectName": "FitnessApp.Web.ViewModels",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj",
         "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web\\obj\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -326,17 +420,89 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.402/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj",
+        "projectName": "FitnessApp.Web",
+        "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\FitnessApp.Web.csproj",
+        "packagesPath": "C:\\Users\\OMEN\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\OMEN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Common\\FitnessApp.Common.csproj"
               },
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj"
               },
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Data\\FitnessApp.Data.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj"
               },
-              "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj": {
-                "projectPath": "C:\\Users\\OMEN\\source\\repos\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj"
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Mapping\\FitnessApp.Services.Mapping.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Mapping\\FitnessApp.Services.Mapping.csproj"
+              },
+              "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj": {
+                "projectPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web.ViewModels\\FitnessApp.Web.ViewModels.csproj"
               }
             }
           }

@@ -21,3 +21,15 @@ C:\Users\OMEN\source\repos\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8
 C:\Users\OMEN\source\repos\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\refint\FitnessApp.Common.dll
 C:\Users\OMEN\source\repos\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.pdb
 C:\Users\OMEN\source\repos\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\ref\FitnessApp.Common.dll
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\bin\Debug\net8.0\FitnessApp.Common.deps.json
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\bin\Debug\net8.0\FitnessApp.Common.dll
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\bin\Debug\net8.0\FitnessApp.Common.pdb
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.AssemblyInfoInputs.cache
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.AssemblyInfo.cs
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.csproj.CoreCompileInputs.cache
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.sourcelink.json
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.dll
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\refint\FitnessApp.Common.dll
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\FitnessApp.Common.pdb
+D:\GitHub\Fitness-App\CSharpWeb-FitnessApp\FitnessApp.Common\obj\Debug\net8.0\ref\FitnessApp.Common.dll

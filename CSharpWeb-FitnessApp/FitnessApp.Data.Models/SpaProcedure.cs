@@ -10,21 +10,27 @@ public class SpaProcedure
 	[Key]
 	public int Id { get; set; }
 
+	[Required]
 	[Comment("Spa type")]
 	[MaxLength(NameMaxLength)]
-	public required string Name { get; set; }
+	public string Name { get; set; } = null!;
+	
+	public string? ImageUrl { get; set; }
 
+	[Required]
 	[Comment("Description of the spa procedure")]
 	[MaxLength(DescriptionMaxLength)]
-	public required string Description { get; set; }
+	public string Description { get; set; } = null!;
 
+	[Required]
 	[Comment("Duration of the spa procedure in minutes")]
 	[Range(DurationMinValue, DurationMaxValue)]
-	public required int Duration { get; set; }
+	public int Duration { get; set; }
 
+	[Required]
 	[Comment("Price of the spa procedure")]
 	[Range((double)PriceMinValue, (double)PriceMaxValue)]
-	public required decimal Price { get; set; }
+	public decimal Price { get; set; }
 
 	[Comment("Registrations for this spa procedure")]
 	public virtual ICollection<SpaRegistration> SpaRegistrations { get; set; } = new List<SpaRegistration>();
