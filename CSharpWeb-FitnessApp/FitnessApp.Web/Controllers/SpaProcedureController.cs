@@ -1,4 +1,6 @@
-﻿using FitnessApp.Services.Data;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using FitnessApp.Services.Data;
 using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -41,14 +43,18 @@ namespace FitnessApp.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            model.TreatmentDaysOptions = await _spaService.GetTreatmentDaysAsync();
-
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddToMySpaAppointments(int id, string treatmentDay)
+        public async Task<IActionResult> AddToMySpaAppointments(int id, DateTime appointmentDateTime)
         {
+            if (appointmentDateTime < DateTime.Now)
+            {
+                ModelState.AddModelError(string.Empty, "Appointment date and time cannot be in the past.");
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
             var model = await _spaService.GetSpaProceduresByIdAsync(id);
 
             if (model == null)
@@ -62,15 +68,14 @@ namespace FitnessApp.Web.Controllers
 
             if (userAppointments.Any(a => a.Id == id))
             {
-                // Optional: Add a message to the user
+                ModelState.AddModelError(string.Empty, "You have already booked this appointment.");
                 return RedirectToAction(nameof(Index));
             }
 
-            await _spaService.AddToMySpaAppointmentsAsync(userId, model, treatmentDay);
+            await _spaService.AddToMySpaAppointmentsAsync(userId, model, appointmentDateTime);
 
             return RedirectToAction(nameof(MySpaAppointments));
         }
-
 
         public async Task<IActionResult> RemoveFromToMySpaAppointment(int id)
         {
@@ -81,7 +86,7 @@ namespace FitnessApp.Web.Controllers
                 return RedirectToAction(nameof(MySpaAppointments));
             }
 
-            var userId = GetUserId(); 
+            var userId = GetUserId();
 
             await _spaService.RemoveFromMySpaAppointmentsAsync(userId, model);
 

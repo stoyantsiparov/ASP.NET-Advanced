@@ -10,6 +10,5 @@ public class SpaProceduresDetailsViewModel
 	public string Description { get; set; } = null!;
 	public int Duration { get; set; }
 	public decimal Price { get; set; }
-    public string TreatmentDay { get; set; } = null!;
-    public IEnumerable<string> TreatmentDaysOptions { get; set; } = new List<string> { "Saturday", "Sunday" };
+	public string? AppointmentDateTime { get; set; }
 }

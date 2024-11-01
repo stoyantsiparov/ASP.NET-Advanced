@@ -32,6 +32,12 @@ public class SpaProcedure
 	[Range((double)PriceMinValue, (double)PriceMaxValue)]
 	public decimal Price { get; set; }
 
-	[Comment("Registrations for this spa procedure")]
+    [Required]
+    [Comment("Appointment date and time for the spa service")]
+    [DataType(DataType.DateTime)]
+    [DisplayFormat(DataFormatString = AppointmentDateTimeFormat, ApplyFormatInEditMode = true)]
+    public DateTime AppointmentDateTime { get; set; }
+
+    [Comment("Registrations for this spa procedure")]
 	public virtual ICollection<SpaRegistration> SpaRegistrations { get; set; } = new List<SpaRegistration>();
 }

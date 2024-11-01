@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FitnessApp.Data.Models;
 using FitnessApp.Web.ViewModels.SpaProcedures;
 
@@ -17,11 +18,6 @@ namespace FitnessApp.Services.Data.Contracts
         Task<SpaProcedure?> GetSpaProceduresByIdAsync(int id);
 
         /// <summary>
-        /// Get all treatment days
-        /// </summary>
-        Task<List<string>> GetTreatmentDaysAsync();
-
-        /// <summary>
         /// Get spa procedure details by id
         /// </summary>
         Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id);
@@ -34,7 +30,7 @@ namespace FitnessApp.Services.Data.Contracts
         /// <summary>
         /// Add spa procedure to the current user's appointments
         /// </summary>
-        Task AddToMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure, string treatmentDay);
+        Task AddToMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure, DateTime appointmentDateTime);
 
         /// <summary>
         /// Remove spa procedure from the current user's appointments

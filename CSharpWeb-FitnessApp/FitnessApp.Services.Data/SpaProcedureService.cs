@@ -1,4 +1,7 @@
-﻿using FitnessApp.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using FitnessApp.Data;
 using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.SpaProcedures;
@@ -29,15 +32,8 @@ namespace FitnessApp.Services.Data
                 .ToListAsync();
         }
 
-        public async Task<List<string>> GetTreatmentDaysAsync()
-        {
-            return await Task.FromResult(new List<string> { "Saturday", "Sunday" });
-        }
-
         public async Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id)
         {
-            var treatmentDaysOptions = new List<string> { "Saturday", "Sunday" };
-
             return await _context.SpaProcedures
                 .Where(x => x.Id == id)
                 .Select(x => new SpaProceduresDetailsViewModel
@@ -48,7 +44,7 @@ namespace FitnessApp.Services.Data
                     Description = x.Description,
                     Price = x.Price,
                     Duration = x.Duration,
-                    TreatmentDaysOptions = treatmentDaysOptions
+                    AppointmentDateTime = null
                 })
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
@@ -68,20 +64,27 @@ namespace FitnessApp.Services.Data
                     Id = sr.SpaProcedureId,
                     Name = sr.SpaProcedure.Name,
                     ImageUrl = sr.SpaProcedure.ImageUrl,
-                    TreatmentDay = sr.TreatmentDay,
-                    Description = sr.SpaProcedure.Description
+                    Description = sr.SpaProcedure.Description,
+                    AppointmentDateTime = sr.SpaProcedure.AppointmentDateTime
                 })
                 .AsNoTracking()
                 .ToListAsync();
         }
 
-        public async Task AddToMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure, string treatmentDay)
+        public async Task AddToMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure, DateTime appointmentDateTime)
         {
+            var existingRegistration = await _context.SpaRegistrations
+                .FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
+
+            if (existingRegistration != null)
+            {
+                throw new InvalidOperationException("This appointment has already been booked.");
+            }
+
             var spaRegistration = new SpaRegistration
             {
                 MemberId = userId,
-                SpaProcedureId = spaProcedure.Id,
-                TreatmentDay = treatmentDay
+                SpaProcedureId = spaProcedure.Id
             };
 
             await _context.SpaRegistrations.AddAsync(spaRegistration);

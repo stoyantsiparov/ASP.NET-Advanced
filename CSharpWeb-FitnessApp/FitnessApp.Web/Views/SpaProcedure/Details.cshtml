@@ -30,15 +30,12 @@
 
             <form asp-action="AddToMySpaAppointments" method="post">
                 <input type="hidden" name="id" value="@Model.Id" />
+
                 <div class="form-group">
-                    <label for="treatmentDay">Select Treatment Day</label>
-                    <select name="treatmentDay" id="treatmentDay" class="form-control">
-                        @foreach (var day in Model.TreatmentDaysOptions)
-                        {
-                            <option value="@day">@day</option>
-                        }
-                    </select>
+                    <label for="appointmentDateTime">Select Appointment Date and Time</label>
+                    <input type="datetime-local" name="appointmentDateTime" id="appointmentDateTime" class="form-control" lang="en" required />
                 </div>
+
                 <button type="submit" class="btn btn-success mt-2 w-100">Book Now</button>
                 <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
             </form>
@@ -48,4 +45,26 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const appointmentDateTimeInput = document.getElementById("appointmentDateTime");
+
+            const today = new Date();
+            const daysToAdd = [6, 0];
+
+            for (let i = 0; i < 30; i++) { 
+                const date = new Date();
+                date.setDate(today.getDate() + i);
+
+                if (daysToAdd.includes(date.getDay())) {
+                    const dateString = date.toISOString().split("T")[0];
+                    const option = document.createElement("option");
+                    option.value = dateString;
+                    option.textContent = dateString;
+                    appointmentDateTimeInput.appendChild(option);
+                }
+            }
+        });
+    </script>
 }

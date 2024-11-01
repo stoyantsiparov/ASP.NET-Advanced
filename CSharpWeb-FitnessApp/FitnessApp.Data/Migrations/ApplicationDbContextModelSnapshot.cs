@@ -256,6 +256,10 @@ namespace FitnessApp.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("AppointmentDateTime")
+                        .HasColumnType("datetime2")
+                        .HasComment("Appointment date and time for the spa service");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(5000)
@@ -288,6 +292,7 @@ namespace FitnessApp.Web.Data.Migrations
                         new
                         {
                             Id = 1,
+                            AppointmentDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A soothing massage to relieve tension and stress.",
                             Duration = 60,
                             ImageUrl = "https://www.dshieldsusa.com/wp-content/uploads/2021/05/relaxing-massage-slide.jpg",
@@ -297,6 +302,7 @@ namespace FitnessApp.Web.Data.Migrations
                         new
                         {
                             Id = 2,
+                            AppointmentDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A rejuvenating facial to nourish and hydrate your skin.",
                             Duration = 45,
                             ImageUrl = "https://spamd.net/wp-content/uploads/2022/03/medications-facial-treatments.jpg",
@@ -306,6 +312,7 @@ namespace FitnessApp.Web.Data.Migrations
                         new
                         {
                             Id = 3,
+                            AppointmentDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "A session using essential oils to promote relaxation and well-being.",
                             Duration = 30,
                             ImageUrl = "https://elementsmassage.com/files/shared/AZ%20-%20Elements%20Massage%205-1864269.jpg",
@@ -322,14 +329,10 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TreatmentDay")
-                        .HasColumnType("nvarchar(450)")
-                        .HasComment("Appointment day for the spa service");
-
                     b.Property<int?>("MemberId1")
                         .HasColumnType("int");
 
-                    b.HasKey("SpaProcedureId", "MemberId", "TreatmentDay");
+                    b.HasKey("SpaProcedureId", "MemberId");
 
                     b.HasIndex("MemberId");
 

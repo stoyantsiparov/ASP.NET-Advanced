@@ -17,7 +17,11 @@
 
 				<hr class="mt-2 mb-2" />
 
-				<p class="mt-2 flex-grow-1">@appointment.Description</p>
+				<p class="mt-2 flex-grow-1" style="min-height: 80px;">@appointment.Description</p>
+				<p class="text-muted" style="margin-top: auto; text-align: center;">
+					Appointment Date and Time:<br />
+					@appointment.AppointmentDateTime.ToString("dddd, dd MMMM yyyy HH:mm")
+				</p>
 
 				<div class="mt-auto">
 					<a asp-controller="SpaProcedure" asp-action="RemoveFromToMySpaAppointment" asp-route-id="@appointment.Id" class="btn btn-danger w-100">Remove</a>
