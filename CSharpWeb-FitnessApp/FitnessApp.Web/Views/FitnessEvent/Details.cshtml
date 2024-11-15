@@ -1,0 +1,45 @@
+﻿@model FitnessApp.Web.ViewModels.FitnessEvents.FitnessEventDetailsViewModel
+
+@{
+	ViewData["Title"] = "Fitness Event Details";
+}
+
+<h2>@Model.Title</h2>
+<hr />
+
+<div class="row justify-content-center" style="margin: 0 auto; max-width: 800px;">
+	<div class="col-md-4 text-center">
+		@if (!string.IsNullOrEmpty(Model.ImageUrl))
+		{
+			<img src="@Model.ImageUrl" class="img-fluid" style="max-width: 100%; height: auto;" alt="@Model.Title" />
+		}
+		else
+		{
+			<img src="~/img/no-image-available-02.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="No Image Available" />
+		}
+	</div>
+
+	<div class="col-md-8">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Title</h5>
+			<hr />
+			<p><strong>Location:</strong> @Model.Location</p>
+			<p><strong>Description:</strong> @Model.Description</p>
+			<p><strong>Start:</strong> @Model.StartDateTime</p>
+			<p><strong>End:</strong> @Model.EndDateTime</p>
+
+			<form method="post" asp-action="AddToMyFitnessEvents" asp-route-id="@Model.Id">
+				<div class="form-group">
+					<label for="appointmentDateTime">Select Appointment Date and Time</label>
+					<input type="datetime-local" id="appointmentDateTime" name="appointmentDateTime" class="form-control" required />
+				</div>
+				<button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

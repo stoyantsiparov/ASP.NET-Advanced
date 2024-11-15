@@ -69,6 +69,39 @@ namespace FitnessApp.Data
 					Price = 30.00m,
 					ImageUrl = "https://elementsmassage.com/files/shared/AZ%20-%20Elements%20Massage%205-1864269.jpg"
 				});
+
+			// Seed data for FitnessEvents
+			builder.Entity<FitnessEvent>().HasData(
+				new FitnessEvent
+				{
+					Id = 1,
+					Title = "Morning Yoga",
+					Description = "A calm and peaceful yoga session to start your day.",
+					Location = "Gym 1",
+					StartDate = new DateTime(2024, 12, 5, 7, 0, 0), // DateTime example with time
+					EndDate = new DateTime(2024, 12, 5, 8, 0, 0),   // DateTime example with time
+					ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg"
+				},
+				new FitnessEvent
+				{
+					Id = 2,
+					Title = "HIIT Challenge",
+					Description = "An intense, high-energy interval training session.",
+					Location = "Gym 2",
+					StartDate = new DateTime(2024, 12, 5, 18, 0, 0), // DateTime example with time
+					EndDate = new DateTime(2024, 12, 5, 19, 0, 0),   // DateTime example with time
+					ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB88ucCUVHp_EFpv6T47y7oJRpRsQ"
+				},
+				new FitnessEvent
+				{
+					Id = 3,
+					Title = "Zumba Party",
+					Description = "A fun and energetic Zumba dance class for all levels.",
+					Location = "Gym 3",
+					StartDate = new DateTime(2024, 12, 6, 10, 0, 0), // DateTime example with time
+					EndDate = new DateTime(2024, 12, 6, 11, 0, 0),   // DateTime example with time
+					ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw"
+				});
 		}
 	}
 }

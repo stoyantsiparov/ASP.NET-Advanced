@@ -70,12 +70,17 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MemberId")
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("MemberId1")
                         .HasColumnType("int");
 
                     b.HasKey("ClassId", "MemberId");
 
                     b.HasIndex("MemberId");
+
+                    b.HasIndex("MemberId1");
 
                     b.ToTable("ClassesRegistrations");
                 });
@@ -85,12 +90,17 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MemberId")
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("MemberId1")
                         .HasColumnType("int");
 
                     b.HasKey("EventId", "MemberId");
 
                     b.HasIndex("MemberId");
+
+                    b.HasIndex("MemberId1");
 
                     b.ToTable("EventRegistrations");
                 });
@@ -136,6 +146,38 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FitnessEvents");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A calm and peaceful yoga session to start your day.",
+                            EndDate = new DateTime(2024, 12, 5, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg",
+                            Location = "Gym 1",
+                            StartDate = new DateTime(2024, 12, 5, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Morning Yoga"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "An intense, high-energy interval training session.",
+                            EndDate = new DateTime(2024, 12, 5, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB88ucCUVHp_EFpv6T47y7oJRpRsQ",
+                            Location = "Gym 2",
+                            StartDate = new DateTime(2024, 12, 5, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "HIIT Challenge"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A fun and energetic Zumba dance class for all levels.",
+                            EndDate = new DateTime(2024, 12, 6, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw",
+                            Location = "Gym 3",
+                            StartDate = new DateTime(2024, 12, 6, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Zumba Party"
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Instructor", b =>
@@ -562,11 +604,15 @@ namespace FitnessApp.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FitnessApp.Data.Models.Member", "Member")
-                        .WithMany("ClassRegistrations")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FitnessApp.Data.Models.Member", null)
+                        .WithMany("ClassRegistrations")
+                        .HasForeignKey("MemberId1");
 
                     b.Navigation("Class");
 
@@ -581,11 +627,15 @@ namespace FitnessApp.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FitnessApp.Data.Models.Member", "Member")
-                        .WithMany("EventRegistrations")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FitnessApp.Data.Models.Member", null)
+                        .WithMany("EventRegistrations")
+                        .HasForeignKey("MemberId1");
 
                     b.Navigation("FitnessEvent");
 

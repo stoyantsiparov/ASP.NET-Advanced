@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FitnessApp.Data;
+﻿using FitnessApp.Data;
 using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.SpaProcedures;
@@ -18,6 +15,9 @@ namespace FitnessApp.Services.Data
             _context = context;
         }
 
+        /// <summary>
+        /// Get all spa procedures
+        /// </summary>
         public async Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync()
         {
             return await _context.SpaProcedures
@@ -32,6 +32,9 @@ namespace FitnessApp.Services.Data
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Get spa procedure details
+        /// </summary>
         public async Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id)
         {
             return await _context.SpaProcedures
@@ -50,11 +53,18 @@ namespace FitnessApp.Services.Data
                 .FirstOrDefaultAsync();
         }
 
+        /// <summary>
+        /// Get spa procedure by id
+        /// </summary>
+        // TODO: Implement GetSpaProceduresByIdAsync (SpaProcedure) -> remove and add ViewModel
         public async Task<SpaProcedure?> GetSpaProceduresByIdAsync(int id)
         {
             return await _context.SpaProcedures.FindAsync(id);
         }
 
+        /// <summary>
+        /// Get user's spa procedures
+        /// </summary>
         public async Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId)
         {
             return await _context.SpaRegistrations
@@ -71,6 +81,9 @@ namespace FitnessApp.Services.Data
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Add spa procedure to user's appointments
+        /// </summary>
         public async Task AddToMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure, DateTime appointmentDateTime)
         {
             var existingRegistration = await _context.SpaRegistrations
@@ -91,6 +104,9 @@ namespace FitnessApp.Services.Data
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Remove spa procedure from user's appointments
+        /// </summary>
         public async Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProcedure spaProcedure)
         {
             var registration = await _context.SpaRegistrations

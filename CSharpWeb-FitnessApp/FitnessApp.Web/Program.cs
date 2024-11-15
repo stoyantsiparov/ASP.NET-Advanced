@@ -5,6 +5,7 @@ using FitnessApp.Data.Repository.Contracts;
 using FitnessApp.Services.Data;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Services.Mapping;
+using FitnessApp.Web.Controllers;
 using FitnessApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,20 +35,22 @@ namespace FitnessApp.Web
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
 			builder.Services.AddControllersWithViews();
-			builder.Services.AddScoped<ISpaProcedureService, SpaProcedureService>();
+            // Add Razor Pages
+            builder.Services.AddScoped<ISpaProcedureService, SpaProcedureService>();
+            builder.Services.AddScoped<IFitnessEventService, FitnessEventService>();
 
-			//TODO: Add repositories and implement them
-			//builder.Services.AddScoped<IRepository<Class, int>, BaseRepository<Class, int>>();
-			//builder.Services.AddScoped<IRepository<ClassRegistration, int>, BaseRepository<ClassRegistration, int>>();
-			//builder.Services.AddScoped<IRepository<EventRegistration, int>, BaseRepository<EventRegistration, int>>();
-			//builder.Services.AddScoped<IRepository<FitnessEvent, int>, BaseRepository<FitnessEvent, int>>();
-			//builder.Services.AddScoped<IRepository<Instructor, int>, BaseRepository<Instructor, int>>();
-			//builder.Services.AddScoped<IRepository<Member, int>, BaseRepository<Member, int>>();
-			//builder.Services.AddScoped<IRepository<MembershipType, int>, BaseRepository<MembershipType, int>>();
-			//builder.Services.AddScoped<IRepository<SpaProcedure, int>, BaseRepository<SpaProcedure, int>>();
-			//builder.Services.AddScoped<IRepository<SpaRegistration, int>, BaseRepository<SpaRegistration, int>>();
+            //TODO: Add repositories and implement them
+            //builder.Services.AddScoped<IRepository<Class, int>, BaseRepository<Class, int>>();
+            //builder.Services.AddScoped<IRepository<ClassRegistration, int>, BaseRepository<ClassRegistration, int>>();
+            //builder.Services.AddScoped<IRepository<EventRegistration, int>, BaseRepository<EventRegistration, int>>();
+            //builder.Services.AddScoped<IRepository<FitnessEventViewModel, int>, BaseRepository<FitnessEventViewModel, int>>();
+            //builder.Services.AddScoped<IRepository<Instructor, int>, BaseRepository<Instructor, int>>();
+            //builder.Services.AddScoped<IRepository<Member, int>, BaseRepository<Member, int>>();
+            //builder.Services.AddScoped<IRepository<MembershipType, int>, BaseRepository<MembershipType, int>>();
+            //builder.Services.AddScoped<IRepository<SpaProcedure, int>, BaseRepository<SpaProcedure, int>>();
+            //builder.Services.AddScoped<IRepository<SpaRegistration, int>, BaseRepository<SpaRegistration, int>>();
 
-			WebApplication app = builder.Build();
+            WebApplication app = builder.Build();
 
 			//TODO: Add AutoMapper
 			// Тук вместо ErrorViewModel трябва да сложа моите си модели които ще ползвам
