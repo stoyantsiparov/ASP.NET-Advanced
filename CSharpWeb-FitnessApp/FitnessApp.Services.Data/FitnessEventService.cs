@@ -138,5 +138,4 @@ public class FitnessEventService : IFitnessEventService
 		_context.EventRegistrations.Remove(registration);
 		await _context.SaveChangesAsync();
 	}
-
 }

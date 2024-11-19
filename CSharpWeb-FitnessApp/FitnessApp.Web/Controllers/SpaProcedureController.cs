@@ -12,7 +12,7 @@ namespace FitnessApp.Web.Controllers
         {
             _spaService = spaService;
         }
-
+        
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
@@ -74,7 +74,7 @@ namespace FitnessApp.Web.Controllers
             return RedirectToAction(nameof(MySpaAppointments));
         }
 
-        public async Task<IActionResult> RemoveFromToMySpaAppointment(int id)
+        public async Task<IActionResult> RemoveFromMySpaAppointment(int id)
         {
             var model = await _spaService.GetSpaProceduresByIdAsync(id);
 
