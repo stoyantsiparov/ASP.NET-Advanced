@@ -15,6 +15,7 @@ public class FitnessEvent
 	[MaxLength(TitleMaxLength)]
 	public string Title { get; set; } = null!;
 
+	[Comment("Image URL of the fitness class")]
 	public string? ImageUrl { get; set; }
 
 	[Required]

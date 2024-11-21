@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.Class;
 
 namespace FitnessApp.Data.Models;
-
+	
 public class Class
 {
 	[Comment("Primary key")]
@@ -16,6 +16,7 @@ public class Class
 	[MaxLength(NameMaxLength)]
 	public string Name { get; set; } = null!;
 
+	[Comment("Image URL of the fitness class")]
 	public string? ImageUrl { get; set; }
 
 	[Required]

@@ -15,6 +15,7 @@ public class SpaProcedure
 	[MaxLength(NameMaxLength)]
 	public string Name { get; set; } = null!;
 
+	[Comment("Image URL of the spa procedure")]
 	public string? ImageUrl { get; set; }
 
     [Required]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FitnessApp.Services.Mapping")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a260d98c21b8ade518580457d41b2b3f7b12ee2a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d82628b700599c51f1e3025223ad19f70ce2553")]
 [assembly: System.Reflection.AssemblyProductAttribute("FitnessApp.Services.Mapping")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FitnessApp.Services.Mapping")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
