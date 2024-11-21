@@ -50,6 +50,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/Class/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/Class/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/Class/MyClasses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NcTXlDbGFzc2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/FitnessEvent/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRml0bmVzc0V2ZW50XERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

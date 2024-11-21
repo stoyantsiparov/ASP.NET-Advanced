@@ -10,4 +10,8 @@
     <ProjectReference Include="..\FitnessApp.Common\FitnessApp.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ClassViewModels\" />
+  </ItemGroup>
+
 </Project>

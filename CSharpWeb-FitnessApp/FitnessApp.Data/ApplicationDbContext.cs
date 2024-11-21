@@ -102,6 +102,68 @@ namespace FitnessApp.Data
 					EndDate = new DateTime(2024, 12, 6, 11, 0, 0),   // DateTime example with time
 					ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw"
 				});
+
+			// Seed data for Instructors
+			builder.Entity<Instructor>().HasData(
+				new Instructor
+				{
+					Id = 1,
+					FirstName = "Natalie",
+					LastName = "Asatryan",
+					Specialization = "Yoga",
+					ImageUrl = "https://horizonweekly.ca/wp-content/uploads/2021/01/Nat-2.jpg"
+				},
+				new Instructor
+				{
+					Id = 2,
+					FirstName = "Warren",
+					LastName = "Scott",
+					Specialization = "HIIT",
+					ImageUrl = "https://images.squarespace-cdn.com/content/v1/651489d366d19e59b7bbf9cf/a68428a6-992f-45a4-adfc-1b5a75e5cfda/Warren_square500.jpg"
+				},
+				new Instructor
+				{
+					Id = 3,
+					FirstName = "Emily",
+					LastName = "Johnson",
+					Specialization = "Zumba",
+					ImageUrl = "https://d29za44huniau5.cloudfront.net/uploads/2023/11/first-class-mobile.png"
+				}
+			);
+
+			// Seed data for Classes
+			builder.Entity<Class>().HasData(
+				new Class
+				{
+					Id = 1,
+					Name = "Morning Yoga",
+					InstructorId = 1,
+					Schedule = new DateTime(2024, 12, 5, 7, 0, 0),
+					Duration = 60,
+					Description = "A calm and peaceful yoga session to start your day.",
+					ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg"
+				},
+				new Class
+				{
+					Id = 2,
+					Name = "HIIT Challenge",
+					InstructorId = 2,
+					Schedule = new DateTime(2024, 12, 5, 18, 0, 0),
+					Duration = 45,
+					Description = "An intense, high-energy interval training session.",
+					ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB88ucCUVHp_EFpv6T47y7oJRpRsQ"
+				},
+				new Class
+				{
+					Id = 3,
+					Name = "Zumba Party",
+					InstructorId = 3,
+					Schedule = new DateTime(2024, 12, 6, 10, 0, 0),
+					Duration = 60,
+					Description = "A fun and energetic Zumba dance class for all levels.",
+					ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw"
+				}
+			);
 		}
 	}
 }

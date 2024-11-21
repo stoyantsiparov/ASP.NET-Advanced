@@ -20,10 +20,15 @@ public class Instructor
 	[MaxLength(LastNameMaxLength)]
 	public string LastName { get; set; } = null!;
 
-	[Required]
+    //TODO: Add instructor bio
+
+    [Required]
 	[Comment("Specialization of the fitness instructor")]
 	[MaxLength(SpecializationMaxLength)]
 	public string Specialization { get; set; } = null!;
+
+	[Comment("Image URL of the fitness instructor")]
+	public string? ImageUrl { get; set; }
 
 	[Comment("Classes taught by the fitness instructor")]
 	public virtual ICollection<Class> Classes { get; set; } = new List<Class>();

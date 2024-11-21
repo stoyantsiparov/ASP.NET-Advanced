@@ -63,7 +63,39 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A calm and peaceful yoga session to start your day.",
+                            Duration = 60,
+                            ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg",
+                            InstructorId = 1,
+                            Name = "Morning Yoga",
+                            Schedule = new DateTime(2024, 12, 5, 7, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "An intense, high-energy interval training session.",
+                            Duration = 45,
+                            ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB88ucCUVHp_EFpv6T47y7oJRpRsQ",
+                            InstructorId = 2,
+                            Name = "HIIT Challenge",
+                            Schedule = new DateTime(2024, 12, 5, 18, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A fun and energetic Zumba dance class for all levels.",
+                            Duration = 60,
+                            ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw",
+                            InstructorId = 3,
+                            Name = "Zumba Party",
+                            Schedule = new DateTime(2024, 12, 6, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ClassRegistration", b =>
@@ -83,7 +115,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("ClassesRegistrations");
+                    b.ToTable("ClassesRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.EventRegistration", b =>
@@ -103,7 +135,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("EventRegistrations");
+                    b.ToTable("EventRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.FitnessEvent", b =>
@@ -147,7 +179,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FitnessEvents");
+                    b.ToTable("FitnessEvents", (string)null);
 
                     b.HasData(
                         new
@@ -197,6 +229,10 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasComment("First name of the fitness instructor");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Image URL of the fitness instructor");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -211,7 +247,33 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instructors", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Natalie",
+                            ImageUrl = "https://horizonweekly.ca/wp-content/uploads/2021/01/Nat-2.jpg",
+                            LastName = "Asatryan",
+                            Specialization = "Yoga"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            FirstName = "Warren",
+                            ImageUrl = "https://images.squarespace-cdn.com/content/v1/651489d366d19e59b7bbf9cf/a68428a6-992f-45a4-adfc-1b5a75e5cfda/Warren_square500.jpg",
+                            LastName = "Scott",
+                            Specialization = "HIIT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            FirstName = "Emily",
+                            ImageUrl = "https://d29za44huniau5.cloudfront.net/uploads/2023/11/first-class-mobile.png",
+                            LastName = "Johnson",
+                            Specialization = "Zumba"
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Member", b =>
@@ -259,7 +321,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MembershipTypeId");
 
-                    b.ToTable("Members");
+                    b.ToTable("Members", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
@@ -288,7 +350,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MembershipTypes");
+                    b.ToTable("MembershipTypes", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
@@ -331,7 +393,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpaProcedures");
+                    b.ToTable("SpaProcedures", (string)null);
 
                     b.HasData(
                         new
@@ -383,7 +445,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("SpaRegistrations");
+                    b.ToTable("SpaRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

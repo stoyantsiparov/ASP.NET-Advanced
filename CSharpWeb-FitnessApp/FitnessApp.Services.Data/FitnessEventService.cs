@@ -121,7 +121,6 @@ public class FitnessEventService : IFitnessEventService
 		await _context.SaveChangesAsync();
 	}
 
-
 	/// <summary>
 	/// Remove fitness event from user's fitness events
 	/// </summary>
