@@ -41,13 +41,14 @@
                         <h5>Instructor Details</h5>
                         <p><strong>Name:</strong> @Model.Instructor.FirstName @Model.Instructor.LastName</p>
                         <p><strong>Specialty:</strong> @Model.Instructor.Specialization</p>
+                        <p><strong>Bio:</strong> @Model.Instructor.Bio</p> <!-- Добавено полето за биография -->
                         @if (!string.IsNullOrEmpty(Model.Instructor.ImageUrl))
                         {
-                            <img src="@Model.Instructor.ImageUrl" class="img-fluid" alt="Instructor Image" style="max-width: 100%; height: auto;" />
+                            <img src="@Model.Instructor.ImageUrl" class="img-fluid mt-3" alt="Instructor Image" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;" />
                         }
                         else
                         {
-                            <img src="~/img/no-image-available-02.jpg" class="img-fluid" alt="No Instructor Image" style="max-width: 100%; height: auto;" />
+                            <img src="~/img/no-image-available-02.jpg" class="img-fluid mt-3" alt="No Instructor Image" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;" />
                         }
                     </div>
                 </div>

@@ -94,7 +94,7 @@ public class FitnessEventService : IFitnessEventService
 	/// <summary>
 	/// Add fitness event to user's fitness events
 	/// </summary>
-	public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel fitnessEventViewModel, DateTime appointmentDateTime)
+	public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel, DateTime appointmentDateTime)
 	{
 		var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
 
@@ -124,7 +124,7 @@ public class FitnessEventService : IFitnessEventService
 	/// <summary>
 	/// Remove fitness event from user's fitness events
 	/// </summary>
-	public async Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel fitnessEventViewModel)
+	public async Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
 	{
 		var registration = await _context.EventRegistrations
 			.FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);

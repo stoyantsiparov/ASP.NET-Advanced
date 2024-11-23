@@ -53,7 +53,9 @@ public static class EntityValidationConstants
 		public const int FirstNameMinLength = 2;
 		public const int LastNameMaxLength = 50;
 		public const int LastNameMinLength = 2;
-		public const int SpecializationMaxLength = 50;
+        public const int BioMaxLength = 5000;
+        public const int BioMinLength = 10;
+        public const int SpecializationMaxLength = 50;
 		public const int SpecializationMinLength = 2;
 	}
 

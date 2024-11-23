@@ -8,7 +8,7 @@ namespace FitnessApp.Services.Data.Contracts
 		Task<ClassesViewModel?> GetClassByIdAsync(int id);
 		Task<ClassesDetailsViewModel?> GetClassDetailsAsync(int id);
 		Task<IEnumerable<AllClassesViewModel>> GetMyClassesAsync(string userId);
-		Task AddToMyClassesAsync(string userId, ClassesViewModel classesViewModel, DateTime appointmentDateTime);
-		Task RemoveFromMyClassesAsync(string userId, ClassesViewModel classesViewModel);
+		Task AddToMyClassesAsync(string userId, ClassesViewModel? classesViewModel, DateTime appointmentDateTime);
+		Task RemoveFromMyClassesAsync(string userId, ClassesViewModel? classesViewModel);
 	}
 }

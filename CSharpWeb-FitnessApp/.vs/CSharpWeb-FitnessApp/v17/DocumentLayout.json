@@ -3,32 +3,16 @@
   "WorkspaceRootPath": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5}|FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.data.models\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5}|FitnessApp.Data.Models\\FitnessApp.Data.Models.csproj|solutionrelative:fitnessapp.data.models\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.services.data\\contracts\\iclassservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|solutionrelative:fitnessapp.services.data\\contracts\\iclassservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.services.data\\classservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|solutionrelative:fitnessapp.services.data\\classservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\views\\class\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\views\\class\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\views\\class\\myclasses.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\views\\class\\myclasses.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.web\\views\\class\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EE1CDA9D-9D5F-4BE9-8874-C76F845134DE}|FitnessApp.Web\\FitnessApp.Web.csproj|solutionrelative:fitnessapp.web\\views\\class\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|d:\\github\\fitness-app\\csharpweb-fitnessapp\\fitnessapp.services.data\\contracts\\iclassservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70B9EA8C-744C-4208-9DA5-572B97AFC469}|FitnessApp.Services.Data\\FitnessApp.Services.Data.csproj|solutionrelative:fitnessapp.services.data\\contracts\\iclassservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,90 +27,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Instructor.cs",
-              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\Instructor.cs",
-              "RelativeDocumentMoniker": "FitnessApp.Data.Models\\Instructor.cs",
-              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Data.Models\\Instructor.cs",
-              "RelativeToolTip": "FitnessApp.Data.Models\\Instructor.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB0AAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T15:07:51.499Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Views\\Class\\Details.cshtml",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Views\\Class\\Details.cshtml",
-              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Views\\Class\\Details.cshtml",
-              "RelativeToolTip": "FitnessApp.Web\\Views\\Class\\Details.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T14:20:55.031Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MyClasses.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Views\\Class\\MyClasses.cshtml",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Views\\Class\\MyClasses.cshtml",
-              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Views\\Class\\MyClasses.cshtml",
-              "RelativeToolTip": "FitnessApp.Web\\Views\\Class\\MyClasses.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T14:29:53.449Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Views\\Class\\Index.cshtml",
-              "RelativeDocumentMoniker": "FitnessApp.Web\\Views\\Class\\Index.cshtml",
-              "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Views\\Class\\Index.cshtml",
-              "RelativeToolTip": "FitnessApp.Web\\Views\\Class\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-21T14:16:47.074Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "ClassController.cs",
               "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Controllers\\ClassController.cs",
               "RelativeDocumentMoniker": "FitnessApp.Web\\Controllers\\ClassController.cs",
               "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Web\\Controllers\\ClassController.cs",
               "RelativeToolTip": "FitnessApp.Web\\Controllers\\ClassController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T12:39:05.37Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "ClassService.cs",
               "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\ClassService.cs",
               "RelativeDocumentMoniker": "FitnessApp.Services.Data\\ClassService.cs",
               "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\ClassService.cs",
               "RelativeToolTip": "FitnessApp.Services.Data\\ClassService.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwDMAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwIEAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T12:38:42.641Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "IClassService.cs",
               "DocumentMoniker": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\Contracts\\IClassService.cs",
               "RelativeDocumentMoniker": "FitnessApp.Services.Data\\Contracts\\IClassService.cs",
               "ToolTip": "D:\\GitHub\\Fitness-App\\CSharpWeb-FitnessApp\\FitnessApp.Services.Data\\Contracts\\IClassService.cs",
               "RelativeToolTip": "FitnessApp.Services.Data\\Contracts\\IClassService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T12:38:25.807Z",
               "EditorCaption": ""

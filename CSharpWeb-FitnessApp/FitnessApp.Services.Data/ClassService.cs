@@ -69,7 +69,8 @@ public class ClassService : IClassService
 				{
 					FirstName = c.Instructor.FirstName,
 					LastName = c.Instructor.LastName,
-					Specialization = c.Instructor.Specialization,
+                    Bio = c.Instructor.Bio,
+                    Specialization = c.Instructor.Specialization,
 					ImageUrl = c.Instructor.ImageUrl
 				}
 			})
@@ -98,7 +99,7 @@ public class ClassService : IClassService
 	/// <summary>
 	/// Add class to user's classes
 	/// </summary>
-	public async Task AddToMyClassesAsync(string userId, ClassesViewModel classesViewModel, DateTime appointmentDateTime)
+	public async Task AddToMyClassesAsync(string userId, ClassesViewModel? classesViewModel, DateTime appointmentDateTime)
 	{
 		var classEntity = await _context.Classes.FindAsync(classesViewModel.Id);
 
@@ -128,7 +129,7 @@ public class ClassService : IClassService
 	/// <summary>
 	/// Remove class from user's classes
 	/// </summary>
-	public async Task RemoveFromMyClassesAsync(string userId, ClassesViewModel classesViewModel)
+	public async Task RemoveFromMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
 	{
 		var classRegistration = await _context.ClassesRegistrations
 			.FirstOrDefaultAsync(cr => cr.MemberId == userId && cr.ClassId == classesViewModel.Id);

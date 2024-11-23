@@ -110,7 +110,8 @@ namespace FitnessApp.Data
 					Id = 1,
 					FirstName = "Natalie",
 					LastName = "Asatryan",
-					Specialization = "Yoga",
+                    Bio = "Natalie is a certified yoga instructor with over 10 years of experience. She is passionate about helping others achieve their fitness goals and improve their overall well-being.",
+                    Specialization = "Yoga",
 					ImageUrl = "https://horizonweekly.ca/wp-content/uploads/2021/01/Nat-2.jpg"
 				},
 				new Instructor
@@ -118,7 +119,8 @@ namespace FitnessApp.Data
 					Id = 2,
 					FirstName = "Warren",
 					LastName = "Scott",
-					Specialization = "HIIT",
+                    Bio = "Warren is a certified personal trainer and fitness coach. He specializes in high-intensity interval training (HIIT) and enjoys helping clients push their limits and reach their full potential.",
+                    Specialization = "HIIT",
 					ImageUrl = "https://images.squarespace-cdn.com/content/v1/651489d366d19e59b7bbf9cf/a68428a6-992f-45a4-adfc-1b5a75e5cfda/Warren_square500.jpg"
 				},
 				new Instructor
@@ -126,7 +128,8 @@ namespace FitnessApp.Data
 					Id = 3,
 					FirstName = "Emily",
 					LastName = "Johnson",
-					Specialization = "Zumba",
+                    Bio = "Emily is a certified Zumba instructor with a background in dance and fitness. She loves creating a fun and inclusive environment where everyone can enjoy the benefits of Zumba.",
+                    Specialization = "Zumba",
 					ImageUrl = "https://d29za44huniau5.cloudfront.net/uploads/2023/11/first-class-mobile.png"
 				}
 			);
