@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241125155334_ChangedFitnessEventSeededInfo")]
+    partial class ChangedFitnessEventSeededInfo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,7 +190,7 @@ namespace FitnessApp.Web.Data.Migrations
                             Id = 1,
                             Description = "Join us for a thrilling 10K spring marathon through the city streets.",
                             EndDate = new DateTime(2025, 4, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://www.chicagospringhalf.com/wp-content/uploads/sites/32/2023/05/2022_SPRCHI_RaceDay_Ali_282-1024x683.jpg",
+                            ImageUrl = "https://example.com/spring-marathon.jpg",
                             Location = "Downtown City Center",
                             StartDate = new DateTime(2025, 4, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Spring City Marathon"
@@ -197,7 +200,7 @@ namespace FitnessApp.Web.Data.Migrations
                             Id = 2,
                             Description = "A challenging hike to the top of the mountain with stunning views.",
                             EndDate = new DateTime(2025, 7, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://www.reserveamerica.com/articles/wp-content/uploads/2024/07/11174967-1e85-45df-8097-ac30b3bb1c34.jpg",
+                            ImageUrl = "https://example.com/mountain-hike.jpg",
                             Location = "Rocky Mountain Trail",
                             StartDate = new DateTime(2025, 7, 15, 6, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Mountain Peak Hike"
@@ -207,7 +210,7 @@ namespace FitnessApp.Web.Data.Migrations
                             Id = 3,
                             Description = "A scenic walk around the beautiful autumn lake. Perfect for relaxation and exercise.",
                             EndDate = new DateTime(2025, 10, 8, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://images.stockcake.com/public/c/a/0/ca09354d-17f0-4693-b9d3-fb2d399a07c1_large/autumn-lakeside-walk-stockcake.jpg",
+                            ImageUrl = "https://example.com/autumn-lake-walk.jpg",
                             Location = "Autumn Lake Park",
                             StartDate = new DateTime(2025, 10, 8, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Autumn Lake Walk"

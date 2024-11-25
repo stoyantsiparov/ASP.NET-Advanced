@@ -1,4 +1,4 @@
-﻿@model FitnessApp.Web.ViewModels.FitnessEvents.FitnessEventDetailsViewModel
+﻿@model FitnessApp.Web.ViewModels.FitnessEventViewModels.FitnessEventDetailsViewModel
 
 @{
 	ViewData["Title"] = "Fitness Event Details";
@@ -29,13 +29,8 @@
 			<p><strong>End:</strong> @Model.EndDateTime</p>
 
 			<form method="post" asp-action="AddToMyFitnessEvents" asp-route-id="@Model.Id">
-				<div class="form-group">
-					<label for="appointmentDateTime">Select Appointment Date and Time</label>
-					<input type="datetime-local" id="appointmentDateTime" name="appointmentDateTime" class="form-control" required />
-				</div>
 				<button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
 			</form>
-
 		</div>
 	</div>
 </div>
