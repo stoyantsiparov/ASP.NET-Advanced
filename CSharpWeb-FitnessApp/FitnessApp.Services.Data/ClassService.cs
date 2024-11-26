@@ -63,7 +63,8 @@ public class ClassService : IClassService
 				Id = c.Id,
 				Name = c.Name,
 				ImageUrl = c.ImageUrl,
-				Schedule = c.Schedule.ToString(ScheduleDateTimeFormat, System.Globalization.CultureInfo.InvariantCulture),
+                Description = c.Description,
+                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat, System.Globalization.CultureInfo.InvariantCulture),
 				Duration = c.Duration,
 				Instructor = new InstructorViewModel
 				{
@@ -99,13 +100,16 @@ public class ClassService : IClassService
 	/// <summary>
 	/// Add class to user's classes
 	/// </summary>
-	public async Task AddToMyClassesAsync(string userId, ClassesViewModel? classesViewModel, DateTime appointmentDateTime)
+	public async Task AddToMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
 	{
-		var classEntity = await _context.Classes.FindAsync(classesViewModel.Id);
-
-		if (classEntity == null)
+		if (classesViewModel != null)
 		{
-			throw new InvalidOperationException("The specified class does not exist.");
+			var classEntity = await _context.Classes.FindAsync(classesViewModel.Id);
+
+			if (classEntity == null)
+			{
+				throw new InvalidOperationException("The specified class does not exist.");
+			}
 		}
 
 		var existingRegistration = await _context.ClassesRegistrations

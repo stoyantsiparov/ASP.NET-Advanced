@@ -43,29 +43,29 @@ namespace FitnessApp.Web.Controllers
 			return View(model);
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> AddToMyClasses(int id, DateTime appointmentDateTime)
+		public async Task<IActionResult> AddToMyClasses(int id)
 		{
-			if (appointmentDateTime < DateTime.Now)
-			{
-				ModelState.AddModelError(string.Empty, "Appointment date and time cannot be in the past.");
-				return RedirectToAction(nameof(Details), new { id });
-			}
-
 			var userId = GetUserId();
 
 			try
 			{
 				var model = await _classService.GetClassByIdAsync(id);
-				await _classService.AddToMyClassesAsync(userId, model, appointmentDateTime);
+				if (model == null)
+				{
+					ModelState.AddModelError(string.Empty, "The fitness class does not exist.");
+					return RedirectToAction(nameof(Details), new { id });
+				}
+
+				// Добавяне на потребителя към избрания клас
+				await _classService.AddToMyClassesAsync(userId, model);
+
+				return RedirectToAction(nameof(MyClasses));
 			}
 			catch (InvalidOperationException ex)
 			{
 				ModelState.AddModelError(string.Empty, ex.Message);
 				return RedirectToAction(nameof(Details), new { id });
 			}
-
-			return RedirectToAction(nameof(MyClasses));
 		}
 
 		public async Task<IActionResult> RemoveFromMyClasses(int id)

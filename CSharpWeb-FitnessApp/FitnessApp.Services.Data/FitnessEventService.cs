@@ -92,40 +92,40 @@ public class FitnessEventService : IFitnessEventService
 			.ToListAsync();
 	}
 
-    /// <summary>
-    /// Add fitness event to user's fitness events
-    /// </summary>
-    public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel, DateTime appointmentDateTime)
-    {
-        var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
+	/// <summary>
+	/// Add fitness event to user's fitness events
+	/// </summary>
+	public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel fitnessEventViewModel)
+	{
+		var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
 
-        if (fitnessEvent == null)
-        {
-            throw new InvalidOperationException("The specified event does not exist.");
-        }
+		if (fitnessEvent == null)
+		{
+			throw new InvalidOperationException("The specified event does not exist.");
+		}
 
-        var existingRegistration = await _context.EventRegistrations
-            .FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);
+		var existingRegistration = await _context.EventRegistrations
+			.FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);
 
-        if (existingRegistration != null)
-        {
-            throw new InvalidOperationException("You have already signed up for this event.");
-        }
+		if (existingRegistration != null)
+		{
+			throw new InvalidOperationException("You have already signed up for this event.");
+		}
 
-        var eventRegistration = new EventRegistration
-        {
-            MemberId = userId,
-            EventId = fitnessEventViewModel.Id
-        };
+		var eventRegistration = new EventRegistration
+		{
+			MemberId = userId,
+			EventId = fitnessEventViewModel.Id
+		};
 
-        await _context.EventRegistrations.AddAsync(eventRegistration);
-        await _context.SaveChangesAsync();
-    }
+		await _context.EventRegistrations.AddAsync(eventRegistration);
+		await _context.SaveChangesAsync();
+	}
 
-    /// <summary>
-    /// Remove fitness event from user's fitness events
-    /// </summary>
-    public async Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
+	/// <summary>
+	/// Remove fitness event from user's fitness events
+	/// </summary>
+	public async Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
 	{
 		var registration = await _context.EventRegistrations
 			.FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);

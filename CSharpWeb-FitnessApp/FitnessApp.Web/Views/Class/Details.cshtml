@@ -19,29 +19,25 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <hr />
+            <p><strong>Description:</strong> @Model.Description</p>
             <p><strong>Schedule:</strong> @Model.Schedule</p>
             <p><strong>Duration:</strong> @Model.Duration minutes</p>
 
             <form method="post" asp-action="AddToMyClasses" asp-route-id="@Model.Id">
-                <div class="form-group">
-                    <label for="appointmentDateTime">Select Appointment Date and Time</label>
-                    <input type="datetime-local" id="appointmentDateTime" name="appointmentDateTime" class="form-control" required />
-                </div>
-                <button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
+	            <button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
+	            <a asp-controller="Class" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
             </form>
 
             <hr />
-            <!-- Бутон за показване на информация за инструктора -->
             <button class="btn btn-info mt-2 w-100" id="showInstructorBtn">Show Instructor</button>
 
-            <!-- Показване на информация за инструктора -->
             <div id="instructorInfo" class="mt-3" style="display: none;">
                 <div class="card">
                     <div class="card-body">
                         <h5>Instructor Details</h5>
                         <p><strong>Name:</strong> @Model.Instructor.FirstName @Model.Instructor.LastName</p>
                         <p><strong>Specialty:</strong> @Model.Instructor.Specialization</p>
-                        <p><strong>Bio:</strong> @Model.Instructor.Bio</p> <!-- Добавено полето за биография -->
+                        <p><strong>Bio:</strong> @Model.Instructor.Bio</p>
                         @if (!string.IsNullOrEmpty(Model.Instructor.ImageUrl))
                         {
                             <img src="@Model.Instructor.ImageUrl" class="img-fluid mt-3" alt="Instructor Image" style="max-width: 100%; height: auto; border: 1px solid #ccc; padding: 5px;" />
@@ -61,17 +57,16 @@
     <partial name="_ValidationScriptsPartial" />
 
     <script>
-        // Скрипт за показване/скриване на информацията за инструктора и промяна на текста на бутона
         document.getElementById('showInstructorBtn').addEventListener('click', function () {
             var instructorInfo = document.getElementById('instructorInfo');
             var button = document.getElementById('showInstructorBtn');
 
             if (instructorInfo.style.display === 'none') {
                 instructorInfo.style.display = 'block';
-                button.innerText = 'Hide Instructor';  // Променяме текста на бутона на "Hide Instructor"
+                button.innerText = 'Hide Instructor';
             } else {
                 instructorInfo.style.display = 'none';
-                button.innerText = 'Show Instructor';  // Връщаме текста на бутона на "Show Instructor"
+                button.innerText = 'Show Instructor';
             }
         });
     </script>
