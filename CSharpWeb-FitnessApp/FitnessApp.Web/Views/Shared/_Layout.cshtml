@@ -29,6 +29,17 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" id="buyMembershipDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                            Become a member
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="buyMembershipDropdown">
+                                <li><a class="dropdown-item" asp-controller="MembershipType" asp-action="Index">Prices</a></li>
+                                <li><a class="dropdown-item" asp-controller="MembershipType" asp-action="MyMembershipTypes">My Membership</a></li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Services
@@ -39,6 +50,7 @@
                                 <li><a class="dropdown-item" asp-controller="Class" asp-action="Index">Fitness Classes</a></li>
                             </ul>
                         </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" id="appointmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Appointments
@@ -55,6 +67,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -66,6 +79,7 @@
             &copy; @footerNote - FitnessWebApp
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

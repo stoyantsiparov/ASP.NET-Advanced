@@ -1,11 +1,7 @@
 using FitnessApp.Data;
-using FitnessApp.Data.Models;
-using FitnessApp.Data.Repository;
-using FitnessApp.Data.Repository.Contracts;
 using FitnessApp.Services.Data;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Services.Mapping;
-using FitnessApp.Web.Controllers;
 using FitnessApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +35,7 @@ namespace FitnessApp.Web
             builder.Services.AddScoped<ISpaProcedureService, SpaProcedureService>();
             builder.Services.AddScoped<IFitnessEventService, FitnessEventService>();
 			builder.Services.AddScoped<IClassService, ClassService>();
+			builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
 
 			//TODO: Add repositories and implement them
 			//builder.Services.AddScoped<IRepository<Class, int>, BaseRepository<Class, int>>();

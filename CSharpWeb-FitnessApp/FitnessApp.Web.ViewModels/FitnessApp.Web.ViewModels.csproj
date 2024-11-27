@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="ClassViewModels\" />
+    <Folder Include="MemberViewModels\" />
   </ItemGroup>
 
 </Project>

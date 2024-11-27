@@ -13,6 +13,7 @@ namespace FitnessApp.Data
         }
         public virtual DbSet<Member> Members { get; set; } = null!;
         public virtual DbSet<MembershipType> MembershipTypes { get; set; } = null!;
+        public virtual DbSet<MembershipRegistration> MembershipRegistrations { get; set; } = null!;
         public virtual DbSet<FitnessEvent> FitnessEvents { get; set; } = null!;
         public virtual DbSet<EventRegistration> EventRegistrations { get; set; } = null!;
         public virtual DbSet<Class> Classes { get; set; } = null!;
@@ -31,6 +32,8 @@ namespace FitnessApp.Data
                 .HasKey(cr => new { cr.ClassId, cr.MemberId });
             builder.Entity<SpaRegistration>()
                 .HasKey(sr => new { sr.SpaProcedureId, sr.MemberId });
+            builder.Entity<MembershipRegistration>()
+                .HasKey(mr => new { mr.MembershipTypeId, mr.MemberId });
 
             // Precision settings for prices
             builder.Entity<MembershipType>()
@@ -166,6 +169,46 @@ namespace FitnessApp.Data
                     Duration = 60,
                     Description = "A fun and energetic Zumba dance class for all levels.",
                     ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw"
+                }
+            );
+
+            // Seed data for MembershipTypes
+            builder.Entity<MembershipType>().HasData(
+                new MembershipType
+                {
+                    Id = 1,
+                    Name = "Basic",
+                    Price = 59.99m,
+                    Duration = 30,
+                    ImageUrl = "https://i0.wp.com/poolstats.co/wp-content/uploads/2019/01/Basic-Membership.png?fit=400%2C327&ssl=1",
+                    Description = "A basic membership that grants access to all regular classes and gym facilities."
+                },
+                new MembershipType
+                {
+                    Id = 2,
+                    Name = "Elite",
+                    Price = 99.99m,
+                    Duration = 60,
+                    ImageUrl = "https://cdn.vectorstock.com/i/500p/49/16/elite-gold-label-vector-2944916.jpg",
+                    Description = "An elite membership offering access to all classes, gym facilities, and spa treatments."
+                },
+                new MembershipType
+                {
+                    Id = 3,
+                    Name = "Premium",
+                    Price = 299.99m,
+                    Duration = 180,
+                    ImageUrl = "https://thumbs.dreamstime.com/b/premium-membership-badge-stamp-golden-red-ribbon-text-30827692.jpg",
+                    Description = "A premium membership offering access to all classes, gym facilities, and spa treatments."
+                },
+                new MembershipType
+                {
+                    Id = 4,
+                    Name = "VIP",
+                    Price = 499.99m,
+                    Duration = 365,
+                    ImageUrl = "https://cdn11.bigcommerce.com/s-2ooutu2zpl/images/stencil/original/products/35315/51564/VIP_Badge_2__62906.1641934958.png?c=2",
+                    Description = "An exclusive membership with additional perks including priority booking for events and personal training."
                 }
             );
         }

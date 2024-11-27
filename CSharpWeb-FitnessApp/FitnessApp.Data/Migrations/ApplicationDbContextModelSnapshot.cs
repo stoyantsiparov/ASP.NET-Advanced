@@ -308,17 +308,13 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.Property<DateTime>("JoinDate")
                         .HasColumnType("datetime2")
-                        .HasComment("Date whn the member joined the gym");
+                        .HasComment("Date when the member joined the gym");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)")
                         .HasComment("Last name of the member");
-
-                    b.Property<int>("MembershipTypeId")
-                        .HasColumnType("int")
-                        .HasComment("Membership type of the member");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -328,9 +324,27 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MembershipTypeId");
-
                     b.ToTable("Members");
+                });
+
+            modelBuilder.Entity("FitnessApp.Data.Models.MembershipRegistration", b =>
+                {
+                    b.Property<int>("MembershipTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("MemberId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("MembershipTypeId", "MemberId");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("MemberId1");
+
+                    b.ToTable("MembershipRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
@@ -342,9 +356,19 @@ namespace FitnessApp.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Description of the membership type");
+
                     b.Property<int>("Duration")
                         .HasColumnType("int")
                         .HasComment("Duration of the membership type in days");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Image URL of the membership type");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -360,6 +384,44 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MembershipTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A basic membership that grants access to all regular classes and gym facilities.",
+                            Duration = 30,
+                            ImageUrl = "https://i0.wp.com/poolstats.co/wp-content/uploads/2019/01/Basic-Membership.png?fit=400%2C327&ssl=1",
+                            Name = "Basic",
+                            Price = 59.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "An elite membership offering access to all classes, gym facilities, and spa treatments.",
+                            Duration = 60,
+                            ImageUrl = "https://cdn.vectorstock.com/i/500p/49/16/elite-gold-label-vector-2944916.jpg",
+                            Name = "Elite",
+                            Price = 99.99m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A premium membership offering access to all classes, gym facilities, and spa treatments.",
+                            Duration = 180,
+                            ImageUrl = "https://thumbs.dreamstime.com/b/premium-membership-badge-stamp-golden-red-ribbon-text-30827692.jpg",
+                            Name = "Premium",
+                            Price = 299.99m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "An exclusive membership with additional perks including priority booking for events and personal training.",
+                            Duration = 365,
+                            ImageUrl = "https://cdn11.bigcommerce.com/s-2ooutu2zpl/images/stencil/original/products/35315/51564/VIP_Badge_2__62906.1641934958.png?c=2",
+                            Name = "VIP",
+                            Price = 499.99m
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
@@ -716,13 +778,25 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("FitnessApp.Data.Models.Member", b =>
+            modelBuilder.Entity("FitnessApp.Data.Models.MembershipRegistration", b =>
                 {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FitnessApp.Data.Models.Member", null)
+                        .WithMany("MembershipRegistrations")
+                        .HasForeignKey("MemberId1");
+
                     b.HasOne("FitnessApp.Data.Models.MembershipType", "MembershipType")
-                        .WithMany("Members")
+                        .WithMany("MembershipRegistrations")
                         .HasForeignKey("MembershipTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Member");
 
                     b.Navigation("MembershipType");
                 });
@@ -822,12 +896,14 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.Navigation("EventRegistrations");
 
+                    b.Navigation("MembershipRegistrations");
+
                     b.Navigation("SpaRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
                 {
-                    b.Navigation("Members");
+                    b.Navigation("MembershipRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>

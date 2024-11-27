@@ -95,7 +95,7 @@ public class FitnessEventService : IFitnessEventService
 	/// <summary>
 	/// Add fitness event to user's fitness events
 	/// </summary>
-	public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel fitnessEventViewModel)
+	public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
 	{
 		var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
 

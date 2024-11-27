@@ -25,6 +25,14 @@ public class MembershipType
 	[Range(DurationMinValue, DurationMaxValue)]
 	public int Duration { get; set; }
 
-	[Comment("Members with this membership type")]
-	public virtual ICollection<Member> Members { get; set; } = new List<Member>();
+	[Comment("Image URL of the membership type")]
+	public string? ImageUrl { get; set; }
+
+	[Required]
+	[Comment("Description of the membership type")]
+	[MaxLength(DescriptionMaxLength)]
+	public string Description { get; set; } = null!;
+
+	[Comment("Registrations for this membership type")]
+	public virtual ICollection<MembershipRegistration> MembershipRegistrations { get; set; } = new List<MembershipRegistration>();
 }

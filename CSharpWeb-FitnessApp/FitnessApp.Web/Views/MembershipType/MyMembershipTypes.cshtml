@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.MembershipTypeViewModels.AllMembershipTypeViewModel>
+
+@{
+	ViewData["Title"] = "My Membership Types";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="text-center row">
+	@foreach (var membershipType in Model)
+	{
+		<div class="card col-4" style="width: 20rem;">
+			<div class="card-body d-flex flex-column" style="height: 100%;">
+				<h5 class="card-title mt-1">@membershipType.Name</h5>
+				<img class="card-img-top" src="@membershipType.ImageUrl" alt="@membershipType.Name" style="max-height: 200px; object-fit: cover; width: 100%;">
+
+				<hr class="mt-2 mb-2" />
+
+				<p class="mt-2 flex-grow-1">Duration: @membershipType.Duration days</p>
+				<p class="text-muted" style="margin-top: auto; text-align: center;">
+					Price: @membershipType.Price.ToString("C")
+				</p>
+
+				<div class="mt-auto">
+					<form method="post" asp-action="RemoveFromMyMembershipTypes" asp-route-id="@membershipType.Id">
+						<button type="submit" class="btn btn-danger w-100">Unsubscribe</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

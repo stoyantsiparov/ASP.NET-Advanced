@@ -23,6 +23,8 @@ public static class EntityValidationConstants
 		public const decimal PriceMaxValue = 1199.00m;
 		public const int DurationMinValue = 30;
 		public const int DurationMaxValue = 365;
+		public const int DescriptionMaxLength = 5000;
+		public const int DescriptionMinLength = 10;
 	}
 	
 	public static class Class
