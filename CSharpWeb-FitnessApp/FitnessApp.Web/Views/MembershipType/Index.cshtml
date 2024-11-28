@@ -23,6 +23,10 @@
 				</p>
 
 				<div class="mt-auto">
+					<form method="post" asp-action="AddMyMembership" asp-route-id="@membershipType.Id">
+						<button type="submit" class="btn btn-primary w-100 mb-2">Subscribe</button>
+					</form>
+
 					<a asp-controller="MembershipType" asp-action="Details" asp-route-id="@membershipType.Id" class="btn btn-success w-100">View Details</a>
 				</div>
 			</div>
