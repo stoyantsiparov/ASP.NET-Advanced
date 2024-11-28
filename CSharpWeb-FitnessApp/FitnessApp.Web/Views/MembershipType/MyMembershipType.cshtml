@@ -16,11 +16,11 @@
 			<div class="card-body text-center">
 				<h4 class="card-title">@membership.Name</h4>
 				<p class="card-text"><strong>Duration:</strong> @membership.Duration days</p>
-				<p class="card-text"><strong>Price:</strong> @membership.Price.ToString("C", System.Globalization.CultureInfo.InvariantCulture)</p>
+				<p class="card-text"><strong>Price:</strong> @membership.Price.ToString("C")</p>
 			</div>
 			<div class="card-footer text-center">
 				<form method="post" asp-action="RemoveMyMembership" asp-route-id="@membership.Id">
-					<button type="submit" class="btn btn-danger w-100">Unsubscribe</button>
+					<button type="submit" class="btn btn-danger w-100">Cancel Membership</button>
 				</form>
 			</div>
 		</div>
