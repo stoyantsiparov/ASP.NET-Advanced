@@ -20,6 +20,10 @@
 				<p class="mt-2 flex-grow-1">@procedure.Description</p>
 
 				<div class="mt-auto">
+					<form method="post" asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id">
+						<button type="submit" class="btn btn-success w-100 mb-2">Book Now</button>
+					</form>
+
 					<a asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id" class="btn btn-success w-100">View Details</a>
 				</div>
 			</div>
