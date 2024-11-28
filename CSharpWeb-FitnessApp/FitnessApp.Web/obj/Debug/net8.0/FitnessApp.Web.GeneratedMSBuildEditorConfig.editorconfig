@@ -86,8 +86,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyc2hpcFR5cGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/MembershipType/MyMembershipTypes.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyc2hpcFR5cGVcTXlNZW1iZXJzaGlwVHlwZXMuY3NodG1s
+[D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/MembershipType/MyMembershipType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVtYmVyc2hpcFR5cGVcTXlNZW1iZXJzaGlwVHlwZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/GitHub/Fitness-App/CSharpWeb-FitnessApp/FitnessApp.Web/Views/Shared/Error.cshtml]

@@ -19,9 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Common", "Fitnes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{B75E5CA2-B5BC-4ED7-866D-A610C0132035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Services.Data", "FitnessApp.Services.Data\FitnessApp.Services.Data.csproj", "{70B9EA8C-744C-4208-9DA5-572B97AFC469}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessApp.Services.Mapping", "FitnessApp.Services.Mapping\FitnessApp.Services.Mapping.csproj", "{32784B02-FABE-482F-8F70-1DEB6246030A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessApp.Services.Data", "FitnessApp.Services.Data\FitnessApp.Services.Data.csproj", "{70B9EA8C-744C-4208-9DA5-572B97AFC469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +51,6 @@ Global
 		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70B9EA8C-744C-4208-9DA5-572B97AFC469}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32784B02-FABE-482F-8F70-1DEB6246030A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32784B02-FABE-482F-8F70-1DEB6246030A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32784B02-FABE-482F-8F70-1DEB6246030A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32784B02-FABE-482F-8F70-1DEB6246030A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,7 +61,6 @@ Global
 		{95565B1D-5CB8-453E-956A-308C1B1BDF41} = {3C3831BE-095A-4097-A81D-38C5E6E2C846}
 		{29BD8F74-7DBA-4792-B30E-A7A972EFBBC5} = {3C3831BE-095A-4097-A81D-38C5E6E2C846}
 		{70B9EA8C-744C-4208-9DA5-572B97AFC469} = {B75E5CA2-B5BC-4ED7-866D-A610C0132035}
-		{32784B02-FABE-482F-8F70-1DEB6246030A} = {B75E5CA2-B5BC-4ED7-866D-A610C0132035}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0942C8E5-B8BB-4B6C-BA7A-C8B81EAF35AD}

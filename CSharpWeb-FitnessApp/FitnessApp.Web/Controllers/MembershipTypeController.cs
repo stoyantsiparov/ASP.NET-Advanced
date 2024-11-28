@@ -2,89 +2,87 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FitnessApp.Web.Controllers
+namespace FitnessApp.Web.Controllers;
+public class MembershipTypeController : BaseController
 {
-	public class MembershipTypeController : BaseController
+	private readonly IMembershipTypeService _membershipTypeService;
+
+	public MembershipTypeController(IMembershipTypeService membershipTypeService)
 	{
-		private readonly IMembershipTypeService _membershipTypeService;
+		_membershipTypeService = membershipTypeService;
+	}
 
-		public MembershipTypeController(IMembershipTypeService membershipTypeService)
+	[AllowAnonymous]
+	public async Task<IActionResult> Index()
+	{
+		var model = await _membershipTypeService.GetAllMembershipTypesAsync();
+
+		return View(model);
+	}
+
+	public async Task<IActionResult> MyMembershipType()
+	{
+		var userId = GetUserId();
+
+		var model = await _membershipTypeService.GetMyMembershipTypesAsync(userId);
+
+		return View(model);
+	}
+
+	[AllowAnonymous]
+	public async Task<IActionResult> Details(int id)
+	{
+		var model = await _membershipTypeService.GetMembershipTypeDetailsAsync(id);
+
+		if (model == null)
 		{
-			_membershipTypeService = membershipTypeService;
+			return RedirectToAction(nameof(Index));
 		}
 
-		[AllowAnonymous]
-		public async Task<IActionResult> Index()
+		return View(model);
+	}
+	
+	public async Task<IActionResult> AddMyMembership(int id)
+	{
+		var userId = GetUserId();
+
+		try
 		{
-			var model = await _membershipTypeService.GetAllMembershipTypesAsync();
-
-			return View(model);
-		}
-		
-		public async Task<IActionResult> MyMembershipTypes()
-		{
-			var userId = GetUserId();
-
-			var model = await _membershipTypeService.GetMyMembershipTypesAsync(userId);
-
-			return View(model);
-		}
-
-		[AllowAnonymous]
-		public async Task<IActionResult> Details(int id)
-		{
-			var model = await _membershipTypeService.GetMembershipTypeDetailsAsync(id);
-
+			var model = await _membershipTypeService.GetMembershipTypeByIdAsync(id);
 			if (model == null)
 			{
-				return RedirectToAction(nameof(Index));
-			}
-
-			return View(model);
-		}
-
-		public async Task<IActionResult> AddToMyMembershipTypes(int id)
-		{
-			var userId = GetUserId();
-
-			try
-			{
-				var model = await _membershipTypeService.GetMembershipTypeByIdAsync(id);
-				if (model == null)
-				{
-					ModelState.AddModelError(string.Empty, "The membership type does not exist.");
-					return RedirectToAction(nameof(Details), new { id });
-				}
-
-				await _membershipTypeService.AddToMyMembershipTypesAsync(userId, model);
-				return RedirectToAction(nameof(MyMembershipTypes));
-			}
-			catch (InvalidOperationException ex)
-			{
-				ModelState.AddModelError(string.Empty, ex.Message);
+				ModelState.AddModelError(string.Empty, "The membership type does not exist.");
 				return RedirectToAction(nameof(Details), new { id });
 			}
-		}
 
-		public async Task<IActionResult> RemoveFromMyMembershipTypes(int id)
+			await _membershipTypeService.AddMyMembershipAsync(userId, model);
+			return RedirectToAction(nameof(MyMembershipType));
+		}
+		catch (InvalidOperationException ex)
 		{
-			var userId = GetUserId();
-
-			try
-			{
-				var model = await _membershipTypeService.GetMembershipTypeByIdAsync(id);
-
-				if (model != null)
-				{
-					await _membershipTypeService.RemoveFromMyMembershipTypesAsync(userId, model);
-				}
-			}
-			catch (InvalidOperationException ex)
-			{
-				ModelState.AddModelError(string.Empty, ex.Message);
-			}
-
-			return RedirectToAction(nameof(MyMembershipTypes));
+			TempData["ErrorMessage"] = ex.Message;
+			return RedirectToAction(nameof(Details), new { id });
 		}
+	}
+	
+	public async Task<IActionResult> RemoveMyMembership(int id)
+	{
+		var userId = GetUserId();
+
+		try
+		{
+			var model = await _membershipTypeService.GetMembershipTypeByIdAsync(id);
+
+			if (model != null)
+			{
+				await _membershipTypeService.RemoveMyMembershipAsync(userId, model);
+			}
+		}
+		catch (InvalidOperationException ex)
+		{
+			ModelState.AddModelError(string.Empty, ex.Message);
+		}
+
+		return RedirectToAction(nameof(MyMembershipType));
 	}
 }

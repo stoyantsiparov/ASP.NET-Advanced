@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.MembershipTypeViewModels.AllMembershipTypeViewModel>
+
+@{
+	ViewData["Title"] = "My Membership";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+@if (Model != null && Model.Any())
+{
+	foreach (var membership in Model)
+	{
+		<div class="card mx-auto" style="max-width: 25rem;">
+			<img class="card-img-top" src="@membership.ImageUrl" alt="@membership.Name" style="max-height: 300px; object-fit: cover;">
+			<div class="card-body text-center">
+				<h4 class="card-title">@membership.Name</h4>
+				<p class="card-text"><strong>Duration:</strong> @membership.Duration days</p>
+				<p class="card-text"><strong>Price:</strong> @membership.Price.ToString("C", System.Globalization.CultureInfo.InvariantCulture)</p>
+			</div>
+			<div class="card-footer text-center">
+				<form method="post" asp-action="RemoveMyMembership" asp-route-id="@membership.Id">
+					<button type="submit" class="btn btn-danger w-100">Unsubscribe</button>
+				</form>
+			</div>
+		</div>
+	}
+}
+else
+{
+	<div class="alert alert-warning text-center" role="alert">
+		You currently have no membership. Please subscribe to one to access our services.
+	</div>
+	<div class="text-center mt-3">
+		<a asp-action="Index" class="btn btn-primary">View Membership Options</a>
+	</div>
+}
