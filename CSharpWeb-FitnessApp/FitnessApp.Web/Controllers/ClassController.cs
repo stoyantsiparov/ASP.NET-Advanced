@@ -43,32 +43,31 @@ namespace FitnessApp.Web.Controllers
 			return View(model);
 		}
 
-		public async Task<IActionResult> AddToMyClasses(int id)
-		{
-			var userId = GetUserId();
+        public async Task<IActionResult> AddToMyClasses(int id)
+        {
+            var userId = GetUserId();
 
-			try
-			{
-				var model = await _classService.GetClassByIdAsync(id);
-				if (model == null)
-				{
-					ModelState.AddModelError(string.Empty, "The fitness class does not exist.");
-					return RedirectToAction(nameof(Details), new { id });
-				}
+            try
+            {
+                var model = await _classService.GetClassByIdAsync(id);
+                if (model == null)
+                {
+                    ModelState.AddModelError(string.Empty, "The fitness class does not exist.");
+                    return RedirectToAction(nameof(Details), new { id });
+                }
 
-				// Добавяне на потребителя към избрания клас
-				await _classService.AddToMyClassesAsync(userId, model);
+                await _classService.AddToMyClassesAsync(userId, model);
 
-				return RedirectToAction(nameof(MyClasses));
-			}
-			catch (InvalidOperationException ex)
-			{
-				ModelState.AddModelError(string.Empty, ex.Message);
-				return RedirectToAction(nameof(Details), new { id });
-			}
-		}
+                return RedirectToAction(nameof(MyClasses));
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction(nameof(Details), new { id });
+            }
+        }
 
-		public async Task<IActionResult> RemoveFromMyClasses(int id)
+        public async Task<IActionResult> RemoveFromMyClasses(int id)
 		{
 			var userId = GetUserId();
 
