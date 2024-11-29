@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using static FitnessApp.Common.ErrorMessages.SpaProcedure;
+
 namespace FitnessApp.Web.Controllers
 {
     public class SpaProcedureController : BaseController
@@ -65,7 +67,7 @@ namespace FitnessApp.Web.Controllers
 
             if (userAppointments.Any(a => a.Id == id))
             {
-                TempData["ErrorMessage"] = "You have already booked this appointment.";
+                TempData["ErrorMessage"] = AlreadyBookedAppointment;
                 return RedirectToAction(nameof(Details), new { id });
             }
 
