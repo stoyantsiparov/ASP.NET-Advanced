@@ -4,6 +4,8 @@ using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.SpaProcedures;
 using Microsoft.EntityFrameworkCore;
 
+using static FitnessApp.Common.ErrorMessages.SpaProcedure;
+
 namespace FitnessApp.Services.Data
 {
 	public class SpaProcedureService : ISpaProcedureService
@@ -98,7 +100,7 @@ namespace FitnessApp.Services.Data
 
 			if (existingRegistration != null)
 			{
-				throw new InvalidOperationException("This appointment has already been booked.");
+				throw new InvalidOperationException(AlreadyBookedAppointment);
 			}
 
 			var spaRegistration = new SpaRegistration

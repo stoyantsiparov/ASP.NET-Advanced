@@ -63,15 +63,15 @@ namespace FitnessApp.Web.Controllers
 
             var userId = GetUserId();
 
-            var userAppointments = await _spaService.GetMySpaProceduresAsync(userId);
-
-            if (userAppointments.Any(a => a.Id == id))
+            try
             {
-                TempData["ErrorMessage"] = AlreadyBookedAppointment;
+                await _spaService.AddToMySpaAppointmentsAsync(userId, model, appointmentDateTime);
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction(nameof(Details), new { id });
             }
-
-            await _spaService.AddToMySpaAppointmentsAsync(userId, model, appointmentDateTime);
 
             return RedirectToAction(nameof(MySpaAppointments));
         }
