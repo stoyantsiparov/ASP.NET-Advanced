@@ -1,6 +1,7 @@
 ﻿using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FitnessApp.Common.ErrorMessages.FitnessEvent;
 
 namespace FitnessApp.Web.Controllers
 {
@@ -50,7 +51,7 @@ namespace FitnessApp.Web.Controllers
             var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
             if (model == null)
             {
-                ModelState.AddModelError(string.Empty, "The fitness event does not exist.");
+                ModelState.AddModelError(string.Empty, FitnessEventDoesNotExist);
                 return RedirectToAction(nameof(Details), new { id });
             }
 

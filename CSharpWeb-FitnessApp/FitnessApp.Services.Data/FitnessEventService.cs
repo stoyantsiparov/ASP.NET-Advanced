@@ -5,6 +5,7 @@ using FitnessApp.Web.ViewModels.FitnessEvents;
 using FitnessApp.Web.ViewModels.FitnessEventViewModels;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.FitnessEvent;
+using static FitnessApp.Common.ErrorMessages.FitnessEvent;
 
 namespace FitnessApp.Services.Data;
 
@@ -101,7 +102,7 @@ public class FitnessEventService : IFitnessEventService
 
 		if (fitnessEvent == null)
 		{
-			throw new InvalidOperationException("The specified event does not exist.");
+			throw new InvalidOperationException(FitnessEventDoesNotExist);
 		}
 
 		var existingRegistration = await _context.EventRegistrations
@@ -109,7 +110,7 @@ public class FitnessEventService : IFitnessEventService
 
 		if (existingRegistration != null)
 		{
-			throw new InvalidOperationException("You have already signed up for this event.");
+			throw new InvalidOperationException(AlreadyRegisteredForEvent);
 		}
 
 		var eventRegistration = new EventRegistration
@@ -132,7 +133,7 @@ public class FitnessEventService : IFitnessEventService
 
 		if (registration == null)
 		{
-			throw new InvalidOperationException("You are not registered for this event.");
+			throw new InvalidOperationException(UserNotRegisteredForEvent);
 		}
 
 		_context.EventRegistrations.Remove(registration);
