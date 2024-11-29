@@ -48,7 +48,7 @@ namespace FitnessApp.Web.Controllers
         {
             if (appointmentDateTime < DateTime.Now)
             {
-                ModelState.AddModelError(string.Empty, "Appointment date and time cannot be in the past.");
+                ModelState.AddModelError(string.Empty, PastAppointmentDate);
                 return RedirectToAction(nameof(Details), new { id });
             }
 
