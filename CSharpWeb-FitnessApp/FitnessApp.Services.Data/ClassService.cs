@@ -5,6 +5,7 @@ using FitnessApp.Web.ViewModels.ClassViewModels;
 using FitnessApp.Web.ViewModels.InstructorViewModels;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.Class;
+using static FitnessApp.Common.ErrorMessages.Class;
 
 namespace FitnessApp.Services.Data;
 
@@ -108,7 +109,7 @@ public class ClassService : IClassService
 
 			if (classEntity == null)
 			{
-				throw new InvalidOperationException("The specified class does not exist.");
+				throw new InvalidOperationException(FitnessClassDoesNotExist);
 			}
 		}
 
@@ -117,7 +118,7 @@ public class ClassService : IClassService
 
 		if (existingRegistration != null)
 		{
-			throw new InvalidOperationException("You have already signed up for this class.");
+			throw new InvalidOperationException(AlreadyRegisteredForClass);
 		}
 
 		var classRegistration = new ClassRegistration
@@ -140,7 +141,7 @@ public class ClassService : IClassService
 
 		if (classRegistration == null)
 		{
-			throw new InvalidOperationException("You are not registered for this class.");
+			throw new InvalidOperationException(UserNotRegisteredForClass);
 		}
 
 		_context.ClassesRegistrations.Remove(classRegistration);

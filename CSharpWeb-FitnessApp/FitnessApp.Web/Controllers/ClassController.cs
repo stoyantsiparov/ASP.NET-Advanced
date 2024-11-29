@@ -1,6 +1,7 @@
 ﻿using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FitnessApp.Common.ErrorMessages.Class;
 
 namespace FitnessApp.Web.Controllers
 {
@@ -52,7 +53,7 @@ namespace FitnessApp.Web.Controllers
                 var model = await _classService.GetClassByIdAsync(id);
                 if (model == null)
                 {
-                    ModelState.AddModelError(string.Empty, "The fitness class does not exist.");
+                    ModelState.AddModelError(string.Empty, FitnessClassDoesNotExist);
                     return RedirectToAction(nameof(Details), new { id });
                 }
 
