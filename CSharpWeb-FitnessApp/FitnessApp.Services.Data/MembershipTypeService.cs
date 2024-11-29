@@ -3,6 +3,7 @@ using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.MembershipTypeViewModels;
 using Microsoft.EntityFrameworkCore;
+using static FitnessApp.Common.ErrorMessages.MembershipType;
 
 namespace FitnessApp.Services.Data;
 public class MembershipTypeService : IMembershipTypeService
@@ -99,7 +100,7 @@ public class MembershipTypeService : IMembershipTypeService
 
 		if (membershipType == null)
 		{
-			throw new InvalidOperationException("The membership type does not exist.");
+			throw new InvalidOperationException(MembershipTypeDoesNotExist);
 		}
 
 		var existingMembership = await _context.MembershipRegistrations
@@ -107,7 +108,7 @@ public class MembershipTypeService : IMembershipTypeService
 
 		if (existingMembership != null)
 		{
-			throw new InvalidOperationException("You can only have one membership type at a time.");
+			throw new InvalidOperationException(OnlyOneMembershipTypeAllowed);
 		}
 
 		var registration = new MembershipRegistration
@@ -130,7 +131,7 @@ public class MembershipTypeService : IMembershipTypeService
 
 		if (registration == null)
 		{
-			throw new InvalidOperationException("You are not subscribed to this membership type.");
+			throw new InvalidOperationException(MembershipNotPurchased);
 		}
 
 		_context.MembershipRegistrations.Remove(registration);

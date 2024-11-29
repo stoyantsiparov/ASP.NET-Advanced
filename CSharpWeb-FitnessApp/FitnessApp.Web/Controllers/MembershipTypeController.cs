@@ -1,6 +1,7 @@
 ﻿using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FitnessApp.Common.ErrorMessages.MembershipType;
 
 namespace FitnessApp.Web.Controllers;
 public class MembershipTypeController : BaseController
@@ -51,7 +52,7 @@ public class MembershipTypeController : BaseController
 			var model = await _membershipTypeService.GetMembershipTypeByIdAsync(id);
 			if (model == null)
 			{
-				ModelState.AddModelError(string.Empty, "The membership type does not exist.");
+				ModelState.AddModelError(string.Empty, MembershipTypeDoesNotExist);
 				return RedirectToAction(nameof(Details), new { id });
 			}
 
