@@ -22,4 +22,11 @@ public static class ErrorMessages
         public const string AlreadyRegisteredForClass = "You have already signed up for this class.";
         public const string UserNotRegisteredForClass = "You are not registered for this class.";
     }
+
+    public static class MembershipType
+    {
+        public const string MembershipTypeDoesNotExist = "The membership type does not exist.";
+        public const string OnlyOneMembershipTypeAllowed = "You can only have one membership type at a time.";
+        public const string MembershipNotPurchased = "You have not purchased a membership";
+    }
 }
