@@ -28,6 +28,13 @@
 			<p><strong>Start:</strong> @Model.StartDateTime</p>
 			<p><strong>End:</strong> @Model.EndDateTime</p>
 
+			@if (TempData["ErrorMessage"] != null)
+			{
+				<div class="alert alert-danger" role="alert">
+					@TempData["ErrorMessage"]
+				</div>
+			}
+
 			<form method="post" asp-action="AddToMyFitnessEvents" asp-route-id="@Model.Id">
 				<button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
 				<a asp-controller="FitnessEvent" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
