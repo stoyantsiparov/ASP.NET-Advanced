@@ -1,24 +1,17 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using FitnessApp.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace FitnessApp.Web.Controllers
+namespace FitnessApp.Web.Controllers;
+
+public class HomeController : BaseController
 {
-	public class HomeController : BaseController
-	{
-		public HomeController()
-		{
-
-		}
-
-		[AllowAnonymous]
-		public IActionResult Index()
-		{
-			ViewData["Title"] = "Home Page";
-			ViewData["Message"] = "Welcome to the Fitness Web App!";
-
-			return View();
-		}
-	}
+    [AllowAnonymous]
+    public IActionResult Index()
+    {
+        ViewData["Title"] = "Achieve Your Fitness Goals";
+        ViewData["Message"] = "Join our fitness and wellness community today!";
+        ViewData["CTAButtonText"] = "Get Started";
+        ViewData["Description"] = "Explore our fitness classes and rejuvenating spa services. Whether you’re looking to get fit or relax, we’ve got you covered.";
+        return View();
+    }
 }
