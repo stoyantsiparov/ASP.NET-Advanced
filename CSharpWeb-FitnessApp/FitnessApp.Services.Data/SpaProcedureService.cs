@@ -3,7 +3,6 @@ using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.SpaProcedures;
 using Microsoft.EntityFrameworkCore;
-
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
 
 namespace FitnessApp.Services.Data;
