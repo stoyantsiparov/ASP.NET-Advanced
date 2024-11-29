@@ -1,8 +1,6 @@
 ﻿@model FitnessApp.Web.ViewModels.SpaProcedures.SpaProceduresDetailsViewModel
 
-<div class="d-flex justify-content-between align-items-center mb-3" style="margin-top: 20px;">
-    <h2>@Model.Name</h2>
-</div>
+<h2>@Model.Name</h2>
 <hr />
 
 <div class="row justify-content-center" style="margin: 0 auto; max-width: 800px;">
@@ -21,23 +19,24 @@
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
             <hr />
-            <h6 class="card-subtitle mb-2 text-muted">@String.Format("{0:F2}", Model.Price) BGN</h6>
-            <hr />
-            <p class="card-text">@Model.Description</p>
-            <hr />
-            <p class="card-text"><small class="text-muted">Duration: @Model.Duration minutes</small></p>
-            <hr />
+            <p><strong>Description:</strong> @Model.Description</p>
+            <p><strong>Duration:</strong> @Model.Duration minutes</p>
 
-            <form asp-action="AddToMySpaAppointments" method="post">
-                <input type="hidden" name="id" value="@Model.Id" />
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @TempData["ErrorMessage"]
+                </div>
+            }
 
+            <form method="post" asp-action="AddToMySpaAppointments" asp-route-id="@Model.Id">
                 <div class="form-group">
                     <label for="appointmentDateTime">Select Appointment Date and Time</label>
                     <input type="datetime-local" name="appointmentDateTime" id="appointmentDateTime" class="form-control" lang="en" required />
                 </div>
 
                 <button type="submit" class="btn btn-success mt-2 w-100">Book Now</button>
-                <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
+                <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-secondary mt-2 w-100" style="border: none;">Back</a>
             </form>
         </div>
     </div>
@@ -51,20 +50,14 @@
             const appointmentDateTimeInput = document.getElementById("appointmentDateTime");
 
             const today = new Date();
-            const daysToAdd = [6, 0];
+            today.setDate(today.getDate() + 1); // Set minimum date to tomorrow
 
-            for (let i = 0; i < 30; i++) { 
-                const date = new Date();
-                date.setDate(today.getDate() + i);
+            const maxDate = new Date();
+            maxDate.setDate(today.getDate() + 30); // Set maximum date to 30 days ahead
 
-                if (daysToAdd.includes(date.getDay())) {
-                    const dateString = date.toISOString().split("T")[0];
-                    const option = document.createElement("option");
-                    option.value = dateString;
-                    option.textContent = dateString;
-                    appointmentDateTimeInput.appendChild(option);
-                }
-            }
+            // Set the min and max date for the input
+            appointmentDateTimeInput.min = today.toISOString().slice(0, 16);
+            appointmentDateTimeInput.max = maxDate.toISOString().slice(0, 16);
         });
     </script>
 }

@@ -65,8 +65,8 @@ namespace FitnessApp.Web.Controllers
 
             if (userAppointments.Any(a => a.Id == id))
             {
-                ModelState.AddModelError(string.Empty, "You have already booked this appointment.");
-                return RedirectToAction(nameof(Index));
+                TempData["ErrorMessage"] = "You have already booked this appointment.";
+                return RedirectToAction(nameof(Details), new { id });
             }
 
             await _spaService.AddToMySpaAppointmentsAsync(userId, model, appointmentDateTime);
