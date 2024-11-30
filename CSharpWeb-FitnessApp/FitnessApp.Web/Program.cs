@@ -1,7 +1,6 @@
 using FitnessApp.Data;
 using FitnessApp.Services.Data;
 using FitnessApp.Services.Data.Contracts;
-using FitnessApp.Services.Mapping;
 using FitnessApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -39,10 +38,7 @@ namespace FitnessApp.Web
 
 			WebApplication app = builder.Build();
 
-			// Тук вместо ErrorViewModel трябва да сложа моите си модели които ще ползвам
-			AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).Assembly);
-
-			// Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseMigrationsEndPoint();
