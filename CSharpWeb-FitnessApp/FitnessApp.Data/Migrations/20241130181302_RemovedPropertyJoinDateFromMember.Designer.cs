@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241130181302_RemovedPropertyJoinDateFromMember")]
+    partial class RemovedPropertyJoinDateFromMember
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,7 +66,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Classes", (string)null);
+                    b.ToTable("Classes");
 
                     b.HasData(
                         new
@@ -115,7 +118,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("ClassesRegistrations", (string)null);
+                    b.ToTable("ClassesRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.EventRegistration", b =>
@@ -135,7 +138,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("EventRegistrations", (string)null);
+                    b.ToTable("EventRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.FitnessEvent", b =>
@@ -179,7 +182,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FitnessEvents", (string)null);
+                    b.ToTable("FitnessEvents");
 
                     b.HasData(
                         new
@@ -253,7 +256,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors", (string)null);
+                    b.ToTable("Instructors");
 
                     b.HasData(
                         new
@@ -320,7 +323,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Members", (string)null);
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipRegistration", b =>
@@ -340,7 +343,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("MembershipRegistrations", (string)null);
+                    b.ToTable("MembershipRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
@@ -379,7 +382,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MembershipTypes", (string)null);
+                    b.ToTable("MembershipTypes");
 
                     b.HasData(
                         new
@@ -460,7 +463,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpaProcedures", (string)null);
+                    b.ToTable("SpaProcedures");
 
                     b.HasData(
                         new
@@ -512,7 +515,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId1");
 
-                    b.ToTable("SpaRegistrations", (string)null);
+                    b.ToTable("SpaRegistrations");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
