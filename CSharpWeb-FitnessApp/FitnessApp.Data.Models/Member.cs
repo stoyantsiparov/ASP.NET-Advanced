@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.Member;
 
@@ -32,13 +30,7 @@ public class Member
 	[MaxLength(PhoneNumberMaxLength)]
 	public string Phone { get; set; } = null!;
 
-	[Required]
-	[Comment("Date when the member joined the gym")]
-	[DataType(DataType.Date)]
-	[DisplayFormat(DataFormatString = JoinDateTimeFormat, ApplyFormatInEditMode = true)]
-	public DateTime JoinDate { get; set; }
-
-	[Comment("Membership type of the member")]
+    [Comment("Membership type of the member")]
 	public virtual ICollection<MembershipRegistration> MembershipRegistrations { get; set; } = new List<MembershipRegistration>();
 
 	[Comment("Class registrations of the member")]
