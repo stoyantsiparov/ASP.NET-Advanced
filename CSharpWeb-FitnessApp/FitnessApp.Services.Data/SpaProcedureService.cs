@@ -93,6 +93,11 @@ public class SpaProcedureService : ISpaProcedureService
     /// </summary>
     public async Task AddToMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure, DateTime appointmentDateTime)
     {
+        if (appointmentDateTime < DateTime.Now)
+        {
+            throw new InvalidOperationException(PastAppointmentDate);
+        }
+
         var existingRegistration = await _context.SpaRegistrations
             .FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
 
@@ -109,6 +114,15 @@ public class SpaProcedureService : ISpaProcedureService
 
         await _context.SpaRegistrations.AddAsync(spaRegistration);
         await _context.SaveChangesAsync();
+
+        var procedureToUpdate = await _context.SpaProcedures
+            .FirstOrDefaultAsync(sp => sp.Id == spaProcedure.Id);
+
+        if (procedureToUpdate != null)
+        {
+            procedureToUpdate.AppointmentDateTime = appointmentDateTime;
+            await _context.SaveChangesAsync();
+        }
     }
 
     /// <summary>

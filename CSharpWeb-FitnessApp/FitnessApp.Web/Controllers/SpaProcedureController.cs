@@ -1,95 +1,102 @@
 ﻿using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
+using static FitnessApp.Common.ValidationMessages.SpaProcedure;
 
-namespace FitnessApp.Web.Controllers
+namespace FitnessApp.Web.Controllers;
+
+public class SpaProcedureController : BaseController
 {
-    public class SpaProcedureController : BaseController
-    {
-        private readonly ISpaProcedureService _spaService;
+	private readonly ISpaProcedureService _spaService;
 
-        public SpaProcedureController(ISpaProcedureService spaService)
-        {
-            _spaService = spaService;
-        }
-        
-        [AllowAnonymous]
-        public async Task<IActionResult> Index()
-        {
-            var model = await _spaService.GetAllSpaProceduresAsync();
+	public SpaProcedureController(ISpaProcedureService spaService)
+	{
+		_spaService = spaService;
+	}
 
-            return View(model);
-        }
 
-        public async Task<IActionResult> MySpaAppointments()
-        {
-            var userId = GetUserId();
+	[AllowAnonymous]
+	public async Task<IActionResult> Index()
+	{
+		var model = await _spaService.GetAllSpaProceduresAsync();
 
-            var model = await _spaService.GetMySpaProceduresAsync(userId);
+		return View(model);
+	}
 
-            return View(model);
-        }
+	public async Task<IActionResult> MySpaAppointments()
+	{
+		var userId = GetUserId();
 
-        [AllowAnonymous]
-        public async Task<IActionResult> Details(int id)
-        {
-            var model = await _spaService.GetSpaProceduresDetailsAsync(id);
+		var model = await _spaService.GetMySpaProceduresAsync(userId);
 
-            if (model == null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
+		return View(model);
+	}
 
-            return View(model);
-        }
+	[AllowAnonymous]
+	public async Task<IActionResult> Details(int id)
+	{
+		var model = await _spaService.GetSpaProceduresDetailsAsync(id);
 
-        [HttpPost]
-        public async Task<IActionResult> AddToMySpaAppointments(int id, DateTime appointmentDateTime)
-        {
-            if (appointmentDateTime < DateTime.Now)
-            {
-                ModelState.AddModelError(string.Empty, PastAppointmentDate);
-                return RedirectToAction(nameof(Details), new { id });
-            }
+		if (model == null)
+		{
+			TempData["ErrorMessage"] = SpaAppointmentNotBooked;
+			return RedirectToAction(nameof(Index));
+		}
 
-            var model = await _spaService.GetSpaProceduresByIdAsync(id);
+		return View(model);
+	}
 
-            if (model == null)
-            {
-                return RedirectToAction(nameof(MySpaAppointments));
-            }
+	[HttpPost]
+	public async Task<IActionResult> AddToMySpaAppointments(int id, DateTime appointmentDateTime)
+	{
+		var model = await _spaService.GetSpaProceduresByIdAsync(id);
 
-            var userId = GetUserId();
+		if (model == null)
+		{
+			TempData["ErrorMessage"] = SpaAppointmentNotBooked;
+			return RedirectToAction(nameof(MySpaAppointments));
+		}
 
-            try
-            {
-                await _spaService.AddToMySpaAppointmentsAsync(userId, model, appointmentDateTime);
-            }
-            catch (InvalidOperationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction(nameof(Details), new { id });
-            }
+		var userId = GetUserId();
 
-            return RedirectToAction(nameof(MySpaAppointments));
-        }
+		try
+		{
+			await _spaService.AddToMySpaAppointmentsAsync(userId, model, appointmentDateTime);
+			TempData["SuccessMessage"] = "Spa appointment added successfully.";
+		}
+		catch (InvalidOperationException ex)
+		{
+			TempData["ErrorMessage"] = ex.Message;
+			return RedirectToAction(nameof(Details), new { id });
+		}
 
-        public async Task<IActionResult> RemoveFromMySpaAppointment(int id)
-        {
-            var model = await _spaService.GetSpaProceduresByIdAsync(id);
+		return RedirectToAction(nameof(MySpaAppointments));
+	}
 
-            if (model == null)
-            {
-                return RedirectToAction(nameof(MySpaAppointments));
-            }
+	public async Task<IActionResult> RemoveFromMySpaAppointment(int id)
+	{
+		var model = await _spaService.GetSpaProceduresByIdAsync(id);
 
-            var userId = GetUserId();
+		if (model == null)
+		{
+			TempData["ErrorMessage"] = SpaAppointmentNotBooked;
+			return RedirectToAction(nameof(MySpaAppointments));
+		}
 
-            await _spaService.RemoveFromMySpaAppointmentsAsync(userId, model);
+		var userId = GetUserId();
 
-            return RedirectToAction(nameof(MySpaAppointments));
-        }
-    }
+		try
+		{
+			await _spaService.RemoveFromMySpaAppointmentsAsync(userId, model);
+			TempData["SuccessMessage"] = SpaAppointmentRemovedSuccessfully;
+		}
+		catch (InvalidOperationException ex)
+		{
+			TempData["ErrorMessage"] = ex.Message;
+			return RedirectToAction(nameof(MySpaAppointments));
+		}
+
+		return RedirectToAction(nameof(MySpaAppointments));
+	}
 }

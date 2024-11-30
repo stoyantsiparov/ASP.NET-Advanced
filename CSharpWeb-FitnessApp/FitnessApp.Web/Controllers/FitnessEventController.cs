@@ -44,30 +44,30 @@ namespace FitnessApp.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> AddToMyFitnessEvents(int id)
-        {
-            var userId = GetUserId();
+		public async Task<IActionResult> AddToMyFitnessEvents(int id)
+		{
+			var userId = GetUserId();
 
-            var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
-            if (model == null)
-            {
-                ModelState.AddModelError(string.Empty, FitnessEventDoesNotExist);
-                return RedirectToAction(nameof(Details), new { id });
-            }
+			var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
+			if (model == null)
+			{
+				ModelState.AddModelError(string.Empty, FitnessEventDoesNotExist);
+				return RedirectToAction(nameof(Details), new { id });
+			}
 
-            try
-            {
-                await _fitnessEventService.AddToMyFitnessEventsAsync(userId, model);
-                return RedirectToAction(nameof(MyFitnessEvents));
-            }
-            catch (InvalidOperationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction(nameof(Details), new { id });
-            }
-        }
+			try
+			{
+				await _fitnessEventService.AddToMyFitnessEventsAsync(userId, model);
+				return RedirectToAction(nameof(MyFitnessEvents));
+			}
+			catch (InvalidOperationException ex)
+			{
+				TempData["ErrorMessage"] = ex.Message;
+				return RedirectToAction(nameof(Details), new { id });
+			}
+		}
 
-        public async Task<IActionResult> RemoveFromMyFitnessEvents(int id)
+		public async Task<IActionResult> RemoveFromMyFitnessEvents(int id)
         {
             var userId = GetUserId();
 
