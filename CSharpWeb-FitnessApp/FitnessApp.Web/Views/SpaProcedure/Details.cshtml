@@ -4,60 +4,56 @@
 <hr />
 
 <div class="row justify-content-center" style="margin: 0 auto; max-width: 800px;">
-    <div class="col-md-4 text-center">
-        @if (!string.IsNullOrEmpty(Model.ImageUrl))
-        {
-            <img src="@Model.ImageUrl" class="img-fluid" style="max-width: 100%; height: auto;" alt="@Model.Name" />
-        }
-        else
-        {
-            <img src="~/img/no-image-available-02.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="No Image Available" />
-        }
-    </div>
+	<div class="col-md-4 text-center">
+		@if (!string.IsNullOrEmpty(Model.ImageUrl))
+		{
+			<img src="@Model.ImageUrl" class="img-fluid" style="max-width: 100%; height: auto;" alt="@Model.Name" />
+		}
+		else
+		{
+			<img src="~/img/no-image-available-02.jpg" class="img-fluid" style="max-width: 100%; height: auto;" alt="No Image Available" />
+		}
+	</div>
 
-    <div class="col-md-8">
-        <div class="card-body">
-            <h5 class="card-title">@Model.Name</h5>
-            <hr />
-            <p><strong>Description:</strong> @Model.Description</p>
-            <p><strong>Duration:</strong> @Model.Duration minutes</p>
+	<div class="col-md-8">
+		<div class="card-body">
+			<h5 class="card-title">@Model.Name</h5>
+			<hr />
+			<p><strong>Description:</strong> @Model.Description</p>
+			<p><strong>Duration:</strong> @Model.Duration minutes</p>
 
-            @if (TempData["ErrorMessage"] != null)
-            {
-                <div class="alert alert-danger" role="alert">
-                    @TempData["ErrorMessage"]
-                </div>
-            }
+			@if (TempData["ErrorMessage"] != null)
+			{
+				<div class="alert alert-danger" role="alert">
+					@TempData["ErrorMessage"]
+				</div>
+			}
 
-            <form method="post" asp-action="AddToMySpaAppointments" asp-route-id="@Model.Id">
-                <div class="form-group">
-                    <label for="appointmentDateTime">Select Appointment Date and Time</label>
-                    <input type="datetime-local" name="appointmentDateTime" id="appointmentDateTime" class="form-control" lang="en" required />
-                </div>
-
-                <button type="submit" class="btn btn-success mt-2 w-100">Book Now</button>
-                <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-secondary mt-2 w-100" style="border: none;">Back</a>
-            </form>
-        </div>
-    </div>
+			<form method="post" asp-action="AddToMySpaAppointments" asp-route-id="@Model.Id">
+				<div class="form-group">
+					<label for="appointmentDateTime">Select Appointment Date and Time</label>
+					<input type="datetime-local" name="appointmentDateTime" id="appointmentDateTime" class="form-control" required />
+				</div>
+				<button type="submit" class="btn btn-success mt-2 w-100">Book Now</button>
+				<a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-secondary mt-2 w-100" style="border: none;">Back</a>
+			</form>
+		</div>
+	</div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+	<partial name="_ValidationScriptsPartial" />
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const appointmentDateTimeInput = document.getElementById("appointmentDateTime");
+	<script>
+		// Get current date and time
+		var today = new Date();
+		// Set the min attribute for the input to today's date
+		var minDate = today.toISOString().slice(0, 16); // This formats the date as 'yyyy-MM-ddTHH:mm'
+		document.getElementById("appointmentDateTime").setAttribute("min", minDate);
 
-            const today = new Date();
-            today.setDate(today.getDate() + 1); // Set minimum date to tomorrow
-
-            const maxDate = new Date();
-            maxDate.setDate(today.getDate() + 30); // Set maximum date to 30 days ahead
-
-            // Set the min and max date for the input
-            appointmentDateTimeInput.min = today.toISOString().slice(0, 16);
-            appointmentDateTimeInput.max = maxDate.toISOString().slice(0, 16);
-        });
-    </script>
+		// Get the date 7 days from today
+		today.setDate(today.getDate() + 7);
+		var maxDate = today.toISOString().slice(0, 16); // Format it similarly
+		document.getElementById("appointmentDateTime").setAttribute("max", maxDate);
+	</script>
 }
