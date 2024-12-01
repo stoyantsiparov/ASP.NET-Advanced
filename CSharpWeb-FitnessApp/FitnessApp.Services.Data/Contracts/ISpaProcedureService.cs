@@ -1,4 +1,4 @@
-﻿using FitnessApp.Web.ViewModels.SpaProcedures;
+﻿using FitnessApp.Web.ViewModels.SpaProcedureViewModels;
 
 namespace FitnessApp.Services.Data.Contracts;
 

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FitnessApp.Web.ViewModels.SpaProcedures;
+﻿namespace FitnessApp.Web.ViewModels.SpaProcedureViewModels;
 
 public class SpaProceduresDetailsViewModel
 {
