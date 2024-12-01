@@ -32,7 +32,7 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" id="buyMembershipDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                            Become a member
+                                Become a member
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="buyMembershipDropdown">
                                 <li><a class="dropdown-item" asp-controller="MembershipType" asp-action="Index">Prices</a></li>
@@ -61,6 +61,15 @@
                                 <li><a class="dropdown-item" asp-controller="Class" asp-action="MyClasses">My Class Appointments</a></li>
                             </ul>
                         </li>
+
+                        <li class="nav-item dropdown ms-auto">
+                            <a class="nav-link dropdown-toggle text-dark" id="addClassDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Add New Class
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="addClassDropdown">
+                                <li><a class="dropdown-item" asp-controller="Class" asp-action="Add">Create New Class</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -68,7 +77,7 @@
         </nav>
     </header>
 
-    <div class="container">
+<div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
