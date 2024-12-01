@@ -2,20 +2,7 @@
 
 public static class EntityValidationConstants
 {
-	public static class Member
-	{
-		public const int FirstNameMaxLength = 30;
-		public const int FirstNameMinLength = 2;
-		public const int LastNameMaxLength = 30;
-		public const int LastNameMinLength = 2;
-		public const int EmailMaxLength = 50;
-		public const int EmailMinLength = 5;
-		public const int PhoneNumberMaxLength = 15;
-		public const int PhoneNumberMinLength = 4;
-		public const string JoinDateTimeFormat = "dd-MM-yyyy";
-	}
-
-	public static class MembershipType
+    public static class MembershipType
 	{
 		public const int NameMaxLength = 30;
 		public const int NameMinLength = 2;
