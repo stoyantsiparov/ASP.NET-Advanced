@@ -25,7 +25,7 @@ public class AddClassViewModel
     [Range(DurationMinValue, DurationMaxValue)]
     public int Duration { get; set; }
 
-    [Required]
+    [Range(1, int.MaxValue)]
     public int InstructorId { get; set; }
-    public IEnumerable<InstructorViewModel> Instructors { get; set; } = null!;
+    public IEnumerable<InstructorViewModel> Instructors { get; set; } = new List<InstructorViewModel>();
 }
