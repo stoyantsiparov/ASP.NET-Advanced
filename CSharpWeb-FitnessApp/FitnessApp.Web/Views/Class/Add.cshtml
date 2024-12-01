@@ -23,10 +23,10 @@
     <div class="form-group">
         <label asp-for="InstructorId">Instructor</label>
         <select asp-for="InstructorId" class="form-control">
-            <option value="">Select Instructor</option>
+            <option value="">Select Instructor Specialization</option>
             @foreach (var instructor in Model.Instructors)
             {
-                <option value="@instructor.Id">@instructor.FirstName @instructor.LastName</option>
+                <option value="@instructor.Id">@instructor.Specialization</option>
             }
         </select>
         <span asp-validation-for="InstructorId" class="text-danger"></span>
