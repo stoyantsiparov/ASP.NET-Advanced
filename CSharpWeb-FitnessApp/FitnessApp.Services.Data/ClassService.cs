@@ -188,12 +188,28 @@ public class ClassService : IClassService
     /// </summary>
     public async Task AddClassAsync(AddClassViewModel model, string userId)
     {
+        if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Schedule))
+        {
+            throw new ArgumentException("Name and Schedule are required.");
+        }
+
+        DateTime schedule;
+        if (!DateTime.TryParse(model.Schedule, out schedule))
+        {
+            throw new ArgumentException("Invalid schedule format.");
+        }
+
+        if (await _context.Classes.AnyAsync(c => c.Name == model.Name && c.Schedule == schedule))
+        {
+            throw new InvalidOperationException("A class with the same name and schedule already exists.");
+        }
+
         Class classEntity = new Class
         {
             Name = model.Name,
             Description = model.Description,
             ImageUrl = model.ImageUrl,
-            Schedule = DateTime.Parse(model.Schedule),
+            Schedule = schedule,
             Duration = model.Duration,
             InstructorId = model.InstructorId
         };
@@ -201,6 +217,7 @@ public class ClassService : IClassService
         await _context.Classes.AddAsync(classEntity);
         await _context.SaveChangesAsync();
     }
+
 
     /// <summary>
     /// Edit class
