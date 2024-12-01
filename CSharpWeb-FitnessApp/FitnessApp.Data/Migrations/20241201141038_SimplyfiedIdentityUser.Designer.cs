@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241201141038_SimplyfiedIdentityUser")]
+    partial class SimplyfiedIdentityUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,12 +92,12 @@ namespace FitnessApp.Web.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "A fun and energetic Zumba dance class for all levels.",
-                            Duration = 60,
-                            ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw",
+                            Description = "A fun and energetic dance workout to get your heart pumping.",
+                            Duration = 45,
+                            ImageUrl = "https://fpt.vn/wp-content/uploads/2022/09/zumba.jpg",
                             InstructorId = 3,
                             Name = "Zumba Dance",
-                            Schedule = new DateTime(2024, 12, 6, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                            Schedule = new DateTime(2024, 12, 6, 19, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -121,7 +124,12 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("FitnessEventId")
+                        .HasColumnType("int");
+
                     b.HasKey("EventId", "MemberId");
+
+                    b.HasIndex("FitnessEventId");
 
                     b.HasIndex("MemberId");
 
@@ -327,44 +335,6 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MembershipTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A basic membership that grants access to all regular classes and gym facilities.",
-                            Duration = 30,
-                            ImageUrl = "https://i0.wp.com/poolstats.co/wp-content/uploads/2019/01/Basic-Membership.png?fit=400%2C327&ssl=1",
-                            Name = "Basic",
-                            Price = 59.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "An elite membership offering access to all classes, gym facilities, and spa treatments.",
-                            Duration = 60,
-                            ImageUrl = "https://cdn.vectorstock.com/i/500p/49/16/elite-gold-label-vector-2944916.jpg",
-                            Name = "Elite",
-                            Price = 99.99m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "A premium membership offering access to all classes, gym facilities, and spa treatments.",
-                            Duration = 180,
-                            ImageUrl = "https://thumbs.dreamstime.com/b/premium-membership-badge-stamp-golden-red-ribbon-text-30827692.jpg",
-                            Name = "Premium",
-                            Price = 299.99m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "An exclusive membership with additional perks including priority booking for events and personal training.",
-                            Duration = 365,
-                            ImageUrl = "https://cdn11.bigcommerce.com/s-2ooutu2zpl/images/stencil/original/products/35315/51564/VIP_Badge_2__62906.1641934958.png?c=2",
-                            Name = "VIP",
-                            Price = 499.99m
-                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
@@ -693,7 +663,7 @@ namespace FitnessApp.Web.Data.Migrations
                 {
                     b.HasOne("FitnessApp.Data.Models.FitnessEvent", "FitnessEvent")
                         .WithMany("EventsRegistrations")
-                        .HasForeignKey("EventId")
+                        .HasForeignKey("FitnessEventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

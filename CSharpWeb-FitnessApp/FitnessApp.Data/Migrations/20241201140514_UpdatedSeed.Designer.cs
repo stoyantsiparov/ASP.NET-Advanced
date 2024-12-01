@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241201140514_UpdatedSeed")]
+    partial class UpdatedSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,83 @@ namespace FitnessApp.Web.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("FitnessApp.Data.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasComment("First name of the member");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasComment("Last name of the member");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Class", b =>
                 {
@@ -89,12 +169,12 @@ namespace FitnessApp.Web.Data.Migrations
                         new
                         {
                             Id = 3,
-                            Description = "A fun and energetic Zumba dance class for all levels.",
-                            Duration = 60,
-                            ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw",
+                            Description = "A fun and energetic dance workout to get your heart pumping.",
+                            Duration = 45,
+                            ImageUrl = "https://fpt.vn/wp-content/uploads/2022/09/zumba.jpg",
                             InstructorId = 3,
                             Name = "Zumba Dance",
-                            Schedule = new DateTime(2024, 12, 6, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                            Schedule = new DateTime(2024, 12, 6, 19, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -121,7 +201,12 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("FitnessEventId")
+                        .HasColumnType("int");
+
                     b.HasKey("EventId", "MemberId");
+
+                    b.HasIndex("FitnessEventId");
 
                     b.HasIndex("MemberId");
 
@@ -327,44 +412,6 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MembershipTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "A basic membership that grants access to all regular classes and gym facilities.",
-                            Duration = 30,
-                            ImageUrl = "https://i0.wp.com/poolstats.co/wp-content/uploads/2019/01/Basic-Membership.png?fit=400%2C327&ssl=1",
-                            Name = "Basic",
-                            Price = 59.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "An elite membership offering access to all classes, gym facilities, and spa treatments.",
-                            Duration = 60,
-                            ImageUrl = "https://cdn.vectorstock.com/i/500p/49/16/elite-gold-label-vector-2944916.jpg",
-                            Name = "Elite",
-                            Price = 99.99m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "A premium membership offering access to all classes, gym facilities, and spa treatments.",
-                            Duration = 180,
-                            ImageUrl = "https://thumbs.dreamstime.com/b/premium-membership-badge-stamp-golden-red-ribbon-text-30827692.jpg",
-                            Name = "Premium",
-                            Price = 299.99m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Description = "An exclusive membership with additional perks including priority booking for events and personal training.",
-                            Duration = 365,
-                            ImageUrl = "https://cdn11.bigcommerce.com/s-2ooutu2zpl/images/stencil/original/products/35315/51564/VIP_Badge_2__62906.1641934958.png?c=2",
-                            Name = "VIP",
-                            Price = 499.99m
-                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
@@ -509,71 +556,6 @@ namespace FitnessApp.Web.Data.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -678,8 +660,8 @@ namespace FitnessApp.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
-                        .WithMany()
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", "Member")
+                        .WithMany("ClassRegistrations")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -693,12 +675,12 @@ namespace FitnessApp.Web.Data.Migrations
                 {
                     b.HasOne("FitnessApp.Data.Models.FitnessEvent", "FitnessEvent")
                         .WithMany("EventsRegistrations")
-                        .HasForeignKey("EventId")
+                        .HasForeignKey("FitnessEventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
-                        .WithMany()
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", "Member")
+                        .WithMany("EventRegistrations")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -710,8 +692,8 @@ namespace FitnessApp.Web.Data.Migrations
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipRegistration", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
-                        .WithMany()
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", "Member")
+                        .WithMany("MembershipRegistrations")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -729,8 +711,8 @@ namespace FitnessApp.Web.Data.Migrations
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaRegistration", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
-                        .WithMany()
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", "Member")
+                        .WithMany("SpaRegistrations")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -757,7 +739,7 @@ namespace FitnessApp.Web.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -766,7 +748,7 @@ namespace FitnessApp.Web.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -781,7 +763,7 @@ namespace FitnessApp.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -790,11 +772,22 @@ namespace FitnessApp.Web.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("FitnessApp.Data.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FitnessApp.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("ClassRegistrations");
+
+                    b.Navigation("EventRegistrations");
+
+                    b.Navigation("MembershipRegistrations");
+
+                    b.Navigation("SpaRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.Class", b =>
