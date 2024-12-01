@@ -11,140 +11,247 @@ namespace FitnessApp.Services.Data;
 
 public class ClassService : IClassService
 {
-	private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-	public ClassService(ApplicationDbContext context)
-	{
-		_context = context;
-	}
+    public ClassService(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
-	/// <summary>
-	/// Get all classes
-	/// </summary>
-	public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync()
-	{
-		return await _context.Classes
-			.Select(c => new AllClassesViewModel
-			{
-				Id = c.Id,
-				Name = c.Name,
-				ImageUrl = c.ImageUrl,
-				Schedule = c.Schedule,
-				Duration = c.Duration
-			})
-			.AsNoTracking()
-			.ToListAsync();
-	}
+    /// <summary>
+    /// Get all classes
+    /// </summary>
+    public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync()
+    {
+        return await _context.Classes
+            .Select(c => new AllClassesViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                ImageUrl = c.ImageUrl,
+                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
+                Duration = c.Duration
+            })
+            .AsNoTracking()
+            .ToListAsync();
+    }
 
-	/// <summary>
-	/// Get class by ID
-	/// </summary>
-	public async Task<ClassesViewModel?> GetClassByIdAsync(int id)
-	{
-		return await _context.Classes
-			.Where(c => c.Id == id)
-			.Select(c => new ClassesViewModel
-			{
-				Id = c.Id,
-				Name = c.Name
-			})
-			.AsNoTracking()
-			.FirstOrDefaultAsync();
-	}
-
-	/// <summary>
-	/// Get class details
-	/// </summary>
-	public async Task<ClassesDetailsViewModel?> GetClassDetailsAsync(int id)
-	{
-		return await _context.Classes
-			.Where(c => c.Id == id)
-			.Select(c => new ClassesDetailsViewModel
-			{
-				Id = c.Id,
-				Name = c.Name,
-				ImageUrl = c.ImageUrl,
+    /// <summary>
+    /// Get class by ID
+    /// </summary>
+    public async Task<ClassesViewModel?> GetClassByIdAsync(int id)
+    {
+        return await _context.Classes
+            .Where(c => c.Id == id)
+            .Select(c => new ClassesViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
                 Description = c.Description,
-                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat, System.Globalization.CultureInfo.InvariantCulture),
-				Duration = c.Duration,
-				Instructor = new InstructorViewModel
-				{
-					FirstName = c.Instructor.FirstName,
-					LastName = c.Instructor.LastName,
+                ImageUrl = c.ImageUrl,
+                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
+                Duration = c.Duration,
+                InstructorId = c.InstructorId
+            })
+            .FirstOrDefaultAsync();
+    }
+
+    /// <summary>
+    /// Get class details
+    /// </summary>
+    public async Task<ClassesDetailsViewModel?> GetClassDetailsAsync(int id)
+    {
+        return await _context.Classes
+            .Where(c => c.Id == id)
+            .Select(c => new ClassesDetailsViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                ImageUrl = c.ImageUrl,
+                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
+                Duration = c.Duration,
+                Instructor = new InstructorViewModel
+                {
+                    Id = c.Instructor.Id,
+                    FirstName = c.Instructor.FirstName,
+                    LastName = c.Instructor.LastName,
+                    ImageUrl = c.Instructor.ImageUrl,
                     Bio = c.Instructor.Bio,
-                    Specialization = c.Instructor.Specialization,
-					ImageUrl = c.Instructor.ImageUrl
-				}
-			})
-			.FirstOrDefaultAsync();
-	}
+                    Specialization = c.Instructor.Specialization
+                }
+            })
+            .FirstOrDefaultAsync();
+    }
 
-	/// <summary>
-	/// Get user's classes
-	/// </summary>
-	public async Task<IEnumerable<AllClassesViewModel>> GetMyClassesAsync(string userId)
-	{
-		return await _context.ClassesRegistrations
-			.Where(cr => cr.MemberId == userId)
-			.Select(cr => new AllClassesViewModel
-			{
-				Id = cr.Class.Id,
-				Name = cr.Class.Name,
-				ImageUrl = cr.Class.ImageUrl,
-				Schedule = cr.Class.Schedule,
-				Duration = cr.Class.Duration
-			})
-			.AsNoTracking()
-			.ToListAsync();
-	}
+    /// <summary>
+    /// Get user's classes
+    /// </summary>
+    public async Task<IEnumerable<AllClassesViewModel>> GetMyClassesAsync(string userId)
+    {
+        return await _context.ClassesRegistrations
+            .Where(cr => cr.MemberId == userId)
+            .Select(cr => new AllClassesViewModel
+            {
+                Id = cr.Class.Id,
+                Name = cr.Class.Name,
+                ImageUrl = cr.Class.ImageUrl,
+                Schedule = cr.Class.Schedule.ToString(ScheduleDateTimeFormat),
+                Duration = cr.Class.Duration
+            })
+            .AsNoTracking()
+            .ToListAsync();
+    }
 
-	/// <summary>
-	/// Add class to user's classes
-	/// </summary>
-	public async Task AddToMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
-	{
-		if (classesViewModel != null)
-		{
-			var classEntity = await _context.Classes.FindAsync(classesViewModel.Id);
+    /// <summary>
+    /// Add class to user's classes
+    /// </summary>
+    public async Task AddToMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
+    {
+        if (string.IsNullOrWhiteSpace(userId))
+        {
+            throw new ArgumentException(UserIdCannotBeEmpty, nameof(userId));
+        }
 
-			if (classEntity == null)
-			{
-				throw new InvalidOperationException(FitnessClassDoesNotExist);
-			}
-		}
+        if (classesViewModel == null)
+        {
+            throw new ArgumentNullException(nameof(classesViewModel), ClassViewModelCannotBeNull);
+        }
 
-		var existingRegistration = await _context.ClassesRegistrations
-			.FirstOrDefaultAsync(cr => cr.MemberId == userId && cr.ClassId == classesViewModel.Id);
+        var classEntity = await _context.Classes.FindAsync(classesViewModel.Id);
 
-		if (existingRegistration != null)
-		{
-			throw new InvalidOperationException(AlreadyRegisteredForClass);
-		}
+        if (classEntity == null)
+        {
+            throw new InvalidOperationException(FitnessClassDoesNotExist);
+        }
 
-		var classRegistration = new ClassRegistration
-		{
-			MemberId = userId,
-			ClassId = classesViewModel.Id
-		};
+        var existingRegistration = await _context.ClassesRegistrations
+            .FirstOrDefaultAsync(cr => cr.MemberId == userId && cr.ClassId == classesViewModel.Id);
 
-		await _context.ClassesRegistrations.AddAsync(classRegistration);
-		await _context.SaveChangesAsync();
-	}
+        if (existingRegistration != null)
+        {
+            throw new InvalidOperationException(AlreadyRegisteredForClass);
+        }
 
-	/// <summary>
-	/// Remove class from user's classes
-	/// </summary>
-	public async Task RemoveFromMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
-	{
-		var classRegistration = await _context.ClassesRegistrations
-			.FirstOrDefaultAsync(cr => cr.MemberId == userId && cr.ClassId == classesViewModel.Id);
+        var classRegistration = new ClassRegistration
+        {
+            MemberId = userId,
+            ClassId = classesViewModel.Id
+        };
 
-		if (classRegistration == null)
-		{
-			throw new InvalidOperationException(UserNotRegisteredForClass);
-		}
+        await _context.ClassesRegistrations.AddAsync(classRegistration);
+        await _context.SaveChangesAsync();
+    }
 
-		_context.ClassesRegistrations.Remove(classRegistration);
-		await _context.SaveChangesAsync();
-	}
+    /// <summary>
+    /// Remove class from user's classes
+    /// </summary>
+    public async Task RemoveFromMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
+    {
+        var classRegistration = await _context.ClassesRegistrations
+            .FirstOrDefaultAsync(cr => cr.MemberId == userId && cr.ClassId == classesViewModel.Id);
+
+        if (classRegistration == null)
+        {
+            throw new InvalidOperationException(UserNotRegisteredForClass);
+        }
+
+        _context.ClassesRegistrations.Remove(classRegistration);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Get class for add
+    /// </summary>
+    public async Task<AddClassViewModel> GetClassForAddAsync()
+    {
+        var instructors = await _context.Instructors
+            .Select(i => new InstructorViewModel
+            {
+                Id = i.Id,
+                FirstName = i.FirstName
+
+            })
+            .AsNoTracking()
+            .ToListAsync();
+
+        var model = new AddClassViewModel
+        {
+            Instructors = instructors
+        };
+
+        return model;
+    }
+
+    /// <summary>
+    /// Add class
+    /// </summary>
+    public async Task AddClassAsync(AddClassViewModel model, string userId)
+    {
+        Class classEntity = new Class
+        {
+            Name = model.Name,
+            Description = model.Description,
+            ImageUrl = model.ImageUrl,
+            Schedule = DateTime.Parse(model.Schedule),
+            Duration = model.Duration,
+            InstructorId = model.InstructorId
+        };
+
+        await _context.Classes.AddAsync(classEntity);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Edit class
+    /// </summary>
+    public async Task EditClassAsync(ClassesViewModel model)
+    {
+        var classEntity = await _context.Classes.FirstOrDefaultAsync(c => c.Id == model.Id);
+
+        if (classEntity != null)
+        {
+            classEntity.Name = model.Name;
+            classEntity.Description = model.Description;
+            classEntity.ImageUrl = model.ImageUrl;
+            classEntity.Schedule = DateTime.Parse(model.Schedule);
+            classEntity.Duration = model.Duration;
+            classEntity.InstructorId = model.InstructorId;
+
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    /// <summary>
+    /// Get class for delete
+    /// </summary>
+    public async Task<DeleteClassViewModel?> GetClassForDeleteAsync(int id)
+    {
+        return await _context.Classes
+            .Where(c => c.Id == id)
+            .Select(c => new DeleteClassViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
+                Description = c.Description,
+                Duration = c.Duration,
+                ImageUrl = c.ImageUrl
+            })
+            .FirstOrDefaultAsync();
+    }
+
+    /// <summary>
+    /// Delete class
+    /// </summary>
+    public async Task DeleteClassAsync(int id)
+    {
+        var classEntity = await _context.Classes.FindAsync(id);
+
+        if (classEntity != null)
+        {
+            _context.Classes.Remove(classEntity);
+            await _context.SaveChangesAsync();
+        }
+    }
 }

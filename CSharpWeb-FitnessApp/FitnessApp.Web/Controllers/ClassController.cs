@@ -1,88 +1,163 @@
 ﻿using FitnessApp.Services.Data.Contracts;
+using FitnessApp.Web.ViewModels.ClassViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FitnessApp.Common.ErrorMessages.Class;
 
-namespace FitnessApp.Web.Controllers
+namespace FitnessApp.Web.Controllers;
+
+public class ClassController : BaseController
 {
-	public class ClassController : BaseController
-	{
-		private readonly IClassService _classService;
+    private readonly IClassService _classService;
 
-		public ClassController(IClassService classService)
-		{
-			_classService = classService;
-		}
+    public ClassController(IClassService classService)
+    {
+        _classService = classService;
+    }
 
-		[AllowAnonymous]
-		public async Task<IActionResult> Index()
-		{
-			var model = await _classService.GetAllClassesAsync();
+    [AllowAnonymous]
+    public async Task<IActionResult> Index()
+    {
+        var model = await _classService.GetAllClassesAsync();
 
-			return View(model);
-		}
+        return View(model);
+    }
 
-		public async Task<IActionResult> MyClasses()
-		{
-			var userId = GetUserId();
+    public async Task<IActionResult> MyClasses()
+    {
+        var userId = GetUserId();
 
-			var model = await _classService.GetMyClassesAsync(userId);
+        var model = await _classService.GetMyClassesAsync(userId);
 
-			return View(model);
-		}
+        return View(model);
+    }
 
-		[AllowAnonymous]
-		public async Task<IActionResult> Details(int id)
-		{
-			var model = await _classService.GetClassDetailsAsync(id);
+    public async Task<IActionResult> Details(int id)
+    {
+        var model = await _classService.GetClassDetailsAsync(id);
 
-			if (model == null)
-			{
-				return RedirectToAction(nameof(Index));
-			}
-
-			return View(model);
-		}
-
-        public async Task<IActionResult> AddToMyClasses(int id)
+        if (model == null)
         {
-            var userId = GetUserId();
-
-            try
-            {
-                var model = await _classService.GetClassByIdAsync(id);
-                if (model == null)
-                {
-                    ModelState.AddModelError(string.Empty, FitnessClassDoesNotExist);
-                    return RedirectToAction(nameof(Details), new { id });
-                }
-
-                await _classService.AddToMyClassesAsync(userId, model);
-
-                return RedirectToAction(nameof(MyClasses));
-            }
-            catch (InvalidOperationException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return RedirectToAction(nameof(Details), new { id });
-            }
+            return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> RemoveFromMyClasses(int id)
-		{
-			var userId = GetUserId();
+        return View(model);
+    }
 
-			try
-			{
-				var model = await _classService.GetClassByIdAsync(id);
-				await _classService.RemoveFromMyClassesAsync(userId, model);
-			}
-			catch (InvalidOperationException ex)
-			{
-				ModelState.AddModelError(string.Empty, ex.Message);
-			}
+    public async Task<IActionResult> AddToMyClasses(int id)
+    {
+        var userId = GetUserId();
 
-			return RedirectToAction(nameof(MyClasses));
-		}
-	}
+        try
+        {
+            var model = await _classService.GetClassByIdAsync(id);
+
+            if (model == null)
+            {
+                ModelState.AddModelError(string.Empty, FitnessClassDoesNotExist);
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            await _classService.AddToMyClassesAsync(userId, model);
+
+            return RedirectToAction(nameof(MyClasses));
+        }
+        catch (InvalidOperationException ex)
+        {
+            TempData["ErrorMessage"] = ex.Message;
+            return RedirectToAction(nameof(Details), new { id });
+        }
+    }
+
+    public async Task<IActionResult> RemoveFromMyClasses(int id)
+    {
+        var userId = GetUserId();
+
+        try
+        {
+            var model = await _classService.GetClassByIdAsync(id);
+            await _classService.RemoveFromMyClassesAsync(userId, model);
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+        }
+
+        return RedirectToAction(nameof(MyClasses));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Add()
+    {
+        var model = await _classService.GetClassForAddAsync();
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(AddClassViewModel model)
+    {
+        if (ModelState.IsValid == false)
+        {
+            var instructors = await _classService.GetClassForAddAsync();
+            model.Instructors = instructors.Instructors;
+            return View(model);
+        }
+
+        var userId = GetUserId();
+        await _classService.AddClassAsync(model, userId);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var model = await _classService.GetClassByIdAsync(id);
+
+        if (model != null)
+        {
+            var instructors = await _classService.GetClassForAddAsync();
+            model.Instructors = instructors.Instructors;
+            return View(model);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(ClassesViewModel model)
+    {
+        if (ModelState.IsValid == false)
+        {
+            var instructors = await _classService.GetClassForAddAsync();
+            model.Instructors = instructors.Instructors;
+            return View(model);
+        }
+
+        await _classService.EditClassAsync(model);
+
+        return RedirectToAction(nameof(Details), new { id = model.Id });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var model = await _classService.GetClassForDeleteAsync(id);
+
+        if (model != null)
+        {
+            return View(model);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(DeleteClassViewModel model)
+    {
+        await _classService.DeleteClassAsync(model.Id);
+
+        return RedirectToAction(nameof(Index));
+    }
 }
