@@ -21,15 +21,12 @@ public class ClassesViewModel
 	public string Description { get; set; } = null!;
 
 	[Required]
-	[DataType(DataType.Date)]
-	[DisplayFormat(DataFormatString = ScheduleDateTimeFormat)]
-	public string Schedule { get; set; } = null!;
+    public string Schedule { get; set; } = null!;
 
 	[Required]
 	[Range(DurationMinValue, DurationMaxValue)]
 	public int Duration { get; set; }
 
-	[Required]
 	[Range(1, int.MaxValue)]
 	public int InstructorId { get; set; }
 	public virtual IEnumerable<InstructorViewModel> Instructors { get; set; } = new List<InstructorViewModel>();
