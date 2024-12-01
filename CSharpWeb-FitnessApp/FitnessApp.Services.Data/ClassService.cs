@@ -5,6 +5,7 @@ using FitnessApp.Web.ViewModels.ClassViewModels;
 using FitnessApp.Web.ViewModels.InstructorViewModels;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.Class;
+using static FitnessApp.Common.ValidationMessages.Class;
 using static FitnessApp.Common.ErrorMessages.Class;
 
 namespace FitnessApp.Services.Data;
@@ -169,7 +170,7 @@ public class ClassService : IClassService
             .Select(i => new InstructorViewModel
             {
                 Id = i.Id,
-                FirstName = i.FirstName
+                Specialization = i.Specialization
 
             })
             .AsNoTracking()
@@ -190,18 +191,18 @@ public class ClassService : IClassService
     {
         if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Schedule))
         {
-            throw new ArgumentException("Name and Schedule are required.");
+            throw new ArgumentException(ClassNameAndScheduleAreRequired);
         }
 
         DateTime schedule;
         if (!DateTime.TryParse(model.Schedule, out schedule))
         {
-            throw new ArgumentException("Invalid schedule format.");
+            throw new ArgumentException(InvalidScheduleFormat);
         }
 
         if (await _context.Classes.AnyAsync(c => c.Name == model.Name && c.Schedule == schedule))
         {
-            throw new InvalidOperationException("A class with the same name and schedule already exists.");
+            throw new InvalidOperationException(ClassWithTheSameNameAndScheduleAlreadyExists);
         }
 
         Class classEntity = new Class
@@ -218,7 +219,6 @@ public class ClassService : IClassService
         await _context.SaveChangesAsync();
     }
 
-
     /// <summary>
     /// Edit class
     /// </summary>
@@ -229,8 +229,8 @@ public class ClassService : IClassService
         if (classEntity != null)
         {
             classEntity.Name = model.Name;
-            classEntity.Description = model.Description;
             classEntity.ImageUrl = model.ImageUrl;
+            classEntity.Description = model.Description;
             classEntity.Schedule = DateTime.Parse(model.Schedule);
             classEntity.Duration = model.Duration;
             classEntity.InstructorId = model.InstructorId;
