@@ -1,5 +1,4 @@
-﻿using FitnessApp.Web.ViewModels.FitnessEvents;
-using FitnessApp.Web.ViewModels.FitnessEventViewModels;
+﻿using FitnessApp.Web.ViewModels.FitnessEventViewModels;
 
 namespace FitnessApp.Services.Data.Contracts;
 

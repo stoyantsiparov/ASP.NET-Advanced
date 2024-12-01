@@ -1,7 +1,6 @@
 ﻿using FitnessApp.Data;
 using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
-using FitnessApp.Web.ViewModels.FitnessEvents;
 using FitnessApp.Web.ViewModels.FitnessEventViewModels;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.FitnessEvent;
