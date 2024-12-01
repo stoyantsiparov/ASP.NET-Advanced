@@ -1,7 +1,6 @@
 using FitnessApp.Data;
 using FitnessApp.Services.Data;
 using FitnessApp.Services.Data.Contracts;
-using FitnessApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
