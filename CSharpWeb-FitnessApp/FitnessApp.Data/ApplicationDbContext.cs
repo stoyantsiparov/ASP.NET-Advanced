@@ -1,5 +1,4 @@
-﻿using System.Reflection.Emit;
-using FitnessApp.Data.Models;
+﻿using FitnessApp.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +10,7 @@ namespace FitnessApp.Data
             : base(options)
         {
         }
-        public virtual DbSet<Member> Members { get; set; } = null!;
+
         public virtual DbSet<MembershipType> MembershipTypes { get; set; } = null!;
         public virtual DbSet<MembershipRegistration> MembershipRegistrations { get; set; } = null!;
         public virtual DbSet<FitnessEvent> FitnessEvents { get; set; } = null!;
@@ -158,12 +157,12 @@ namespace FitnessApp.Data
                     Schedule = new DateTime(2024, 12, 5, 18, 0, 0),
                     Duration = 45,
                     Description = "An intense, high-energy interval training session.",
-                    ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB88ucCUVHp_EFpv6T47y7oJRpRsQ"
+                    ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQjZQw/2.jpg"
                 },
                 new Class
                 {
                     Id = 3,
-                    Name = "Zumba Party",
+                    Name = "Zumba Dance",
                     InstructorId = 3,
                     Schedule = new DateTime(2024, 12, 6, 10, 0, 0),
                     Duration = 60,
