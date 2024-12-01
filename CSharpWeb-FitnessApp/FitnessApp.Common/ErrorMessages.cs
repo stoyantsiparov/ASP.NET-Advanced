@@ -21,7 +21,9 @@ public static class ErrorMessages
         public const string FitnessClassDoesNotExist = "The specified class does not exist.";
         public const string AlreadyRegisteredForClass = "You have already signed up for this class.";
         public const string UserNotRegisteredForClass = "You are not registered for this class.";
-    }
+        public const string ClassViewModelCannotBeNull = "Class view model cannot be null.";
+        public const string UserIdCannotBeEmpty= "User ID cannot be null or empty.";
+	}
 
     public static class MembershipType
     {
