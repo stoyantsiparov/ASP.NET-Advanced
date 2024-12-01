@@ -6,4 +6,9 @@ public static class ValidationMessages
 	{
 		public const string SpaAppointmentRemovedSuccessfully = "Spa appointment removed successfully.";
 	}
+
+    public static class Class
+    {
+        public const string ClassNameAndScheduleAreRequired = "Name and Schedule are required.";
+    }
 }
