@@ -250,10 +250,7 @@ public class ClassService : IClassService
             {
                 Id = c.Id,
                 Name = c.Name,
-                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
                 Description = c.Description,
-                Duration = c.Duration,
-                ImageUrl = c.ImageUrl
             })
             .FirstOrDefaultAsync();
     }
