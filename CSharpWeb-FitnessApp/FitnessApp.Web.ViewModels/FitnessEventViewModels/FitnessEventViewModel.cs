@@ -25,12 +25,8 @@ public class FitnessEventViewModel
 	public string Location { get; set; } = null!;
 
 	[Required]
-	[DataType(DataType.Date)]
-	[DisplayFormat(DataFormatString = DateTimeFormat, ApplyFormatInEditMode = true)]
-	public string StartDate { get; set; } = null!;
+    public string StartDate { get; set; } = null!;
 
 	[Required]
-	[DataType(DataType.Date)]
-	[DisplayFormat(DataFormatString = DateTimeFormat, ApplyFormatInEditMode = true)]
-	public string EndDate { get; set; } = null!;
+    public string EndDate { get; set; } = null!;
 }

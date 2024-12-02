@@ -7,6 +7,6 @@ public class FitnessEventDetailsViewModel
     public string? ImageUrl { get; set; }
     public string Location { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public string? StartDateTime { get; set; }
-    public string? EndDateTime { get; set; }
+    public string StartDateTime { get; set; } = null!;
+    public string EndDateTime { get; set; } = null!;
 }
