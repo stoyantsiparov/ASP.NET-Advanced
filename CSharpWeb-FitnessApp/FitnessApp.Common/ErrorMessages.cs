@@ -14,6 +14,7 @@ public static class ErrorMessages
         public const string FitnessEventDoesNotExist = "The specified event does not exist.";
         public const string AlreadyRegisteredForEvent = "You have already signed up for this event.";
         public const string UserNotRegisteredForEvent = "You are not registered for this event.";
+        public const string EndDateMustBeLaterThanStartDate = "End Date must be later than Start Date.";
     }
 
     public static class Class
