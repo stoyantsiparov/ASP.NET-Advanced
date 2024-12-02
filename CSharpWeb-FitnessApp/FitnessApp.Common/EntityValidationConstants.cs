@@ -20,6 +20,8 @@ public static class EntityValidationConstants
 		public const int NameMinLength = 2;
 		public const int DescriptionMaxLength = 5000;
 		public const int DescriptionMinLength = 10;
+		public const decimal PriceMinValue = 30.00m;
+		public const decimal PriceMaxValue = 300.00m;
 		public const int DurationMinValue = 30;
 		public const int DurationMaxValue = 180;
 		public const string ScheduleDateTimeFormat = "dd-MM-yyyy HH:mm";
