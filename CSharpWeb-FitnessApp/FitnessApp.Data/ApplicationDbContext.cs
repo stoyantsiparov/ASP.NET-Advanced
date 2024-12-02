@@ -147,6 +147,7 @@ namespace FitnessApp.Data
                     Schedule = new DateTime(2024, 12, 5, 7, 0, 0),
                     Duration = 60,
                     Description = "A calm and peaceful yoga session to start your day.",
+					Price = 50.00m,
                     ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg"
                 },
                 new Class
@@ -157,7 +158,8 @@ namespace FitnessApp.Data
                     Schedule = new DateTime(2024, 12, 5, 18, 0, 0),
                     Duration = 45,
                     Description = "An intense, high-energy interval training session.",
-                    ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQjZQw/2.jpg"
+                    Price = 60.00m,
+					ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQjZQw/2.jpg"
                 },
                 new Class
                 {
@@ -167,7 +169,8 @@ namespace FitnessApp.Data
                     Schedule = new DateTime(2024, 12, 6, 10, 0, 0),
                     Duration = 60,
                     Description = "A fun and energetic Zumba dance class for all levels.",
-                    ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw"
+                    Price = 40.00m,
+					ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw"
                 }
             );
 
