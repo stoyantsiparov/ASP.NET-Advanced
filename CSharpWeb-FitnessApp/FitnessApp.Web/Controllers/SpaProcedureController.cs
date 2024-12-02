@@ -16,7 +16,6 @@ public class SpaProcedureController : BaseController
 		_spaService = spaService;
 	}
 
-
 	[AllowAnonymous]
 	public async Task<IActionResult> Index()
 	{
