@@ -20,6 +20,7 @@
 			<h5 class="card-title">@Model.Name</h5>
 			<hr />
 			<p><strong>Description:</strong> @Model.Description</p>
+			<p><strong>Price:</strong> @Model.Price.ToString("C")</p>
 			<p><strong>Duration:</strong> @Model.Duration minutes</p>
 
 			@if (TempData["ErrorMessage"] != null)
@@ -37,6 +38,16 @@
 				<button type="submit" class="btn btn-success mt-2 w-100">Book Now</button>
 				<a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-secondary mt-2 w-100" style="border: none;">Back</a>
 			</form>
+
+			<hr />
+
+			<!-- Buttons for Edit and Delete -->
+			<div class="d-flex justify-content-between">
+				<a asp-controller="SpaProcedure" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100">Edit</a>
+				<a asp-controller="SpaProcedure" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">Delete</a>
+			</div>
+
+			<hr />
 		</div>
 	</div>
 </div>

@@ -1,0 +1,29 @@
+﻿@model FitnessApp.Web.ViewModels.SpaProcedureViewModels.DeleteSpaProcedureViewModel
+
+@{
+	ViewData["Title"] = "Delete Spa Procedure";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="card-title text-center">@Model.Name</h3>
+				<p class="mb-0"><strong>Description:</strong> @Model.Description</p>
+				<p class="text-danger mt-3">Are you sure you want to delete this spa procedure?</p>
+			</div>
+			<div class="card-footer">
+				<form asp-action="Delete" method="post">
+					<input type="hidden" asp-for="Id" />
+					<input type="hidden" asp-for="Name" />
+					<input type="hidden" asp-for="Description" />
+					<button type="submit" class="btn btn-danger w-100">Confirm Delete</button>
+					<a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-warning w-100">Cancel</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
