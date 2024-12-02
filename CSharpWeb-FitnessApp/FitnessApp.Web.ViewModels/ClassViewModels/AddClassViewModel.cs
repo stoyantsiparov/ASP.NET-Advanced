@@ -19,6 +19,10 @@ public class AddClassViewModel
     public string Description { get; set; } = null!;
 
     [Required]
+    [Range((double)PriceMinValue, (double)PriceMaxValue)]
+    public decimal Price { get; set; }
+
+    [Required]
     public string Schedule { get; set; } = null!;
 
     [Required]

@@ -49,7 +49,8 @@ public class ClassService : IClassService
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-                ImageUrl = c.ImageUrl,
+				Price = c.Price,
+				ImageUrl = c.ImageUrl,
                 Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
                 Duration = c.Duration,
                 InstructorId = c.InstructorId
@@ -69,7 +70,8 @@ public class ClassService : IClassService
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-                ImageUrl = c.ImageUrl,
+                Price = c.Price,
+				ImageUrl = c.ImageUrl,
                 Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
                 Duration = c.Duration,
                 Instructor = new InstructorViewModel
@@ -209,6 +211,7 @@ public class ClassService : IClassService
         {
             Name = model.Name,
             Description = model.Description,
+            Price = model.Price,
             ImageUrl = model.ImageUrl,
             Schedule = schedule,
             Duration = model.Duration,
@@ -231,6 +234,7 @@ public class ClassService : IClassService
             classEntity.Name = model.Name;
             classEntity.ImageUrl = model.ImageUrl;
             classEntity.Description = model.Description;
+            classEntity.Price = model.Price;
             classEntity.Schedule = DateTime.Parse(model.Schedule);
             classEntity.Duration = model.Duration;
             classEntity.InstructorId = model.InstructorId;

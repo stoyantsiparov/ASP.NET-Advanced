@@ -20,7 +20,11 @@ public class ClassesViewModel
 	[MinLength(DescriptionMinLength)]
 	public string Description { get; set; } = null!;
 
-	[Required]
+    [Required]
+    [Range((double)PriceMinValue, (double)PriceMaxValue)]
+    public decimal Price { get; set; }
+
+    [Required]
     public string Schedule { get; set; } = null!;
 
 	[Required]
