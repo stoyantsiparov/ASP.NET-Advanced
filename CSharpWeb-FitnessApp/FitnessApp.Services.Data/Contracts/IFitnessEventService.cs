@@ -10,4 +10,9 @@ public interface IFitnessEventService
     Task<IEnumerable<AllFitnessEventsViewModel>> GetMyFitnessEventsAsync(string userId);
     Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel);
     Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel);
+    Task<AddFitnessEventViewModel> GetFitnessEventForAddAsync();
+    Task AddFitnessEventAsync(AddFitnessEventViewModel model, string userId);
+    Task EditFitnessEventAsync(FitnessEventViewModel model);
+    Task<DeleteFitnessEventViewModel?> GetFitnessEventForDeleteAsync(int id);
+    Task DeleteFitnessEventAsync(int id);
 }
