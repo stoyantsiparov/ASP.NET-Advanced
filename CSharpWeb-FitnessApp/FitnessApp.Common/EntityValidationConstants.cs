@@ -6,7 +6,7 @@ public static class EntityValidationConstants
 	{
 		public const int NameMaxLength = 30;
 		public const int NameMinLength = 2;
-		public const decimal PriceMinValue = 89.00m;
+		public const decimal PriceMinValue = 7.99m;
 		public const decimal PriceMaxValue = 1199.00m;
 		public const int DurationMinValue = 30;
 		public const int DurationMaxValue = 365;
@@ -33,8 +33,8 @@ public static class EntityValidationConstants
 		public const int LocationMinLength = 2;
 		public const int DescriptionMaxLength = 5000;
 		public const int DescriptionMinLength = 10;
-		public const string DateTimeFormat = "dd-MM-yyyy";
-	}
+		public const string DateTimeFormat = "dd-MM-yyyy HH:mm";
+    }
 
 	public static class Instructor
 	{
