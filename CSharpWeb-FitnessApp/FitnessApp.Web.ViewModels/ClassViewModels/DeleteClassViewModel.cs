@@ -1,7 +1,4 @@
-﻿using FitnessApp.Web.ViewModels.InstructorViewModels;
-using System.ComponentModel.DataAnnotations;
-
-namespace FitnessApp.Web.ViewModels.ClassViewModels;
+﻿namespace FitnessApp.Web.ViewModels.ClassViewModels;
 
 public class DeleteClassViewModel
 {
