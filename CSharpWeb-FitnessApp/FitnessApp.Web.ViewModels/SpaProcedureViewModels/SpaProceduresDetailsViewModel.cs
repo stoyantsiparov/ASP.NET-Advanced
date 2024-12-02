@@ -8,5 +8,5 @@ public class SpaProceduresDetailsViewModel
 	public string Description { get; set; } = null!;
 	public int Duration { get; set; }
 	public decimal Price { get; set; }
-	public string? AppointmentDateTime { get; set; }
+	public string AppointmentDateTime { get; set; } = null!;
 }

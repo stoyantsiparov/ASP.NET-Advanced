@@ -6,5 +6,5 @@ public class AllSpaProceduresViewModel
 	public string Name { get; set; } = null!;
 	public string? Description { get; set; }
 	public string? ImageUrl { get; set; }
-    public DateTime AppointmentDateTime { get; set; }
+    public string AppointmentDateTime { get; set; } = null!;
 }

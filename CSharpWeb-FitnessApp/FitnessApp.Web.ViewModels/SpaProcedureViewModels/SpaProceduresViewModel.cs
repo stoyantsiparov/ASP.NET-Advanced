@@ -28,7 +28,5 @@ public class SpaProceduresViewModel
 	public decimal Price { get; set; }
 
 	[Required]
-	[DataType(DataType.DateTime)]
-	[DisplayFormat(DataFormatString = AppointmentDateTimeFormat, ApplyFormatInEditMode = true)]
-	public string AppointmentDateTime { get; set; } = null!;
+    public string AppointmentDateTime { get; set; } = null!;
 }
