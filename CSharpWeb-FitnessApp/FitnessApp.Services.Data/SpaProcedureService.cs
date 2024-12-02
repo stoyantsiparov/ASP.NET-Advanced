@@ -4,6 +4,7 @@ using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.SpaProcedureViewModels;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
+using static FitnessApp.Common.EntityValidationConstants.SpaProcedure;
 
 namespace FitnessApp.Services.Data;
 public class SpaProcedureService : ISpaProcedureService
@@ -42,9 +43,13 @@ public class SpaProcedureService : ISpaProcedureService
             .Select(sp => new SpaProceduresViewModel
             {
                 Id = sp.Id,
-                Name = sp.Name
+                Name = sp.Name,
+                ImageUrl = sp.ImageUrl,
+                Description = sp.Description,
+                Price = sp.Price,
+                Duration = sp.Duration,
+                AppointmentDateTime = sp.AppointmentDateTime.ToString(AppointmentDateTimeFormat)
             })
-            .AsNoTracking()
             .FirstOrDefaultAsync();
     }
 
@@ -65,7 +70,6 @@ public class SpaProcedureService : ISpaProcedureService
                 Duration = x.Duration,
                 AppointmentDateTime = null
             })
-            .AsNoTracking()
             .FirstOrDefaultAsync();
     }
 
