@@ -26,7 +26,5 @@ public class SpaProceduresViewModel
 	[Required]
 	[Range((double)PriceMinValue, (double)PriceMaxValue)]
 	public decimal Price { get; set; }
-
-	[Required]
-    public string AppointmentDateTime { get; set; } = null!;
+	public string? AppointmentDateTime { get; set; }
 }
