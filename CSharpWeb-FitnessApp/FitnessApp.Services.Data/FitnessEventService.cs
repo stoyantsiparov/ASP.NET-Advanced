@@ -235,11 +235,7 @@ public class FitnessEventService : IFitnessEventService
             {
                 Id = fe.Id,
                 Title = fe.Title,
-                ImageUrl = fe.ImageUrl,
-                Location = fe.Location,
-                Description = fe.Description,
-                StartDateTime = fe.StartDate.ToString(DateTimeFormat),
-                EndDateTime = fe.EndDate.ToString(DateTimeFormat)
+                Description = fe.Description
             })
             .FirstOrDefaultAsync();
     }
