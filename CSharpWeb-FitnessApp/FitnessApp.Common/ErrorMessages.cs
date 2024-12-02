@@ -7,6 +7,8 @@ public static class ErrorMessages
         public const string PastAppointmentDate = "Appointment date and time cannot be in the past.";
         public const string AlreadyBookedAppointment = "You have already booked this appointment.";
         public const string SpaAppointmentNotBooked = "You haven't booked a spa appointment";
+        public const string InvalidAppointmentDateFormat = "Invalid appointment date format.";
+        public const string SpaProcedureNotFound = "Spa procedure not found.";
     }
 
     public static class FitnessEvent
