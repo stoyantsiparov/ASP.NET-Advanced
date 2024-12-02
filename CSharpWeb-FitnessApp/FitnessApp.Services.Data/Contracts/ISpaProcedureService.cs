@@ -10,4 +10,9 @@ public interface ISpaProcedureService
 	Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId);
 	Task AddToMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure, DateTime appointmentDateTime);
 	Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure);
+    Task<AddSpaProcedureViewModel> GetSpaProcedureForAddAsync();
+    Task AddSpaProcedureAsync(AddSpaProcedureViewModel model, string userId);
+    Task EditSpaProcedureAsync(SpaProceduresViewModel model);
+    Task<DeleteSpaProcedureViewModel?> GetSpaProcedureForDeleteAsync(int id);
+    Task DeleteSpaProcedureAsync(int id);
 }
