@@ -32,7 +32,8 @@ namespace FitnessApp.Web.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Details(int id)
+        [AllowAnonymous]
+		public async Task<IActionResult> Details(int id)
         {
             var model = await _fitnessEventService.GetFitnessEventDetailsAsync(id);
 

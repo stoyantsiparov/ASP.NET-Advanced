@@ -32,7 +32,8 @@ public class ClassController : BaseController
         return View(model);
     }
 
-    public async Task<IActionResult> Details(int id)
+    [AllowAnonymous]
+	public async Task<IActionResult> Details(int id)
     {
         var model = await _classService.GetClassDetailsAsync(id);
 

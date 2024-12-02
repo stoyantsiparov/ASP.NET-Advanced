@@ -33,6 +33,7 @@ public class SpaProcedureController : BaseController
 		return View(model);
 	}
 
+	[AllowAnonymous]
 	public async Task<IActionResult> Details(int id)
 	{
 		var model = await _spaService.GetSpaProceduresDetailsAsync(id);
