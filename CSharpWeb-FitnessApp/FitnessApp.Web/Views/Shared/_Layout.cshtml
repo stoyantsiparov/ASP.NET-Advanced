@@ -40,33 +40,38 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Services
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                                <li><a class="dropdown-item" asp-controller="SpaProcedure" asp-action="Index">Spa Procedures</a></li>
-                                <li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="Index">Fitness Events</a></li>
-                                <li><a class="dropdown-item" asp-controller="Class" asp-action="Index">Fitness Classes</a></li>
-                            </ul>
-                        </li>
+	                    <li class="nav-item dropdown">
+		                    <a class="nav-link dropdown-toggle text-dark" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			                    Services
+		                    </a>
+		                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+			                    <li><a class="dropdown-item" asp-controller="SpaProcedure" asp-action="Index">Spa Procedures</a></li>
+			                    <li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="Index">Fitness Events</a></li>
+			                    <li><a class="dropdown-item" asp-controller="Class" asp-action="Index">Fitness Classes</a></li>
+		                    </ul>
+	                    </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" id="appointmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Appointments
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="appointmentsDropdown">
-                                <li><a class="dropdown-item" asp-controller="SpaProcedure" asp-action="MySpaAppointments">My Spa Appointments</a></li>
-                                <li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="MyFitnessEvents">My Fitness Appointments</a></li>
-                                <li><a class="dropdown-item" asp-controller="Class" asp-action="MyClasses">My Class Appointments</a></li>
-                            </ul>
-                        </li>
+	                    <li class="nav-item dropdown">
+		                    <a class="nav-link dropdown-toggle text-dark" id="appointmentsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			                    Appointments
+		                    </a>
+		                    <ul class="dropdown-menu" aria-labelledby="appointmentsDropdown">
+			                    <li><a class="dropdown-item" asp-controller="SpaProcedure" asp-action="MySpaAppointments">My Spa Appointments</a></li>
+			                    <li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="MyFitnessEvents">My Fitness Appointments</a></li>
+			                    <li><a class="dropdown-item" asp-controller="Class" asp-action="MyClasses">My Class Appointments</a></li>
+		                    </ul>
+	                    </li>
+                        
+	                    <li class="nav-item ms-left">
+		                    <a class="nav-link text-dark" asp-controller="Instructor" asp-action="Index">Our Instructors</a>
+	                    </li>
 
-                        <li class="nav-item dropdown ms-auto">
+	                    <li class="nav-item dropdown ms-auto">
                             <a class="nav-link dropdown-toggle text-dark" id="addClassDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Admin Menu
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="addClassDropdown">
+                                <li><a class="dropdown-item" asp-controller="Instructor" asp-action="Add">Add New Instructor</a></li>
                                 <li><a class="dropdown-item" asp-controller="MembershipType" asp-action="Add">Create New Membership Type</a></li>
                                 <li><a class="dropdown-item" asp-controller="Class" asp-action="Add">Create New Class</a></li>
                                 <li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="Add">Create New Fitness Event</a></li>
@@ -80,7 +85,7 @@
         </nav>
     </header>
 
-<div class="container">
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
