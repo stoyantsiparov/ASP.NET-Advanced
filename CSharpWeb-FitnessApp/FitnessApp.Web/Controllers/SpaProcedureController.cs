@@ -3,7 +3,7 @@ using FitnessApp.Web.ViewModels.SpaProcedureViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
-using static FitnessApp.Common.ValidationMessages.SpaProcedure;
+using static FitnessApp.Common.SuccessfulValidationMessages.SpaProcedure;
 
 namespace FitnessApp.Web.Controllers;
 
