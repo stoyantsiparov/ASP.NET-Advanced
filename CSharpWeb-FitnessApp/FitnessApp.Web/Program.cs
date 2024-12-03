@@ -34,8 +34,9 @@ namespace FitnessApp.Web
             builder.Services.AddScoped<IFitnessEventService, FitnessEventService>();
 			builder.Services.AddScoped<IClassService, ClassService>();
 			builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
+            builder.Services.AddScoped<IInstructorService, InstructorService>();
 
-			WebApplication app = builder.Build();
+            WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
