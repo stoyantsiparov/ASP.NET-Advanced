@@ -1,0 +1,28 @@
+﻿@model FitnessApp.Web.ViewModels.InstructorViewModels.DeleteInstructorViewModel
+
+@{
+	ViewData["Title"] = "Delete Instructor";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="row justify-content-center">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body">
+				<h3 class="card-title text-center">@Model.FirstName @Model.LastName</h3>
+				<p class="text-danger mt-3">Are you sure you want to delete this instructor?</p>
+			</div>
+			<div class="card-footer">
+				<form asp-action="Delete" method="post">
+					<input type="hidden" asp-for="Id" />
+					<input type="hidden" asp-for="FirstName" />
+					<input type="hidden" asp-for="LastName" />
+					<button type="submit" class="btn btn-danger w-100">Confirm Delete</button>
+					<a asp-controller="Instructor" asp-action="Index" class="btn btn-warning w-100">Cancel</a>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

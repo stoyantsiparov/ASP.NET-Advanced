@@ -1,0 +1,39 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.InstructorViewModels.AllInstructorsViewModel>
+
+@{
+	ViewData["Title"] = "Available Instructors";
+}
+
+<h2 class="text-center">@ViewData["Title"]</h2>
+<hr />
+
+<div class="text-center row">
+	@foreach (var instructor in Model)
+	{
+		<div class="card col-4" style="width: 20rem;">
+			<div class="card-body d-flex flex-column" style="height: 100%;">
+				<h5 class="card-title mt-1">@instructor.FirstName @instructor.LastName</h5>
+				@if (!string.IsNullOrEmpty(instructor.ImageUrl))
+				{
+					<img class="card-img-top" src="@instructor.ImageUrl" alt="@instructor.FirstName @instructor.LastName" style="max-height: 200px; object-fit: cover; width: 100%;">
+				}
+				else
+				{
+					<img class="card-img-top" src="~/img/no-image-available-02.jpg" alt="No Image Available" style="max-height: 200px; object-fit: cover; width: 100%;">
+				}
+
+				<hr class="mt-2 mb-2" />
+
+				<p class="mt-2 flex-grow-1">@instructor.Specialization</p>
+
+				<div class="mt-auto">
+					<a asp-controller="Instructor" asp-action="Details" asp-route-id="@instructor.Id" class="btn btn-success w-100">View Details</a>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model FitnessApp.Web.ViewModels.InstructorViewModels.InstructorViewModel
+
+@{
+	ViewData["Title"] = "Edit Instructor";
+}
+
+<h1>Edit Instructor</h1>
+
+<form asp-action="Edit" method="post" id="editInstructorForm">
+	<input asp-for="Id" type="hidden" />
+
+	<div class="form-group">
+		<label asp-for="FirstName"></label>
+		<input asp-for="FirstName" class="form-control" />
+		<span asp-validation-for="FirstName" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="LastName"></label>
+		<input asp-for="LastName" class="form-control" />
+		<span asp-validation-for="LastName" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="ImageUrl">Image URL</label>
+		<input asp-for="ImageUrl" class="form-control" />
+		<span asp-validation-for="ImageUrl" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Bio"></label>
+		<textarea asp-for="Bio" class="form-control"></textarea>
+		<span asp-validation-for="Bio" class="text-danger"></span>
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Specialization"></label>
+		<input asp-for="Specialization" class="form-control" />
+		<span asp-validation-for="Specialization" class="text-danger"></span>
+	</div>
+
+	<div class="form-group d-flex justify-content-start mt-3">
+		<button type="submit" class="btn btn-primary me-2" style="width: 200px;">Save Changes</button>
+		<a asp-action="Index" class="btn btn-secondary" style="width: 200px;">Cancel</a>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
