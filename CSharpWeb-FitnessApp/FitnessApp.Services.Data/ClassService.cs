@@ -5,7 +5,7 @@ using FitnessApp.Web.ViewModels.ClassViewModels;
 using FitnessApp.Web.ViewModels.InstructorViewModels;
 using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.EntityValidationConstants.Class;
-using static FitnessApp.Common.ValidationMessages.Class;
+using static FitnessApp.Common.SuccessfulValidationMessages.Class;
 using static FitnessApp.Common.ErrorMessages.Class;
 
 namespace FitnessApp.Services.Data;
