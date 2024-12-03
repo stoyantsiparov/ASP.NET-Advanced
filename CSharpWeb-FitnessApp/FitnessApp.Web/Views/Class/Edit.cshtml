@@ -1,71 +1,81 @@
-﻿@model FitnessApp.Web.ViewModels.ClassViewModels.ClassesViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model FitnessApp.Web.ViewModels.ClassViewModels.ClassesViewModel
 
 @{
     ViewData["Title"] = "Edit Fitness Class";
-    var today = DateTime.Now.ToString("dd-MM-yyyy");
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
-<hr />
+<h1>Edit Fitness Class</h1>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <form asp-action="Edit" method="post" enctype="multipart/form-data">
-	        <div class="mb-3">
-		        <label asp-for="@Model.Name" class="form-label-add-edit">Class Name</label>
-		        <input asp-for="@Model.Name" class="form-control" aria-required="true" />
-		        <span asp-validation-for="@Model.Name" class="text-danger"></span>
-	        </div>
-			
-	        <div class="mb-3">
-		        <label asp-for="@Model.ImageUrl" class="form-label-add-edit">Image URL</label>
-		        <input asp-for="@Model.ImageUrl" class="form-control" placeholder="Enter image URL (optional)" />
-		        <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
-	        </div>
-
-	        <div class="mb-3">
-		        <label asp-for="@Model.Description" class="form-label-add-edit">Description</label>
-		        <textarea asp-for="@Model.Description" class="form-control" rows="3" aria-required="true"></textarea>
-		        <span asp-validation-for="@Model.Description" class="text-danger"></span>
-	        </div>
-
-			<div class="mb-3">
-				<label asp-for="@Model.Price" class="form-label-add-edit">Price</label>
-				<input asp-for="@Model.Price" class="form-control" aria-required="true" type="number" min="1" />
-				<span asp-validation-for="@Model.Price" class="text-danger"></span>
-			</div>
-			
-	        <div class="mb-3">
-		        <label asp-for="@Model.Duration" class="form-label-add-edit">Duration (minutes)</label>
-		        <input asp-for="@Model.Duration" class="form-control" aria-required="true" type="number" min="1" />
-		        <span asp-validation-for="@Model.Duration" class="text-danger"></span>
-	        </div>
-            
-	        <div class="form-group">
-		        <label asp-for="InstructorId">Instructor</label>
-		        <select asp-for="InstructorId" class="form-control">
-			        <option value="">Select Instructor Specialization</option>
-			        @foreach (var instructor in Model.Instructors)
-			        {
-				        <option value="@instructor.Id">@instructor.Specialization</option>
-			        }
-		        </select>
-		        <span asp-validation-for="InstructorId" class="text-danger"></span>
-	        </div>
-
-	        <div class="mb-3">
-                <label asp-for="@Model.Schedule" class="form-label-add-edit">Schedule</label>
-                <input asp-for="@Model.Schedule" class="form-control" aria-required="true" type="datetime-local" />
-                <span asp-validation-for="@Model.Schedule" class="text-danger"></span>
-            </div>
-
-	        <div class="mb-3">
-                <input type="submit" class="btn btn-warning w-100 py-2 fw-bold rounded" value="Update" />
-            </div>
-        </form>
+<form asp-action="Edit" method="post" id="editFitnessClassForm">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-</div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="Enter image URL (optional)" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" type="number" min="1" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration">Duration (minutes)</label>
+        <input asp-for="Duration" class="form-control" type="number" min="1" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InstructorId">Instructor</label>
+        <select asp-for="InstructorId" class="form-control">
+            <option value="">Select Instructor Specialization</option>
+            @foreach (var instructor in Model.Instructors)
+            {
+                <option value="@instructor.Id">@instructor.Specialization</option>
+            }
+        </select>
+        <span asp-validation-for="InstructorId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Schedule">Schedule</label>
+        <input asp-for="Schedule" class="form-control" type="datetime-local" />
+        <span asp-validation-for="Schedule" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex justify-content-start mt-3">
+        <button type="submit" class="btn btn-primary me-2" style="width: 200px;">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary" style="width: 200px;">Cancel</a>
+    </div>
+</form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById("editFitnessClassForm").onsubmit = function (event) {
+            var schedule = new Date(document.querySelector("input[name='Schedule']").value);
+            var today = new Date();
+
+            // Checking if Schedule is a future date
+            if (schedule < today) {
+                event.preventDefault(); // Stops submitting the form
+                alert("Schedule must be a future date.");
+            }
+        };
+    </script>
 }
