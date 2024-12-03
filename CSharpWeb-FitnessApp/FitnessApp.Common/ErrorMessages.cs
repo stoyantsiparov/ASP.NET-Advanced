@@ -7,7 +7,6 @@ public static class ErrorMessages
         public const string PastAppointmentDate = "Appointment date and time cannot be in the past.";
         public const string AlreadyBookedAppointment = "You have already booked this appointment.";
         public const string SpaAppointmentNotBooked = "You haven't booked a spa appointment";
-        public const string InvalidAppointmentDateFormat = "Invalid appointment date format.";
         public const string SpaProcedureNotFound = "Spa procedure not found.";
     }
 
@@ -36,5 +35,15 @@ public static class ErrorMessages
         public const string MembershipTypeDoesNotExist = "The membership type does not exist.";
         public const string OnlyOneMembershipTypeAllowed = "You can only have one membership type at a time.";
         public const string MembershipNotPurchased = "You have not purchased a membership";
+    }
+
+    public static class Instructor
+    {
+        public const string InstructorNotFound = "Instructor not found";
+        public const string InstructorViewModelCannotBeNull = "Instructor view model cannot be null.";
+        public const string UserIdCannotBeEmpty = "User ID cannot be null or empty.";
+        public const string InstructorAddError = "An error occurred while adding the instructor.";
+        public const string InstructorEditError = "An error occurred while editing the instructor.";
+        public const string InstructorDeleteError = "An error occurred while deleting the instructor.";
     }
 }
