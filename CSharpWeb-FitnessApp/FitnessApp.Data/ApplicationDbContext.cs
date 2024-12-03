@@ -16,7 +16,7 @@ namespace FitnessApp.Data
         public virtual DbSet<FitnessEvent> FitnessEvents { get; set; } = null!;
         public virtual DbSet<EventRegistration> EventRegistrations { get; set; } = null!;
         public virtual DbSet<Class> Classes { get; set; } = null!;
-        public virtual DbSet<ClassRegistration> ClassesRegistrations { get; set; } = null!;
+        public virtual DbSet<ClassRegistration> ClassesRegistrations { get; set; } = null!; 
         public virtual DbSet<Instructor> Instructors { get; set; } = null!;
         public virtual DbSet<SpaProcedure> SpaProcedures { get; set; } = null!;
         public virtual DbSet<SpaRegistration> SpaRegistrations { get; set; } = null!;
