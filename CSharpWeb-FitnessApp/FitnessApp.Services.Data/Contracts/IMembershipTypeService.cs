@@ -9,4 +9,9 @@ public interface IMembershipTypeService
 	Task<IEnumerable<AllMembershipTypeViewModel>> GetMyMembershipTypesAsync(string userId);
 	Task AddMyMembershipAsync(string userId, MembershipTypeViewModel? membershipTypeViewModel);
 	Task RemoveMyMembershipAsync(string userId, MembershipTypeViewModel? membershipTypeViewModel);
+	Task<AddMembershipTypeViewModel> GetMembershipTypeForAddAsync();
+	Task AddMembershipTypeAsync(AddMembershipTypeViewModel model, string userId);
+	Task EditMembershipTypeAsync(MembershipTypeViewModel model);
+	Task<DeleteMembershipTypeViewModel?> GetMembershipTypeForDeleteAsync(int id);
+	Task DeleteMembershipTypeAsync(int id);
 }

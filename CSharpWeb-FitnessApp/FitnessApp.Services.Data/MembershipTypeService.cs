@@ -137,4 +137,93 @@ public class MembershipTypeService : IMembershipTypeService
 		_context.MembershipRegistrations.Remove(registration);
 		await _context.SaveChangesAsync();
 	}
+
+	/// <summary>
+	/// Get the necessary information for adding a new membership type.
+	/// </summary>
+	public async Task<AddMembershipTypeViewModel> GetMembershipTypeForAddAsync()
+	{
+		var model = new AddMembershipTypeViewModel
+		{
+			Name = string.Empty,
+			ImageUrl = string.Empty,
+			Description = string.Empty,
+			Price = 0.0m,
+			Duration = 0
+		};
+
+		return await Task.FromResult(model);
+	}
+
+	/// <summary>
+	///	Add a new membership type to the database.
+	/// </summary>
+	public async Task AddMembershipTypeAsync(AddMembershipTypeViewModel model, string userId)
+	{
+		var membershipType = new MembershipType
+		{
+			Name = model.Name,
+			ImageUrl = model.ImageUrl,
+			Description = model.Description,
+			Price = model.Price,
+			Duration = model.Duration
+		};
+
+		await _context.MembershipTypes.AddAsync(membershipType);
+		await _context.SaveChangesAsync();
+	}
+
+	/// <summary>
+	/// Edit an existing membership type.
+	/// </summary>
+	public async Task EditMembershipTypeAsync(MembershipTypeViewModel model)
+	{
+		var membershipType = await _context.MembershipTypes.FindAsync(model.Id);
+
+		if (membershipType == null)
+		{
+			throw new InvalidOperationException(MembershipTypeDoesNotExist);
+		}
+
+		membershipType.Name = model.Name;
+		membershipType.Price = model.Price;
+		membershipType.Duration = model.Duration;
+		membershipType.Description = model.Description;
+		membershipType.ImageUrl = model.ImageUrl;
+
+		_context.MembershipTypes.Update(membershipType);
+		await _context.SaveChangesAsync();
+	}
+
+	/// <summary>
+	/// Get the necessary information for deleting a membership type.
+	/// </summary>
+	public async Task<DeleteMembershipTypeViewModel?> GetMembershipTypeForDeleteAsync(int id)
+	{
+		return await _context.MembershipTypes
+		.Where(m => m.Id == id)
+		.Select(m => new DeleteMembershipTypeViewModel
+		{
+			Id = m.Id,
+			Name = m.Name,
+			Description = m.Description
+		})
+		.FirstOrDefaultAsync();
+	}
+
+	/// <summary>
+	/// Delete a membership type from the database.
+	/// </summary>
+	public async Task DeleteMembershipTypeAsync(int id)
+	{
+		var membershipType = await _context.MembershipTypes.FindAsync(id);
+
+		if (membershipType == null)
+		{
+			throw new InvalidOperationException(MembershipTypeDoesNotExist);
+		}
+
+		_context.MembershipTypes.Remove(membershipType);
+		await _context.SaveChangesAsync();
+	}
 }
