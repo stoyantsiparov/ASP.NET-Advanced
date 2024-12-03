@@ -3,10 +3,8 @@
 namespace FitnessApp.Web.ViewModels.InstructorViewModels;
 using static FitnessApp.Common.EntityValidationConstants.Instructor;
 
-public class InstructorViewModel
+public class AddInstructorViewModel
 {
-    public int Id { get; set; }
-
     [Required]
     [MaxLength(FirstNameMaxLength)]
     [MinLength(FirstNameMinLength)]
