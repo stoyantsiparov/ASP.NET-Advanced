@@ -77,7 +77,7 @@ public class InstructorController : BaseController
             await _instructorService.AddInstructorAsync(model, userId);
             return RedirectToAction(nameof(Index));
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             ModelState.AddModelError(string.Empty, InstructorAddError);
             return View(model);
@@ -121,7 +121,7 @@ public class InstructorController : BaseController
             await _instructorService.EditInstructorAsync(model);
             return RedirectToAction(nameof(Details), new { id = model.Id });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             ModelState.AddModelError(string.Empty, InstructorEditError);
             return View(model);
