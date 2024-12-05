@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using static FitnessApp.Common.ApplicationsConstants;
 
 namespace FitnessApp.Data.Configuration
 {
@@ -10,7 +10,7 @@ namespace FitnessApp.Data.Configuration
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            string[] roles = { "Admin", "Member", "User" };
+            string[] roles = { AdminRole, MemberRole};
 
             foreach (var role in roles)
             {
@@ -47,7 +47,7 @@ namespace FitnessApp.Data.Configuration
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(adminUser, "Admin").GetAwaiter().GetResult();
+                    userManager.AddToRoleAsync(adminUser, AdminRole).GetAwaiter().GetResult();
                 }
                 else
                 {
