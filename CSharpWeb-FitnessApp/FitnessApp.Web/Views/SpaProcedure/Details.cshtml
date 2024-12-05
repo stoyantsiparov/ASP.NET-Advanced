@@ -1,4 +1,5 @@
 ﻿@model FitnessApp.Web.ViewModels.SpaProcedureViewModels.SpaProceduresDetailsViewModel
+@using static FitnessApp.Common.ApplicationsConstants
 
 <h2>@Model.Name</h2>
 <hr />
@@ -39,15 +40,19 @@
 				<a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-secondary mt-2 w-100" style="border: none;">Back</a>
 			</form>
 
-			<hr />
+			@if (User.IsInRole(AdminRole))
+			{
+				<hr />
 
-			<!-- Buttons for Edit and Delete -->
-			<div class="d-flex justify-content-between">
-				<a asp-controller="SpaProcedure" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100">Edit</a>
-				<a asp-controller="SpaProcedure" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">Delete</a>
-			</div>
+				<!-- Buttons for Edit and Delete -->
+				<div class="d-flex justify-content-between">
+					<a asp-controller="SpaProcedure" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100">Edit</a>
+					<a asp-controller="SpaProcedure" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">Delete</a>
+				</div>
 
-			<hr />
+				<hr />
+			}
+
 		</div>
 	</div>
 </div>
