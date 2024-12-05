@@ -12,7 +12,7 @@ public interface IFitnessEventService
     Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel);
     Task<AddFitnessEventViewModel> GetFitnessEventForAddAsync();
     Task AddFitnessEventAsync(AddFitnessEventViewModel model, string userId);
-    Task EditFitnessEventAsync(FitnessEventViewModel model);
+    Task EditFitnessEventAsync(FitnessEventViewModel model, string userId);
     Task<DeleteFitnessEventViewModel?> GetFitnessEventForDeleteAsync(int id);
-    Task DeleteFitnessEventAsync(int id);
+    Task DeleteFitnessEventAsync(int id, string userId);
 }

@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.EntityValidationConstants.FitnessEvent;
 using static FitnessApp.Common.ErrorMessages.FitnessEvent;
+using static FitnessApp.Common.ErrorMessages.Roles;
 
 namespace FitnessApp.Services.Data;
 
@@ -183,6 +184,14 @@ public class FitnessEventService : IFitnessEventService
             throw new ArgumentNullException(nameof(model));
         }
 
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToAdd);
+        }
+
         var startDate = DateTime.Parse(model.StartDate);
         var endDate = DateTime.Parse(model.EndDate);
 
@@ -208,8 +217,16 @@ public class FitnessEventService : IFitnessEventService
     /// <summary>
     /// Edit fitness event
     /// </summary>
-    public async Task EditFitnessEventAsync(FitnessEventViewModel model)
+    public async Task EditFitnessEventAsync(FitnessEventViewModel model, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
+        }
+
         var fitnessEvent = await _context.FitnessEvents.FindAsync(model.Id);
 
         if (fitnessEvent == null)
@@ -255,14 +272,26 @@ public class FitnessEventService : IFitnessEventService
     /// <summary>
     /// Delete fitness event
     /// </summary>
-    public async Task DeleteFitnessEventAsync(int id)
+    public async Task DeleteFitnessEventAsync(int id, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToDelete);
+        }
+
         var fitnessEvent = await _context.FitnessEvents.FindAsync(id);
 
         if (fitnessEvent != null)
         {
             _context.FitnessEvents.Remove(fitnessEvent);
             await _context.SaveChangesAsync();
+        }
+        else
+        {
+            throw new InvalidOperationException(FitnessEventDoesNotExist);
         }
     }
 }

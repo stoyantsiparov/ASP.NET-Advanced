@@ -2,6 +2,7 @@
 using FitnessApp.Web.ViewModels.FitnessEventViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.ErrorMessages.FitnessEvent;
 
 namespace FitnessApp.Web.Controllers
@@ -86,6 +87,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = AdminRole)]
         public async Task<IActionResult> Add()
         {
             var model = await _fitnessEventService.GetFitnessEventForAddAsync();
@@ -94,6 +96,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AdminRole)]
         public async Task<IActionResult> Add(AddFitnessEventViewModel model)
         {
             if (ModelState.IsValid == false)
@@ -108,6 +111,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = AdminRole)]
         public async Task<IActionResult> Edit(int id)
         {
             var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
@@ -121,6 +125,7 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AdminRole)]
         public async Task<IActionResult> Edit(FitnessEventViewModel model)
         {
             if (ModelState.IsValid == false)
@@ -128,12 +133,15 @@ namespace FitnessApp.Web.Controllers
                 return View(model);
             }
 
-            await _fitnessEventService.EditFitnessEventAsync(model);
+            var userId = GetUserId();
+
+            await _fitnessEventService.EditFitnessEventAsync(model, userId);
 
             return RedirectToAction(nameof(Details), new { id = model.Id });
         }
 
         [HttpGet]
+        [Authorize(Roles = AdminRole)]
         public async Task<IActionResult> Delete(int id)
         {
             var model = await _fitnessEventService.GetFitnessEventForDeleteAsync(id);
@@ -147,9 +155,12 @@ namespace FitnessApp.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = AdminRole)]
         public async Task<IActionResult> Delete(DeleteFitnessEventViewModel model)
         {
-            await _fitnessEventService.DeleteFitnessEventAsync(model.Id);
+            var userId = GetUserId();
+
+            await _fitnessEventService.DeleteFitnessEventAsync(model.Id, userId);
 
             return RedirectToAction(nameof(Index));
         }
