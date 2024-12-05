@@ -3,7 +3,9 @@ using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.ClassViewModels;
 using FitnessApp.Web.ViewModels.InstructorViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.EntityValidationConstants.Class;
 using static FitnessApp.Common.SuccessfulValidationMessages.Class;
 using static FitnessApp.Common.ErrorMessages.Class;
@@ -13,10 +15,12 @@ namespace FitnessApp.Services.Data;
 public class ClassService : IClassService
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public ClassService(ApplicationDbContext context)
+    public ClassService(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     /// <summary>
@@ -134,6 +138,13 @@ public class ClassService : IClassService
         if (existingRegistration != null)
         {
             throw new InvalidOperationException(AlreadyRegisteredForClass);
+        }
+
+        var user = await _userManager.FindByIdAsync(userId);
+        var roles = await _userManager.GetRolesAsync(user);
+        if (!roles.Contains(MemberRole))
+        {
+            throw new InvalidOperationException(OnlyMembersCanRegisterForThisClass);
         }
 
         var classRegistration = new ClassRegistration
