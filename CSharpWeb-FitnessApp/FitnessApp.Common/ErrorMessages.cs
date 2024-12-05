@@ -46,4 +46,10 @@ public static class ErrorMessages
         public const string InstructorEditError = "An error occurred while editing the instructor.";
         public const string InstructorDeleteError = "An error occurred while deleting the instructor.";
     }
+    
+    public static class Roles
+    {
+        public const string FailedToAssignMemberRole = "Failed to assign Member role.";
+        public const string FailedToRemoveMemberRole = "Failed to remove Member role.";
+    }
 }
