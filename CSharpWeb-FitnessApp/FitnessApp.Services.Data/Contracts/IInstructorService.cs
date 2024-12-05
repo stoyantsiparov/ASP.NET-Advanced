@@ -9,7 +9,7 @@ public interface IInstructorService
     Task<InstructorDetailsViewModel?> GetInstructorDetailsAsync(int id);
     Task<AddInstructorViewModel> GetInstructorForAddAsync();
     Task AddInstructorAsync(AddInstructorViewModel model, string userId);
-    Task EditInstructorAsync(InstructorViewModel model);
+    Task EditInstructorAsync(InstructorViewModel model, string userId);
     Task<DeleteInstructorViewModel?> GetInstructorForDeleteAsync(int id);
-    Task DeleteInstructorAsync(int id);
+    Task DeleteInstructorAsync(int id, string userId);
 }

@@ -2,6 +2,7 @@
 using FitnessApp.Web.ViewModels.InstructorViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.ErrorMessages.Instructor;
 using static FitnessApp.Common.SuccessfulValidationMessages.Instructor;
 
@@ -44,6 +45,7 @@ public class InstructorController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Add()
     {
         var model = await _instructorService.GetInstructorForAddAsync();
@@ -52,6 +54,7 @@ public class InstructorController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Add(AddInstructorViewModel model)
     {
         if (model == null)
@@ -85,6 +88,7 @@ public class InstructorController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Edit(int id)
     {
         if (id <= 0)
@@ -103,6 +107,7 @@ public class InstructorController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Edit(InstructorViewModel model)
     {
         if (model == null)
@@ -116,9 +121,11 @@ public class InstructorController : BaseController
             return View(model);
         }
 
+        var userId = GetUserId();
+
         try
         {
-            await _instructorService.EditInstructorAsync(model);
+            await _instructorService.EditInstructorAsync(model, userId);
             return RedirectToAction(nameof(Details), new { id = model.Id });
         }
         catch (Exception)
@@ -129,6 +136,7 @@ public class InstructorController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Delete(int id)
     {
         if (id <= 0)
@@ -147,6 +155,7 @@ public class InstructorController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Delete(DeleteInstructorViewModel model)
     {
         if (model == null || model.Id <= 0)
@@ -154,9 +163,11 @@ public class InstructorController : BaseController
             return RedirectToAction(nameof(Index));
         }
 
+        var userId = GetUserId();
+
         try
         {
-            await _instructorService.DeleteInstructorAsync(model.Id);
+            await _instructorService.DeleteInstructorAsync(model.Id, userId);
             TempData["SuccessMessage"] = InstructorDeletedSuccessfully;
         }
         catch (Exception)

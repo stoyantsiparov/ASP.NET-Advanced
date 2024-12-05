@@ -2,18 +2,23 @@
 using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.InstructorViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.ErrorMessages.Instructor;
+using static FitnessApp.Common.ErrorMessages.Roles;
 
 namespace FitnessApp.Services.Data;
 
 public class InstructorService : IInstructorService
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public InstructorService(ApplicationDbContext context)
+    public InstructorService(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     /// <summary>
@@ -94,14 +99,16 @@ public class InstructorService : IInstructorService
     /// </summary>
     public async Task AddInstructorAsync(AddInstructorViewModel model, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null || !await _userManager.IsInRoleAsync(user, AdminRole))
+        {
+            throw new InvalidOperationException(YouAreNotAuthorizedToAdd);
+        }
+
         if (model == null)
         {
             throw new ArgumentNullException(InstructorViewModelCannotBeNull);
-        }
-
-        if (string.IsNullOrWhiteSpace(userId))
-        {
-            throw new ArgumentException(UserIdCannotBeEmpty);
         }
 
         var instructor = new Instructor
@@ -120,8 +127,15 @@ public class InstructorService : IInstructorService
     /// <summary>
     /// Edit instructor.
     /// </summary>
-    public async Task EditInstructorAsync(InstructorViewModel model)
+    public async Task EditInstructorAsync(InstructorViewModel model, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null || !await _userManager.IsInRoleAsync(user, AdminRole))
+        {
+            throw new InvalidOperationException(YouAreNotAuthorizedToEdit);
+        }
+
         if (model == null)
         {
             throw new ArgumentNullException(InstructorViewModelCannotBeNull);
@@ -163,8 +177,15 @@ public class InstructorService : IInstructorService
     /// <summary>
     /// Delete instructor.
     /// </summary>
-    public async Task DeleteInstructorAsync(int id)
+    public async Task DeleteInstructorAsync(int id, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null || !await _userManager.IsInRoleAsync(user, AdminRole))
+        {
+            throw new InvalidOperationException(YouAreNotAuthorizedToDelete);
+        }
+
         var instructor = await _context.Instructors.FirstOrDefaultAsync(i => i.Id == id);
 
         if (instructor == null)
