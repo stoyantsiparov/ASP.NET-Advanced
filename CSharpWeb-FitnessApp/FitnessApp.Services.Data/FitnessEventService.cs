@@ -2,7 +2,9 @@
 using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.FitnessEventViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.EntityValidationConstants.FitnessEvent;
 using static FitnessApp.Common.ErrorMessages.FitnessEvent;
 
@@ -11,10 +13,12 @@ namespace FitnessApp.Services.Data;
 public class FitnessEventService : IFitnessEventService
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public FitnessEventService(ApplicationDbContext context)
+    public FitnessEventService(ApplicationDbContext context, UserManager<IdentityUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     /// <summary>
@@ -101,6 +105,14 @@ public class FitnessEventService : IFitnessEventService
     /// </summary>
     public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
     {
+        var user = await _context.Users.FindAsync(userId);
+        var isMember = user != null && await _userManager.IsInRoleAsync(user, MemberRole);
+
+        if (!isMember)
+        {
+            throw new InvalidOperationException(OnlyMembersCanRegisterForThisEvent);
+        }
+
         var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
 
         if (fitnessEvent == null)
