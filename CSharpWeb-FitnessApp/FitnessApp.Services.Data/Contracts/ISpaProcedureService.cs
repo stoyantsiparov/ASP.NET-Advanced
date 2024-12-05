@@ -12,7 +12,7 @@ public interface ISpaProcedureService
 	Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure);
     Task<AddSpaProcedureViewModel> GetSpaProcedureForAddAsync();
     Task AddSpaProcedureAsync(AddSpaProcedureViewModel model, string userId);
-    Task EditSpaProcedureAsync(SpaProceduresViewModel model);
+    Task EditSpaProcedureAsync(SpaProceduresViewModel model, string userId);
     Task<DeleteSpaProcedureViewModel?> GetSpaProcedureForDeleteAsync(int id);
-    Task DeleteSpaProcedureAsync(int id);
+    Task DeleteSpaProcedureAsync(int id, string userId);
 }

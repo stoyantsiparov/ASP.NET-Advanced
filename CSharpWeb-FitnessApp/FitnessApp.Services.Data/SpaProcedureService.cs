@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.EntityValidationConstants.SpaProcedure;
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
+using static FitnessApp.Common.ErrorMessages.Roles;
 
 namespace FitnessApp.Services.Data;
 
@@ -175,50 +176,66 @@ public class SpaProcedureService : ISpaProcedureService
 		return await Task.FromResult(model);
 	}
 
-	/// <summary>
-	/// Add spa procedure
-	/// </summary>
-	public async Task AddSpaProcedureAsync(AddSpaProcedureViewModel model, string userId)
-	{
+    /// <summary>
+    /// Add spa procedure
+    /// </summary>
+    public async Task AddSpaProcedureAsync(AddSpaProcedureViewModel model, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToAdd);
+        }
+
         var spaProcedure = new SpaProcedure
-		{
-			Name = model.Name,
-			ImageUrl = model.ImageUrl,
-			Description = model.Description,
-			Duration = model.Duration,
-			Price = model.Price,
-		};
+        {
+            Name = model.Name,
+            ImageUrl = model.ImageUrl,
+            Description = model.Description,
+            Duration = model.Duration,
+            Price = model.Price,
+        };
 
-		await _context.SpaProcedures.AddAsync(spaProcedure);
-		await _context.SaveChangesAsync();
-	}
+        await _context.SpaProcedures.AddAsync(spaProcedure);
+        await _context.SaveChangesAsync();
+    }
 
-	/// <summary>
-	/// Edit spa procedure
-	/// </summary>
-	public async Task EditSpaProcedureAsync(SpaProceduresViewModel model)
-	{
-		var spaProcedure = await _context.SpaProcedures.FindAsync(model.Id);
+    /// <summary>
+    /// Edit spa procedure
+    /// </summary>
+    public async Task EditSpaProcedureAsync(SpaProceduresViewModel model, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
 
-		if (spaProcedure == null)
-		{
-			throw new InvalidOperationException(SpaProcedureNotFound);
-		}
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
+        }
 
-		spaProcedure.Name = model.Name;
-		spaProcedure.ImageUrl = model.ImageUrl;
-		spaProcedure.Description = model.Description;
-		spaProcedure.Duration = model.Duration;
-		spaProcedure.Price = model.Price;
+        var spaProcedure = await _context.SpaProcedures.FindAsync(model.Id);
 
-		_context.SpaProcedures.Update(spaProcedure);
-		await _context.SaveChangesAsync();
-	}
+        if (spaProcedure == null)
+        {
+            throw new InvalidOperationException(SpaProcedureNotFound);
+        }
 
-	/// <summary>
-	/// Get spa procedure for delete
-	/// </summary>
-	public async Task<DeleteSpaProcedureViewModel?> GetSpaProcedureForDeleteAsync(int id)
+        spaProcedure.Name = model.Name;
+        spaProcedure.ImageUrl = model.ImageUrl;
+        spaProcedure.Description = model.Description;
+        spaProcedure.Duration = model.Duration;
+        spaProcedure.Price = model.Price;
+
+        _context.SpaProcedures.Update(spaProcedure);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Get spa procedure for delete
+    /// </summary>
+    public async Task<DeleteSpaProcedureViewModel?> GetSpaProcedureForDeleteAsync(int id)
 	{
 		return await _context.SpaProcedures
 			.Where(sp => sp.Id == id)
@@ -231,20 +248,27 @@ public class SpaProcedureService : ISpaProcedureService
 			.FirstOrDefaultAsync();
 	}
 
-	/// <summary>
-	/// Delete spa procedure
-	/// </summary>
-	public async Task DeleteSpaProcedureAsync(int id)
-	{
-		var spaProcedure = await _context.SpaProcedures
-			.FirstOrDefaultAsync(sp => sp.Id == id);
+    /// <summary>
+    /// Delete spa procedure
+    /// </summary>
+    public async Task DeleteSpaProcedureAsync(int id, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
 
-		if (spaProcedure == null)
-		{
-			throw new InvalidOperationException(SpaProcedureNotFound);
-		}
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToDelete);
+        }
 
-		_context.SpaProcedures.Remove(spaProcedure);
-		await _context.SaveChangesAsync();
-	}
+        var spaProcedure = await _context.SpaProcedures.FirstOrDefaultAsync(sp => sp.Id == id);
+
+        if (spaProcedure == null)
+        {
+            throw new InvalidOperationException(SpaProcedureNotFound);
+        }
+
+        _context.SpaProcedures.Remove(spaProcedure);
+        await _context.SaveChangesAsync();
+    }
 }
