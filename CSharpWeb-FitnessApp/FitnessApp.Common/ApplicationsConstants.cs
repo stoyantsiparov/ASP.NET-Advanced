@@ -3,6 +3,7 @@
     public static class ApplicationsConstants
     {
         public const int ReleaseYear = 2024;
+        public const string UserRole = "User";
         public const string MemberRole = "Member";
         public const string AdminRole = "Admin";
     }

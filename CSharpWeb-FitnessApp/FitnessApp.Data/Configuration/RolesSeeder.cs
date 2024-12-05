@@ -10,7 +10,7 @@ namespace FitnessApp.Data.Configuration
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            string[] roles = { AdminRole, MemberRole};
+            string[] roles = { AdminRole, MemberRole, UserRole};
 
             foreach (var role in roles)
             {
