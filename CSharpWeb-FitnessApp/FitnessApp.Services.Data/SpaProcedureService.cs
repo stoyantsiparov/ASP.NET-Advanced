@@ -2,7 +2,9 @@
 using FitnessApp.Data.Models;
 using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.SpaProcedureViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.EntityValidationConstants.SpaProcedure;
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
 
@@ -11,11 +13,14 @@ namespace FitnessApp.Services.Data;
 public class SpaProcedureService : ISpaProcedureService
 {
 	private readonly ApplicationDbContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-	public SpaProcedureService(ApplicationDbContext context)
-	{
-		_context = context;
-	}
+
+    public SpaProcedureService(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+    {
+        _context = context;
+        _userManager = userManager;
+    }
 
 	/// <summary>
 	/// Get all spa procedures
@@ -93,47 +98,53 @@ public class SpaProcedureService : ISpaProcedureService
 			.ToListAsync();
 	}
 
-	/// <summary>
-	/// Add spa procedure to user's appointments
-	/// </summary>
-	public async Task AddToMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure, DateTime appointmentDateTime)
-	{
-		if (appointmentDateTime < DateTime.Now)
-		{
-			throw new InvalidOperationException(PastAppointmentDate);
-		}
+    /// <summary>
+    /// Add spa procedure to user's appointments
+    /// </summary>
+    public async Task AddToMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure, DateTime appointmentDateTime)
+    {
+        if (appointmentDateTime < DateTime.Now)
+        {
+            throw new InvalidOperationException(PastAppointmentDate);
+        }
 
-		var existingRegistration = await _context.SpaRegistrations
-			.FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null || !await _userManager.IsInRoleAsync(user, MemberRole))
+        {
+            throw new InvalidOperationException(OnlyMembersCanBookSpaProcedures);
+        }
 
-		if (existingRegistration != null)
-		{
-			throw new InvalidOperationException(AlreadyBookedAppointment);
-		}
+        var existingRegistration = await _context.SpaRegistrations
+            .FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
 
-		var spaRegistration = new SpaRegistration
-		{
-			MemberId = userId,
-			SpaProcedureId = spaProcedure.Id
-		};
+        if (existingRegistration != null)
+        {
+            throw new InvalidOperationException(AlreadyBookedAppointment);
+        }
 
-		await _context.SpaRegistrations.AddAsync(spaRegistration);
-		await _context.SaveChangesAsync();
+        var spaRegistration = new SpaRegistration
+        {
+            MemberId = userId,
+            SpaProcedureId = spaProcedure.Id
+        };
 
-		var procedureToUpdate = await _context.SpaProcedures
-			.FirstOrDefaultAsync(sp => sp.Id == spaProcedure.Id);
+        await _context.SpaRegistrations.AddAsync(spaRegistration);
+        await _context.SaveChangesAsync();
 
-		if (procedureToUpdate != null)
-		{
-			procedureToUpdate.AppointmentDateTime = appointmentDateTime;
-			await _context.SaveChangesAsync();
-		}
-	}
+        var procedureToUpdate = await _context.SpaProcedures
+            .FirstOrDefaultAsync(sp => sp.Id == spaProcedure.Id);
 
-	/// <summary>
-	/// Remove spa procedure from user's appointments
-	/// </summary>
-	public async Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure)
+        if (procedureToUpdate != null)
+        {
+            procedureToUpdate.AppointmentDateTime = appointmentDateTime;
+            await _context.SaveChangesAsync();
+        }
+    }
+
+    /// <summary>
+    /// Remove spa procedure from user's appointments
+    /// </summary>
+    public async Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure)
 	{
 		var registration = await _context.SpaRegistrations
 			.FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
