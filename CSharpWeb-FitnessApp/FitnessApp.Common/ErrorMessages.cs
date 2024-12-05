@@ -8,6 +8,7 @@ public static class ErrorMessages
         public const string AlreadyBookedAppointment = "You have already booked this appointment.";
         public const string SpaAppointmentNotBooked = "You haven't booked a spa appointment";
         public const string SpaProcedureNotFound = "Spa procedure not found.";
+        public const string OnlyMembersCanBookSpaProcedures = "Only members can book spa procedures.";
     }
 
     public static class FitnessEvent
@@ -16,6 +17,7 @@ public static class ErrorMessages
         public const string AlreadyRegisteredForEvent = "You have already signed up for this event.";
         public const string UserNotRegisteredForEvent = "You are not registered for this event.";
         public const string EndDateMustBeLaterThanStartDate = "End Date must be later than Start Date.";
+        public const string OnlyMembersCanRegisterForThisEvent = "Only members can register for fitness events.";
     }
 
     public static class Class
@@ -27,6 +29,7 @@ public static class ErrorMessages
         public const string UserIdCannotBeEmpty = "User ID cannot be null or empty.";
         public const string ClassWithTheSameNameAndScheduleAlreadyExists = "A class with the same name and schedule already exists.";
         public const string InvalidScheduleFormat = "Invalid schedule format.";
+        public const string OnlyMembersCanRegisterForThisClass = "Only members can register for fitness class.";
         
     }
 
@@ -35,6 +38,8 @@ public static class ErrorMessages
         public const string MembershipTypeDoesNotExist = "The membership type does not exist.";
         public const string OnlyOneMembershipTypeAllowed = "You can only have one membership type at a time.";
         public const string MembershipNotPurchased = "You have not purchased a membership";
+        public const string FailedToAssignMemberRole = "Failed to assign Member role.";
+        public const string FailedToRemoveMemberRole = "Failed to remove Member role.";
     }
 
     public static class Instructor
@@ -46,10 +51,12 @@ public static class ErrorMessages
         public const string InstructorEditError = "An error occurred while editing the instructor.";
         public const string InstructorDeleteError = "An error occurred while deleting the instructor.";
     }
-    
+
     public static class Roles
     {
-        public const string FailedToAssignMemberRole = "Failed to assign Member role.";
-        public const string FailedToRemoveMemberRole = "Failed to remove Member role.";
+
+        public const string YouAreNotAuthorizedToAdd = "You are not authorized to add this element.";
+        public const string YouAreNotAuthorizedToEdit = "You are not authorized to edit this element.";
+        public const string YouAreNotAuthorizedToDelete = "You are not authorized to delete this element.";
     }
 }
