@@ -67,7 +67,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
 
                     b.HasData(
                         new
@@ -117,7 +117,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("ClassesRegistrations");
+                    b.ToTable("ClassesRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.EventRegistration", b =>
@@ -132,7 +132,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("EventRegistrations");
+                    b.ToTable("EventRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.FitnessEvent", b =>
@@ -176,7 +176,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FitnessEvents");
+                    b.ToTable("FitnessEvents", (string)null);
 
                     b.HasData(
                         new
@@ -250,7 +250,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instructors", (string)null);
 
                     b.HasData(
                         new
@@ -294,7 +294,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("MembershipRegistrations");
+                    b.ToTable("MembershipRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
@@ -333,7 +333,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MembershipTypes");
+                    b.ToTable("MembershipTypes", (string)null);
 
                     b.HasData(
                         new
@@ -414,7 +414,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SpaProcedures");
+                    b.ToTable("SpaProcedures", (string)null);
 
                     b.HasData(
                         new
@@ -461,7 +461,7 @@ namespace FitnessApp.Web.Data.Migrations
 
                     b.HasIndex("MemberId");
 
-                    b.ToTable("SpaRegistrations");
+                    b.ToTable("SpaRegistrations", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
