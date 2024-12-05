@@ -101,11 +101,14 @@ public class MembershipTypeService : IMembershipTypeService
     /// </summary>
     public async Task AddMyMembershipAsync(string userId, MembershipTypeViewModel? membershipTypeViewModel)
     {
-        var membershipType = await _context.MembershipTypes.FindAsync(membershipTypeViewModel.Id);
-
-        if (membershipType == null)
+        if (membershipTypeViewModel != null)
         {
-            throw new InvalidOperationException(MembershipTypeDoesNotExist);
+            var membershipType = await _context.MembershipTypes.FindAsync(membershipTypeViewModel.Id);
+
+            if (membershipType == null)
+            {
+                throw new InvalidOperationException(MembershipTypeDoesNotExist);
+            }
         }
 
         var existingMembership = await _context.MembershipRegistrations
@@ -116,13 +119,17 @@ public class MembershipTypeService : IMembershipTypeService
             throw new InvalidOperationException(OnlyOneMembershipTypeAllowed);
         }
 
-        var registration = new MembershipRegistration
+        if (membershipTypeViewModel != null)
         {
-            MemberId = userId,
-            MembershipTypeId = membershipTypeViewModel.Id
-        };
+            var registration = new MembershipRegistration
+            {
+                MemberId = userId,
+                MembershipTypeId = membershipTypeViewModel.Id
+            };
 
-        await _context.MembershipRegistrations.AddAsync(registration);
+            await _context.MembershipRegistrations.AddAsync(registration);
+        }
+
         await _context.SaveChangesAsync();
 
         var user = await _userManager.FindByIdAsync(userId);
@@ -142,7 +149,7 @@ public class MembershipTypeService : IMembershipTypeService
     public async Task RemoveMyMembershipAsync(string userId, MembershipTypeViewModel? membershipTypeViewModel)
     {
         var registration = await _context.MembershipRegistrations
-            .FirstOrDefaultAsync(r => r.MemberId == userId && r.MembershipTypeId == membershipTypeViewModel.Id);
+            .FirstOrDefaultAsync(r => membershipTypeViewModel != null && r.MemberId == userId && r.MembershipTypeId == membershipTypeViewModel.Id);
 
         if (registration == null)
         {
@@ -180,50 +187,62 @@ public class MembershipTypeService : IMembershipTypeService
 		return await Task.FromResult(model);
 	}
 
-	/// <summary>
-	///	Add a new membership type to the database.
-	/// </summary>
-	public async Task AddMembershipTypeAsync(AddMembershipTypeViewModel model, string userId)
-	{
-		var membershipType = new MembershipType
-		{
-			Name = model.Name,
-			ImageUrl = model.ImageUrl,
-			Description = model.Description,
-			Price = model.Price,
-			Duration = model.Duration
-		};
+    /// <summary>
+    ///	Add a new membership type to the database.
+    /// </summary>
+    public async Task AddMembershipTypeAsync(AddMembershipTypeViewModel model, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null || !await _userManager.IsInRoleAsync(user, AdminRole))
+        {
+            throw new InvalidOperationException(YouAreNotAuthorizedToAdd);
+        }
 
-		await _context.MembershipTypes.AddAsync(membershipType);
-		await _context.SaveChangesAsync();
-	}
+        var membershipType = new MembershipType
+        {
+            Name = model.Name,
+            ImageUrl = model.ImageUrl,
+            Description = model.Description,
+            Price = model.Price,
+            Duration = model.Duration
+        };
 
-	/// <summary>
-	/// Edit an existing membership type.
-	/// </summary>
-	public async Task EditMembershipTypeAsync(MembershipTypeViewModel model)
-	{
-		var membershipType = await _context.MembershipTypes.FindAsync(model.Id);
+        await _context.MembershipTypes.AddAsync(membershipType);
+        await _context.SaveChangesAsync();
+    }
 
-		if (membershipType == null)
-		{
-			throw new InvalidOperationException(MembershipTypeDoesNotExist);
-		}
+    /// <summary>
+    /// Edit an existing membership type.
+    /// </summary>
+    public async Task EditMembershipTypeAsync(MembershipTypeViewModel model, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null || !await _userManager.IsInRoleAsync(user, AdminRole))
+        {
+            throw new InvalidOperationException(YouAreNotAuthorizedToEdit);
+        }
 
-		membershipType.Name = model.Name;
-		membershipType.Price = model.Price;
-		membershipType.Duration = model.Duration;
-		membershipType.Description = model.Description;
-		membershipType.ImageUrl = model.ImageUrl;
+        var membershipType = await _context.MembershipTypes.FindAsync(model.Id);
 
-		_context.MembershipTypes.Update(membershipType);
-		await _context.SaveChangesAsync();
-	}
+        if (membershipType == null)
+        {
+            throw new InvalidOperationException(MembershipTypeDoesNotExist);
+        }
 
-	/// <summary>
-	/// Get the necessary information for deleting a membership type.
-	/// </summary>
-	public async Task<DeleteMembershipTypeViewModel?> GetMembershipTypeForDeleteAsync(int id)
+        membershipType.Name = model.Name;
+        membershipType.Price = model.Price;
+        membershipType.Duration = model.Duration;
+        membershipType.Description = model.Description;
+        membershipType.ImageUrl = model.ImageUrl;
+
+        _context.MembershipTypes.Update(membershipType);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Get the necessary information for deleting a membership type.
+    /// </summary>
+    public async Task<DeleteMembershipTypeViewModel?> GetMembershipTypeForDeleteAsync(int id)
 	{
 		return await _context.MembershipTypes
 		.Where(m => m.Id == id)
@@ -236,19 +255,25 @@ public class MembershipTypeService : IMembershipTypeService
 		.FirstOrDefaultAsync();
 	}
 
-	/// <summary>
-	/// Delete a membership type from the database.
-	/// </summary>
-	public async Task DeleteMembershipTypeAsync(int id)
-	{
-		var membershipType = await _context.MembershipTypes.FindAsync(id);
+    /// <summary>
+    /// Delete a membership type from the database.
+    /// </summary>
+    public async Task DeleteMembershipTypeAsync(int id, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user == null || !await _userManager.IsInRoleAsync(user, AdminRole))
+        {
+            throw new InvalidOperationException(YouAreNotAuthorizedToDelete);
+        }
 
-		if (membershipType == null)
-		{
-			throw new InvalidOperationException(MembershipTypeDoesNotExist);
-		}
+        var membershipType = await _context.MembershipTypes.FindAsync(id);
 
-		_context.MembershipTypes.Remove(membershipType);
-		await _context.SaveChangesAsync();
-	}
+        if (membershipType == null)
+        {
+            throw new InvalidOperationException(MembershipTypeDoesNotExist);
+        }
+
+        _context.MembershipTypes.Remove(membershipType);
+        await _context.SaveChangesAsync();
+    }
 }

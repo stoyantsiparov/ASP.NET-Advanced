@@ -2,6 +2,7 @@
 using FitnessApp.Web.ViewModels.MembershipTypeViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.ErrorMessages.MembershipType;
 
 namespace FitnessApp.Web.Controllers;
@@ -91,6 +92,7 @@ public class MembershipTypeController : BaseController
 	}
 
 	[HttpGet]
+	[Authorize(Roles = AdminRole)]
 	public async Task<IActionResult> Add()
 	{
 		var model = await _membershipTypeService.GetMembershipTypeForAddAsync();
@@ -99,7 +101,8 @@ public class MembershipTypeController : BaseController
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Add(AddMembershipTypeViewModel model)
+    [Authorize(Roles = AdminRole)]
+    public async Task<IActionResult> Add(AddMembershipTypeViewModel model)
 	{
 		if (ModelState.IsValid == false)
 		{
@@ -113,7 +116,8 @@ public class MembershipTypeController : BaseController
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> Edit(int id)
+    [Authorize(Roles = AdminRole)]
+    public async Task<IActionResult> Edit(int id)
 	{
 		var model = await _membershipTypeService.GetMembershipTypeByIdAsync(id);
 
@@ -126,20 +130,24 @@ public class MembershipTypeController : BaseController
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Edit(MembershipTypeViewModel model)
+    [Authorize(Roles = AdminRole)]
+    public async Task<IActionResult> Edit(MembershipTypeViewModel model)
 	{
 		if (ModelState.IsValid == false)
 		{
 			return View(model);
 		}
 
-		await _membershipTypeService.EditMembershipTypeAsync(model);
+        var userId = GetUserId();
+
+        await _membershipTypeService.EditMembershipTypeAsync(model, userId);
 
 		return RedirectToAction(nameof(Details),new { id = model.Id });
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> Delete(int id)
+    [Authorize(Roles = AdminRole)]
+    public async Task<IActionResult> Delete(int id)
 	{
 		var model = await _membershipTypeService.GetMembershipTypeForDeleteAsync(id);
 
@@ -152,9 +160,12 @@ public class MembershipTypeController : BaseController
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> Delete(DeleteMembershipTypeViewModel model)
+    [Authorize(Roles = AdminRole)]
+    public async Task<IActionResult> Delete(DeleteMembershipTypeViewModel model)
 	{
-		await _membershipTypeService.DeleteMembershipTypeAsync(model.Id);
+        var userId = GetUserId();
+
+        await _membershipTypeService.DeleteMembershipTypeAsync(model.Id, userId);
 
 		return RedirectToAction(nameof(Index));
 	}
