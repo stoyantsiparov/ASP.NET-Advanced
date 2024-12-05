@@ -41,6 +41,9 @@ namespace FitnessApp.Data
             builder.Entity<SpaProcedure>()
                 .Property(sp => sp.Price)
                 .HasPrecision(18, 2);
+            builder.Entity<Class>()
+                .Property(c => c.Price)
+                .HasPrecision(18, 2);
 
             // Seed data for SpaProcedures
             builder.Entity<SpaProcedure>().HasData(
