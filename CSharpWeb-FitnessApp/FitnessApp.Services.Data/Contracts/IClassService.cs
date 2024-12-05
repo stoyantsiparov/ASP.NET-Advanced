@@ -12,7 +12,7 @@ public interface IClassService
     Task RemoveFromMyClassesAsync(string userId, ClassesViewModel? classesViewModel);
     Task<AddClassViewModel> GetClassForAddAsync();
     Task AddClassAsync(AddClassViewModel model, string userId);
-    Task EditClassAsync(ClassesViewModel model);
+    Task EditClassAsync(ClassesViewModel model, string userId);
     Task<DeleteClassViewModel?> GetClassForDeleteAsync(int id);
-    Task DeleteClassAsync(int id);
+    Task DeleteClassAsync(int id, string userId);
 }

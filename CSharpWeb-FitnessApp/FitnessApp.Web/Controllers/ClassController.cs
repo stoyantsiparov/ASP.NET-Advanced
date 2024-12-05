@@ -3,6 +3,7 @@ using FitnessApp.Web.ViewModels.ClassViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FitnessApp.Common.ErrorMessages.Class;
+using static FitnessApp.Common.ApplicationsConstants;
 
 namespace FitnessApp.Web.Controllers;
 
@@ -88,6 +89,7 @@ public class ClassController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Add()
     {
         var model = await _classService.GetClassForAddAsync();
@@ -96,6 +98,7 @@ public class ClassController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Add(AddClassViewModel model)
     {
         if (ModelState.IsValid == false)
@@ -112,6 +115,7 @@ public class ClassController : BaseController
     }
 
     [HttpGet]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Edit(int id)
     {
         var model = await _classService.GetClassByIdAsync(id);
@@ -127,6 +131,7 @@ public class ClassController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Edit(ClassesViewModel model)
     {
         if (ModelState.IsValid == false)
@@ -136,12 +141,15 @@ public class ClassController : BaseController
             return View(model);
         }
 
-        await _classService.EditClassAsync(model);
+        var userId = GetUserId();
+
+        await _classService.EditClassAsync(model, userId);
 
         return RedirectToAction(nameof(Details), new { id = model.Id });
     }
 
     [HttpGet]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Delete(int id)
     {
         var model = await _classService.GetClassForDeleteAsync(id);
@@ -155,9 +163,12 @@ public class ClassController : BaseController
     }
 
     [HttpPost]
+    [Authorize(Roles = AdminRole)]
     public async Task<IActionResult> Delete(DeleteClassViewModel model)
     {
-        await _classService.DeleteClassAsync(model.Id);
+        var userId = GetUserId();
+
+        await _classService.DeleteClassAsync(model.Id, userId);
 
         return RedirectToAction(nameof(Index));
     }

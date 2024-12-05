@@ -9,6 +9,7 @@ using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.EntityValidationConstants.Class;
 using static FitnessApp.Common.SuccessfulValidationMessages.Class;
 using static FitnessApp.Common.ErrorMessages.Class;
+using static FitnessApp.Common.ErrorMessages.Roles;
 
 namespace FitnessApp.Services.Data;
 
@@ -53,8 +54,8 @@ public class ClassService : IClassService
                 Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
-				Price = c.Price,
-				ImageUrl = c.ImageUrl,
+                Price = c.Price,
+                ImageUrl = c.ImageUrl,
                 Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
                 Duration = c.Duration,
                 InstructorId = c.InstructorId
@@ -75,7 +76,7 @@ public class ClassService : IClassService
                 Name = c.Name,
                 Description = c.Description,
                 Price = c.Price,
-				ImageUrl = c.ImageUrl,
+                ImageUrl = c.ImageUrl,
                 Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
                 Duration = c.Duration,
                 Instructor = new InstructorViewModel
@@ -141,10 +142,13 @@ public class ClassService : IClassService
         }
 
         var user = await _userManager.FindByIdAsync(userId);
-        var roles = await _userManager.GetRolesAsync(user);
-        if (!roles.Contains(MemberRole))
+        if (user != null)
         {
-            throw new InvalidOperationException(OnlyMembersCanRegisterForThisClass);
+            var roles = await _userManager.GetRolesAsync(user);
+            if (!roles.Contains(MemberRole))
+            {
+                throw new InvalidOperationException(OnlyMembersCanRegisterForThisClass);
+            }
         }
 
         var classRegistration = new ClassRegistration
@@ -163,7 +167,7 @@ public class ClassService : IClassService
     public async Task RemoveFromMyClassesAsync(string userId, ClassesViewModel? classesViewModel)
     {
         var classRegistration = await _context.ClassesRegistrations
-            .FirstOrDefaultAsync(cr => cr.MemberId == userId && cr.ClassId == classesViewModel.Id);
+            .FirstOrDefaultAsync(cr => classesViewModel != null && cr.MemberId == userId && cr.ClassId == classesViewModel.Id);
 
         if (classRegistration == null)
         {
@@ -184,7 +188,6 @@ public class ClassService : IClassService
             {
                 Id = i.Id,
                 Specialization = i.Specialization
-
             })
             .AsNoTracking()
             .ToListAsync();
@@ -202,6 +205,17 @@ public class ClassService : IClassService
     /// </summary>
     public async Task AddClassAsync(AddClassViewModel model, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (!roles.Contains(AdminRole))
+            {
+                throw new UnauthorizedAccessException(YouAreNotAuthorizedToAdd);
+            }
+        }
+
         if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Schedule))
         {
             throw new ArgumentException(ClassNameAndScheduleAreRequired);
@@ -236,8 +250,19 @@ public class ClassService : IClassService
     /// <summary>
     /// Edit class
     /// </summary>
-    public async Task EditClassAsync(ClassesViewModel model)
+    public async Task EditClassAsync(ClassesViewModel model, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (!roles.Contains(AdminRole))
+            {
+                throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
+            }
+        }
+
         var classEntity = await _context.Classes.FirstOrDefaultAsync(c => c.Id == model.Id);
 
         if (classEntity != null)
@@ -273,8 +298,19 @@ public class ClassService : IClassService
     /// <summary>
     /// Delete class
     /// </summary>
-    public async Task DeleteClassAsync(int id)
+    public async Task DeleteClassAsync(int id, string userId)
     {
+        var user = await _userManager.FindByIdAsync(userId);
+        if (user != null)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (!roles.Contains(AdminRole))
+            {
+                throw new UnauthorizedAccessException(YouAreNotAuthorizedToDelete);
+            }
+        }
+
         var classEntity = await _context.Classes.FindAsync(id);
 
         if (classEntity != null)
