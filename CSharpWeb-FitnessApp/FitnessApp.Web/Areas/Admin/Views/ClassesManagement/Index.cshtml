@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.ClassViewModels.AllClassesViewModel>
+
+@{
+	ViewData["Title"] = "Manage Classes";
+}
+
+<h1 class="text-center mb-4 text-primary">@ViewData["Title"]</h1>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mb-3">Go Back</a>
+<a asp-controller="ClassesManagement" asp-action="Add" class="btn btn-primary mb-3">Add Class</a>
+
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Image</th>
+		<th>Class Name</th>
+		<th>Schedule</th>
+		<th>Duration (in minutes)</th>
+		<th>Actions</th>
+	</tr>
+	</thead>
+	<tbody>
+	@if (Model != null && Model.Any())
+	{
+		foreach (var classModel in Model)
+		{
+			<tr>
+				<td>
+					@if (!string.IsNullOrEmpty(classModel.ImageUrl))
+					{
+						<img src="@classModel.ImageUrl" alt="@classModel.Name" style="max-width: 100px; max-height: 100px;" />
+					}
+					else
+					{
+						<img src="~/img/no-image-available-02.jpg" alt="No Image Available" style="max-width: 100px; max-height: 100px;" />
+					}
+				</td>
+				<td>@classModel.Name</td>
+				<td>@classModel.Schedule</td>
+				<td>@classModel.Duration</td>
+				<td>
+					<a asp-controller="ClassesManagement" asp-action="Edit" asp-route-id="@classModel.Id" class="btn btn-warning btn-sm">Edit</a>
+					<a asp-controller="ClassesManagement" asp-action="Delete" asp-route-id="@classModel.Id" class="btn btn-danger btn-sm">Delete</a>
+				</td>
+			</tr>
+		}
+	}
+	else
+	{
+		<tr>
+			<td colspan="5" class="text-center">No classes found.</td>
+		</tr>
+	}
+	</tbody>
+</table>
