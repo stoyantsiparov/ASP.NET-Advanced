@@ -19,8 +19,9 @@ namespace FitnessApp.Web
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            // За сега ги оставям така за да мога да се логвам по лесно
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+			// They are left so that it is easier to register a new user for testing purposes
+			// (in a production environment, it is good to have the password as secure as possible)
+			builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
@@ -39,6 +40,7 @@ namespace FitnessApp.Web
             builder.Services.AddScoped<IClassService, ClassService>();
             builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
             builder.Services.AddScoped<IInstructorService, InstructorService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             WebApplication app = builder.Build();
 
@@ -70,7 +72,11 @@ namespace FitnessApp.Web
             app.UseAuthentication(); // Who am I?
             app.UseAuthorization(); // What can I do?
 
+
             app.MapControllerRoute(
+	            name: "Areas",
+	            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+			app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
