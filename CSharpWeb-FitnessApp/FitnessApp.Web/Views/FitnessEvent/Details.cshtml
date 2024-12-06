@@ -1,5 +1,4 @@
 ﻿@model FitnessApp.Web.ViewModels.FitnessEventViewModels.FitnessEventDetailsViewModel
-@using static FitnessApp.Common.ApplicationsConstants
 
 @{
 	ViewData["Title"] = "Fitness Event Details";
@@ -40,19 +39,6 @@
 				<button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
 				<a asp-controller="FitnessEvent" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
 			</form>
-			
-			@if (User.IsInRole(AdminRole))
-			{
-				<hr />
-
-				<!-- Buttons for Edit and Delete -->
-				<div class="d-flex justify-content-between">
-					<a asp-controller="FitnessEvent" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100">Edit</a>
-					<a asp-controller="FitnessEvent" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100">Delete</a>
-				</div>
-
-				<hr />
-			}
 		</div>
 	</div>
 </div>
