@@ -1,8 +1,6 @@
 ﻿using FitnessApp.Services.Data.Contracts;
-using FitnessApp.Web.ViewModels.SpaProcedureViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static FitnessApp.Common.ApplicationsConstants;
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
 using static FitnessApp.Common.SuccessfulValidationMessages.SpaProcedure;
 
@@ -99,84 +97,5 @@ public class SpaProcedureController : BaseController
 		}
 
 		return RedirectToAction(nameof(MySpaAppointments));
-	}
-
-	[HttpGet]
-	[Authorize(Roles = AdminRole)]
-	public async Task<IActionResult> Add()
-	{
-		var model = await _spaService.GetSpaProcedureForAddAsync();
-
-		return View(model);
-	}
-
-	[HttpPost]
-    [Authorize(Roles = AdminRole)]
-    public async Task<IActionResult> Add(AddSpaProcedureViewModel model)
-	{
-		if (ModelState.IsValid == false)
-		{
-			return View(model);
-		}
-
-		var userId = GetUserId();
-		await _spaService.AddSpaProcedureAsync(model, userId);
-
-		return RedirectToAction(nameof(Index));
-	}
-
-	[HttpGet]
-    [Authorize(Roles = AdminRole)]
-    public async Task<IActionResult> Edit(int id)
-	{
-		var model = await _spaService.GetSpaProceduresByIdAsync(id);
-
-		if (model != null)
-		{
-			return View(model);
-		}
-
-		return RedirectToAction(nameof(Index));
-	}
-
-	[HttpPost]
-    [Authorize(Roles = AdminRole)]
-    public async Task<IActionResult> Edit(SpaProceduresViewModel model)
-	{
-		if (ModelState.IsValid == false)
-		{
-			return View(model);
-		}
-
-        var userId = GetUserId();
-
-        await _spaService.EditSpaProcedureAsync(model, userId);
-
-		return RedirectToAction(nameof(Details), new { id = model.Id });
-	}
-
-	[HttpGet]
-    [Authorize(Roles = AdminRole)]
-    public async Task<IActionResult> Delete(int id)
-	{
-		var model = await _spaService.GetSpaProcedureForDeleteAsync(id);
-
-		if (model != null)
-		{
-			return View(model);
-		}
-
-		return RedirectToAction(nameof(Index));
-	}
-
-	[HttpPost]
-    [Authorize(Roles = AdminRole)]
-    public async Task<IActionResult> Delete(DeleteSpaProcedureViewModel model)
-	{
-        var userId = GetUserId();
-
-        await _spaService.DeleteSpaProcedureAsync(model.Id, userId);
-
-		return RedirectToAction(nameof(Index));
 	}
 }
