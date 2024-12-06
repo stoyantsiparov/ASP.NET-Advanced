@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.MembershipTypeViewModels.AllMembershipTypeViewModel>
+
+@{
+	ViewData["Title"] = "Manage Membership Types";
+}
+
+<h1 class="text-center mb-4 text-primary">@ViewData["Title"]</h1>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mb-3">Go Back</a>
+<a asp-action="Add" class="btn btn-primary mb-3">Add Membership Type</a>
+
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Image</th>
+		<th>Name</th>
+		<th>Price</th>
+		<th>Duration (in days)</th>
+		<th>Actions</th>
+	</tr>
+	</thead>
+	<tbody>
+	@if (Model != null && Model.Any())
+	{
+		foreach (var membershipType in Model)
+		{
+			<tr>
+				<td>
+					<img src="@membershipType.ImageUrl" alt="@membershipType.Name" style="max-width: 100px; max-height: 100px;" />
+				</td>
+				<td>@membershipType.Name</td>
+				<td>@membershipType.Price</td>
+				<td>@membershipType.Duration</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@membershipType.Id" class="btn btn-warning btn-sm">Edit</a>
+					<a asp-action="Delete" asp-route-id="@membershipType.Id" class="btn btn-danger btn-sm">Delete</a>
+				</td>
+			</tr>
+		}
+	}
+	else
+	{
+		<tr>
+			<td colspan="5" class="text-center">No membership types found.</td>
+		</tr>
+	}
+	</tbody>
+</table>
