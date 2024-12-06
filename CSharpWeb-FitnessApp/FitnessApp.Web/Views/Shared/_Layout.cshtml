@@ -35,8 +35,8 @@
 								Become a member
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="buyApplicationUsershipDropdown">
-								<li><a class="dropdown-item" asp-controller="MembershipType" asp-action="Index">Prices</a></li>
-								<li><a class="dropdown-item" asp-controller="MembershipType" asp-action="MyMembershipType">My Membership</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="MembershipType" asp-action="Index">Prices</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="MembershipType" asp-action="MyMembershipType">My Membership</a></li>
 							</ul>
 						</li>
 
@@ -45,9 +45,9 @@
 								Services
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-								<li><a class="dropdown-item" asp-controller="SpaProcedure" asp-action="Index">Spa Procedures</a></li>
-								<li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="Index">Fitness Events</a></li>
-								<li><a class="dropdown-item" asp-controller="Class" asp-action="Index">Fitness Classes</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="SpaProcedure" asp-action="Index">Spa Procedures</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="FitnessEvent" asp-action="Index">Fitness Events</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="Class" asp-action="Index">Fitness Classes</a></li>
 							</ul>
 						</li>
 
@@ -56,14 +56,14 @@
 								Appointments
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="appointmentsDropdown">
-								<li><a class="dropdown-item" asp-controller="SpaProcedure" asp-action="MySpaAppointments">My Spa Appointments</a></li>
-								<li><a class="dropdown-item" asp-controller="FitnessEvent" asp-action="MyFitnessEvents">My Fitness Appointments</a></li>
-								<li><a class="dropdown-item" asp-controller="Class" asp-action="MyClasses">My Class Appointments</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="SpaProcedure" asp-action="MySpaAppointments">My Spa Appointments</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="FitnessEvent" asp-action="MyFitnessEvents">My Fitness Appointments</a></li>
+								<li><a asp-area="" class="dropdown-item" asp-controller="Class" asp-action="MyClasses">My Class Appointments</a></li>
 							</ul>
 						</li>
 
 						<li class="nav-item ms-left">
-							<a class="nav-link text-dark" asp-controller="Instructor" asp-action="Index">Our Instructors</a>
+							<a asp-area="" class="nav-link text-dark" asp-controller="Instructor" asp-action="Index">Our Instructors</a>
 						</li>
 
 					</ul>
