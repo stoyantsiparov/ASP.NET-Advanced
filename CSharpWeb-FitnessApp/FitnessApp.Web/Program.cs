@@ -5,83 +5,82 @@ using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace FitnessApp.Web
+namespace FitnessApp.Web;
+
+public class Program
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+	public static void Main(string[] args)
+	{
+		WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+		// Add services to the container.
+		var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+		builder.Services.AddDbContext<ApplicationDbContext>(options =>
+			options.UseSqlServer(connectionString));
+		builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-			// They are left so that it is easier to register a new user for testing purposes
-			// (in a production environment, it is good to have the password as secure as possible)
-			builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = false;
-                options.Password.RequireDigit = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-            })
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders()
-            .AddDefaultUI();
+		// They are left so that it is easier to register a new user for testing purposes
+		// (in a production environment, it is good to have the password as secure as possible)
+		builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+			{
+				options.SignIn.RequireConfirmedAccount = false;
+				options.Password.RequireDigit = false;
+				options.Password.RequireUppercase = false;
+				options.Password.RequireNonAlphanumeric = false;
+			})
+			.AddEntityFrameworkStores<ApplicationDbContext>()
+			.AddDefaultTokenProviders()
+			.AddDefaultUI();
 
-            builder.Services.AddControllersWithViews();
-            // Add Razor Pages
-            builder.Services.AddRazorPages();
-            builder.Services.AddScoped<ISpaProcedureService, SpaProcedureService>();
-            builder.Services.AddScoped<IFitnessEventService, FitnessEventService>();
-            builder.Services.AddScoped<IClassService, ClassService>();
-            builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
-            builder.Services.AddScoped<IInstructorService, InstructorService>();
-            builder.Services.AddScoped<IUserService, UserService>();
+		builder.Services.AddControllersWithViews();
+		// Add Razor Pages
+		builder.Services.AddRazorPages();
+		builder.Services.AddScoped<ISpaProcedureService, SpaProcedureService>();
+		builder.Services.AddScoped<IFitnessEventService, FitnessEventService>();
+		builder.Services.AddScoped<IClassService, ClassService>();
+		builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
+		builder.Services.AddScoped<IInstructorService, InstructorService>();
+		builder.Services.AddScoped<IUserService, UserService>();
 
-            WebApplication app = builder.Build();
+		WebApplication app = builder.Build();
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
+		using (var scope = app.Services.CreateScope())
+		{
+			var services = scope.ServiceProvider;
 
-                RolesSeeder.SeedRoles(services);
-                RolesSeeder.AssignAdminRole(services);
-            }
+			RolesSeeder.SeedRoles(services);
+			RolesSeeder.AssignAdminRole(services);
+		}
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseMigrationsEndPoint();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+		// Configure the HTTP request pipeline.
+		if (app.Environment.IsDevelopment())
+		{
+			app.UseMigrationsEndPoint();
+		}
+		else
+		{
+			app.UseExceptionHandler("/Home/Error");
+			// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+			app.UseHsts();
+		}
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+		app.UseHttpsRedirection();
+		app.UseStaticFiles();
 
-            app.UseRouting();
+		app.UseRouting();
 
-            app.UseAuthentication(); // Who am I?
-            app.UseAuthorization(); // What can I do?
+		app.UseAuthentication(); // Who am I?
+		app.UseAuthorization(); // What can I do?
 
 
-            app.MapControllerRoute(
-	            name: "Areas",
-	            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-			app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
+		app.MapControllerRoute(
+			name: "Areas",
+			pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+		app.MapControllerRoute(
+			name: "default",
+			pattern: "{controller=Home}/{action=Index}/{id?}");
+		app.MapRazorPages();
 
-            app.Run();
-        }
-    }
+		app.Run();
+	}
 }
