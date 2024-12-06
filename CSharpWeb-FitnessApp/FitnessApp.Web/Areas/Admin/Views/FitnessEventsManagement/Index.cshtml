@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.FitnessEventViewModels.AllFitnessEventsViewModel>
+
+@{
+	ViewData["Title"] = "Manage Fitness Events";
+}
+
+<h1 class="text-center mb-4 text-primary">@ViewData["Title"]</h1>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mb-3">Go Back</a>
+<a asp-action="Add" class="btn btn-primary mb-3">Add Fitness Event</a>
+
+<table class="table table-striped">
+	<thead>
+	<tr>
+		<th>Image</th>
+		<th>Title</th>
+		<th>Location</th>
+		<th>Start Date</th>
+		<th>End Date</th>
+		<th>Actions</th>
+	</tr>
+	</thead>
+	<tbody>
+	@if (Model != null && Model.Any())
+	{
+		foreach (var eventModel in Model)
+		{
+			<tr>
+				<td>
+					<img src="@eventModel.ImageUrl" alt="@eventModel.Title" style="max-width: 100px; max-height: 100px;" />
+				</td>
+				<td>@eventModel.Title</td>
+				<td>@eventModel.Location</td>
+				<td>@eventModel.StartDateTime</td>
+				<td>@eventModel.EndDateTime</td>
+				<td>
+					<a asp-action="Edit" asp-route-id="@eventModel.Id" class="btn btn-warning btn-sm">Edit</a>
+					<a asp-action="Delete" asp-route-id="@eventModel.Id" class="btn btn-danger btn-sm">Delete</a>
+				</td>
+			</tr>
+		}
+	}
+	else
+	{
+		<tr>
+			<td colspan="6" class="text-center">No fitness events found.</td>
+		</tr>
+	}
+	</tbody>
+</table>

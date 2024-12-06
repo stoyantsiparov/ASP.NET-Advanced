@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model FitnessApp.Web.ViewModels.FitnessEventViewModels.AddFitnessEventViewModel
+
+@{
+    ViewData["Title"] = "Add Fitness Event";
+}
+
+<h1>Add New Fitness Event</h1>
+
+<form asp-action="Add" method="post" id="addFitnessEventForm">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ImageUrl">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate">Start Date and Time</label>
+        <input asp-for="StartDate" class="form-control" type="datetime-local" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate">End Date and Time</label>
+        <input asp-for="EndDate" class="form-control" type="datetime-local" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group d-flex justify-content-start mt-3">
+        <button type="submit" class="btn btn-primary me-2" style="width: 200px;">Add</button>
+        <a asp-action="Index" class="btn btn-secondary" style="width: 200px;">Back</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        document.getElementById("addFitnessEventForm").onsubmit = function (event) {
+            var startDate = new Date(document.querySelector("input[name='StartDate']").value);
+            var endDate = new Date(document.querySelector("input[name='EndDate']").value);
+
+            // Checking if EndDate is later than StartDate
+            if (endDate <= startDate) {
+                event.preventDefault(); // Stops submitting the form
+                alert("End Date must be later than Start Date.");
+            }
+        };
+    </script>
+}
