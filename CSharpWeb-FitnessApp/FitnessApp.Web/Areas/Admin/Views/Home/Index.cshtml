@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 mb-4 text-primary">Welcome to the Admin Dashboard</h1>
+        <p class="lead mb-5 text-muted">Manage your application using the sections below:</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Manage Users -->
+        <div class="col-md-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Manage Users</h5>
+                    <p class="card-text text-muted">Add, edit, or remove users and assign roles.</p>
+                    <a asp-area="Admin" asp-controller="UserManagement" asp-action="Index" class="btn btn-primary mt-auto w-100">
+                        Go to Users
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Instructors -->
+        <div class="col-md-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <i class="fas fa-user-tie fa-3x text-primary mb-3"></i>
+                    <h5 class="card-title">Manage Instructors</h5>
+                    <p class="card-text text-muted">Add, edit, or remove instructors.</p>
+                    <a asp-area="Admin" asp-controller="InstructorsManagement" asp-action="Index" class="btn btn-primary mt-auto w-100">
+                        Go to Instructors
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Classes -->
+        <div class="col-md-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <i class="fas fa-dumbbell fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Manage Classes</h5>
+                    <p class="card-text text-muted">Manage classes, schedules, and details.</p>
+                    <a asp-area="Admin" asp-controller="ClassesManagement" asp-action="Index" class="btn btn-success mt-auto w-100">
+                        Go to Classes
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Spa Procedures -->
+        <div class="col-md-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <i class="fas fa-spa fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Manage Spa Procedures</h5>
+                    <p class="card-text text-muted">Create, update, or delete spa procedures.</p>
+                    <a asp-area="Admin" asp-controller="SpaProceduresManagement" asp-action="Index" class="btn btn-success mt-auto w-100">
+                        Go to Spa Procedures
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Fitness Events -->
+        <div class="col-md-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <i class="fas fa-calendar-alt fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Manage Fitness Events</h5>
+                    <p class="card-text text-muted">Organize and manage fitness events.</p>
+                    <a asp-area="Admin" asp-controller="FitnessEventsManagement" asp-action="Index" class="btn btn-warning mt-auto w-100">
+                        Go to Fitness Events
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Membership Types -->
+        <div class="col-md-4">
+            <div class="card shadow h-100 border-0">
+                <div class="card-body d-flex flex-column align-items-center text-center">
+                    <i class="fas fa-id-card fa-3x text-info mb-3"></i>
+                    <h5 class="card-title">Manage Membership Types</h5>
+                    <p class="card-text text-muted">Add, edit, or remove membership types.</p>
+                    <a asp-area="Admin" asp-controller="MembershipTypesManagement" asp-action="Index" class="btn btn-info mt-auto w-100">
+                        Go to Membership Types
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
