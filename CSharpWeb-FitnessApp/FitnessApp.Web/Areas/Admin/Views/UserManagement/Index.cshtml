@@ -1,0 +1,80 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.EntityFrameworkCore
+@model IEnumerable<FitnessApp.Web.ViewModels.Admin.UserManagement.AllUsersViewModel>
+@inject RoleManager<IdentityRole> roleManager
+
+@{
+    var allRoles = await roleManager.Roles
+        .Select(r => r.Name)
+        .ToListAsync();
+}
+
+<h1 class="text-center mb-4 text-primary">User Management</h1>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mb-3">Go Back</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        @foreach (var role in user.Roles)
+                        {
+                            <span class="badge bg-secondary me-1">@role</span>
+                        }
+                    </td>
+                    <td>
+                        <!-- Assign Role -->
+                        <form method="post" asp-action="AssignRole" asp-controller="UserManagement" asp-area="Admin" class="d-inline">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <select name="role" class="form-select form-select-sm d-inline w-auto">
+                                @foreach (var role in allRoles)
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </select>
+                            <button type="submit" class="btn btn-primary btn-sm">Assign Role</button>
+                        </form>
+
+                        <!-- Remove Role -->
+                        <form method="post" asp-action="RemoveRole" asp-controller="UserManagement" asp-area="Admin" class="d-inline ms-2">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <select name="role" class="form-select form-select-sm d-inline w-auto">
+                                @foreach (var role in user.Roles)
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </select>
+                            <button type="submit" class="btn btn-warning btn-sm">Remove Role</button>
+                        </form>
+
+                        <!-- Delete User -->
+                        <form method="post" asp-action="DeleteUser" asp-controller="UserManagement" asp-area="Admin" class="d-inline ms-2"
+                              onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center">No users found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
