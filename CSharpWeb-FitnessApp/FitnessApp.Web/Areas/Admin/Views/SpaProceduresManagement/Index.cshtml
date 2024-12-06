@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FitnessApp.Web.ViewModels.SpaProcedureViewModels.AllSpaProceduresViewModel>
+
+@{
+    ViewData["Title"] = "Manage Spa Procedures";
+}
+
+<h1 class="text-center mb-4 text-primary">@ViewData["Title"]</h1>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mb-3">Go Back</a>
+<a asp-controller="SpaProceduresManagement" asp-action="Add" class="btn btn-primary mb-3">Add Spa Procedure</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var procedure in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(procedure.ImageUrl))
+                        {
+                            <img src="@procedure.ImageUrl" alt="@procedure.Name" style="max-width: 100px; max-height: 100px;" />
+                        }
+                        else
+                        {
+                            <img src="~/img/no-image-available-02.jpg" alt="No Image Available" style="max-width: 100px; max-height: 100px;" />
+                        }
+                    </td>
+                    <td>@procedure.Name</td>
+                    <td>@procedure.Description</td>
+	                <td>
+		                <a asp-controller="SpaProceduresManagement" asp-action="Edit" asp-route-id="@procedure.Id" class="btn btn-warning btn-sm">Edit</a>
+		                <a asp-controller="SpaProceduresManagement" asp-action="Delete" asp-route-id="@procedure.Id" class="btn btn-danger btn-sm">Delete</a>
+	                </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center">No spa procedures found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
