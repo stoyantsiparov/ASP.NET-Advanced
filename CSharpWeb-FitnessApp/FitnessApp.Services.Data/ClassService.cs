@@ -27,13 +27,26 @@ public class ClassService : IClassService
     /// <summary>
     /// Get all classes
     /// </summary>
-    public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync(string? searchQuery = null)
+    public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync(
+        string? searchQuery = null, 
+        int? minDuration = null, 
+        int? maxDuration = null)
     {
         var query = _context.Classes.AsQueryable();
 
         if (!string.IsNullOrEmpty(searchQuery))
         {
             query = query.Where(c => c.Name.Contains(searchQuery));
+        }
+
+        if (minDuration.HasValue)
+        {
+            query = query.Where(c => c.Duration >= minDuration.Value);
+        }
+
+        if (maxDuration.HasValue)
+        {
+            query = query.Where(c => c.Duration <= maxDuration.Value);
         }
 
         return await query

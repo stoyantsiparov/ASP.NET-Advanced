@@ -14,15 +14,16 @@ public class ClassController : BaseController
 		_classService = classService;
 	}
 
-	[AllowAnonymous]
-	public async Task<IActionResult> Index(string? searchQuery = null)
-	{
-		var model = await _classService.GetAllClassesAsync(searchQuery);
+    [AllowAnonymous]
+    public async Task<IActionResult> Index(string? searchQuery = null, int? minDuration = null, int? maxDuration = null)
+    {
+        var model = await _classService
+            .GetAllClassesAsync(searchQuery, minDuration, maxDuration);
 
-		return View(model);
-	}
+        return View(model);
+    }
 
-	public async Task<IActionResult> MyClasses()
+    public async Task<IActionResult> MyClasses()
 	{
 		var userId = GetUserId();
 

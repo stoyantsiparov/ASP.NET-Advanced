@@ -4,7 +4,7 @@ namespace FitnessApp.Services.Data.Contracts;
 
 public interface IClassService
 {
-    Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync(string? searchQuery = null);
+    Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync(string? searchQuery = null, int? minDuration = null, int? maxDuration = null);
     Task<ClassesViewModel?> GetClassByIdAsync(int id);
     Task<ClassesDetailsViewModel?> GetClassDetailsAsync(int id);
     Task<IEnumerable<AllClassesViewModel>> GetMyClassesAsync(string userId);
