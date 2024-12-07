@@ -4,6 +4,7 @@ using FitnessApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessApp.Web.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241207154913_SeededData")]
+    partial class SeededData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,7 +271,7 @@ namespace FitnessApp.Web.Data.Migrations
                             Id = 6,
                             Description = "Diving is the sport of jumping or falling into water from a platform or springboard, often with acrobatics. It is part of the Olympic Games and also enjoyed recreationally as a non-competitive activity.",
                             EndDate = new DateTime(2025, 9, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://daysym.com/wp-content/uploads/2024/01/dream-about-scuba-diving.jpg",
+                            ImageUrl = "hhttps://daysym.com/wp-content/uploads/2024/01/dream-about-scuba-diving.jpg",
                             Location = "Blue hole",
                             StartDate = new DateTime(2025, 9, 25, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Diving"
