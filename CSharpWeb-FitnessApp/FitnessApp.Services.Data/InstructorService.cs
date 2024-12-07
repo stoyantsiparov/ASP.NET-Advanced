@@ -24,10 +24,17 @@ public class InstructorService : IInstructorService
     /// <summary>
     /// Get all instructors.
     /// </summary>
-    public async Task<IEnumerable<AllInstructorsViewModel>> GetAllInstructorsAsync()
+    public async Task<IEnumerable<AllInstructorsViewModel>> GetAllInstructorsAsync(string? searchQuery = null)
     {
-        return await _context.Instructors
-            .Select(i => new AllInstructorsViewModel
+	    var query = _context.Instructors.AsQueryable();
+
+	    if (!string.IsNullOrEmpty(searchQuery))
+	    {
+		    query = query.Where(e => e.FirstName.Contains(searchQuery) || e.LastName.Contains(searchQuery) || e.Specialization.Contains(searchQuery));
+	    }
+
+	    return await query
+			.Select(i => new AllInstructorsViewModel
             {
                 Id = i.Id,
                 FirstName = i.FirstName,

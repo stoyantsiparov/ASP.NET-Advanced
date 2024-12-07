@@ -15,14 +15,14 @@ public class InstructorController : BaseController
     }
 
     [AllowAnonymous]
-    public async Task<IActionResult> Index()
-    {
-        var model = await _instructorService.GetAllInstructorsAsync();
+	public async Task<IActionResult> Index(string? searchQuery = null)
+	{
+		var model = await _instructorService.GetAllInstructorsAsync(searchQuery);
 
-        return View(model);
-    }
+		return View(model);
+	}
 
-    [AllowAnonymous]
+	[AllowAnonymous]
     public async Task<IActionResult> Details(int id)
     {
         if (id <= 0)

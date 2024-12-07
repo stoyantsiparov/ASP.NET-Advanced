@@ -7,6 +7,14 @@
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
 
+<form method="get" asp-controller="Instructor" asp-action="Index" class="mb-4">
+	<div class="input-group">
+		<input type="text" name="searchQuery" class="form-control" placeholder="Search instructor..." />
+		<button type="submit" class="btn btn-outline-secondary">Search</button>
+		<a asp-controller="Instructor" asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+	</div>
+</form>
+
 <div class="text-center row">
 	@foreach (var instructor in Model)
 	{
