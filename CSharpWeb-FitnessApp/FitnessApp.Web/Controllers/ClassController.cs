@@ -15,9 +15,9 @@ public class ClassController : BaseController
     }
 
     [AllowAnonymous]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string? searchQuery = null)
     {
-        var model = await _classService.GetAllClassesAsync();
+        var model = await _classService.GetAllClassesAsync(searchQuery);
 
         return View(model);
     }

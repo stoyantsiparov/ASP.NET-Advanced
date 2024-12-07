@@ -27,9 +27,16 @@ public class ClassService : IClassService
     /// <summary>
     /// Get all classes
     /// </summary>
-    public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync()
+    public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync(string? searchQuery = null)
     {
-        return await _context.Classes
+        var query = _context.Classes.AsQueryable();
+
+        if (!string.IsNullOrEmpty(searchQuery))
+        {
+            query = query.Where(c => c.Name.Contains(searchQuery));
+        }
+
+        return await query
             .Select(c => new AllClassesViewModel
             {
                 Id = c.Id,
