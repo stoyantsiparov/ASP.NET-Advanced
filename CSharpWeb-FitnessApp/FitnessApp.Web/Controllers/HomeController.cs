@@ -15,18 +15,9 @@ public class HomeController : Controller
 
 	public IActionResult Error(int? statusCode = null)
 	{
-		if (!statusCode.HasValue)
-		{
-			return View();
-		}
-
 		if (statusCode == 404)
 		{
 			return View("Error404");
-		}
-		else if (statusCode == 401 || statusCode == 403)
-		{
-			return View("Error403");
 		}
 
 		return View("Error500");
