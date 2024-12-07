@@ -26,9 +26,16 @@ public class SpaProcedureService : ISpaProcedureService
 	/// <summary>
 	/// Get all spa procedures
 	/// </summary>
-	public async Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync()
+	public async Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync(string? searchQuery = null)
 	{
-		return await _context.SpaProcedures
+		var query = _context.SpaProcedures.AsQueryable();
+
+		if (!string.IsNullOrEmpty(searchQuery))
+		{
+			query = query.Where(e => e.Name.Contains(searchQuery));
+		}
+
+		return await query
 			.Select(sp => new AllSpaProceduresViewModel
 			{
 				Id = sp.Id,

@@ -16,9 +16,9 @@ public class SpaProcedureController : BaseController
 	}
 
 	[AllowAnonymous]
-	public async Task<IActionResult> Index()
+	public async Task<IActionResult> Index(string? searchQuery = null)
 	{
-		var model = await _spaService.GetAllSpaProceduresAsync();
+		var model = await _spaService.GetAllSpaProceduresAsync(searchQuery);
 
 		return View(model);
 	}

@@ -7,6 +7,14 @@
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
+<form method="get" asp-controller="SpaProcedure" asp-action="Index" class="mb-4">
+	<div class="input-group">
+		<input type="text" name="searchQuery" class="form-control" placeholder="Search Spa Procedure..." />
+		<button type="submit" class="btn btn-outline-secondary">Search</button>
+		<a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+	</div>
+</form>
+
 <div class="text-center row">
 	@foreach (var procedure in Model)
 	{

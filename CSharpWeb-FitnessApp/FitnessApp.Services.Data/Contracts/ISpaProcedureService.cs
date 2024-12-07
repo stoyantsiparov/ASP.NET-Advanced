@@ -4,7 +4,7 @@ namespace FitnessApp.Services.Data.Contracts;
 
 public interface ISpaProcedureService
 {
-	Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync();
+	Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync(string? searchQuery = null);
 	Task<SpaProceduresViewModel?> GetSpaProceduresByIdAsync(int id);
 	Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id);
 	Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId);
