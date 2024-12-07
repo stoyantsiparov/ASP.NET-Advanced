@@ -1,5 +1,5 @@
 using FitnessApp.Data;
-using FitnessApp.Data.Configuration;
+using FitnessApp.Data.Seeding;
 using FitnessApp.Services.Data;
 using FitnessApp.Services.Data.Contracts;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +14,7 @@ public class Program
 	{
 		WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-		// Add services to the container.
+		// Connect to the database
 		var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
 							   ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 		builder.Services.AddDbContext<ApplicationDbContext>(options =>
