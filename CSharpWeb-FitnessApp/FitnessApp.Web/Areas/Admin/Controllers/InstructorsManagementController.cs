@@ -36,7 +36,6 @@ public class InstructorsManagementController : BaseController
 	}
 
 	[HttpPost]
-    [ValidateAntiForgeryToken]
 	public async Task<IActionResult> Add(AddInstructorViewModel model)
 	{
 		if (model == null)
@@ -88,7 +87,6 @@ public class InstructorsManagementController : BaseController
 	}
 
 	[HttpPost]
-    [ValidateAntiForgeryToken]
 	public async Task<IActionResult> Edit(InstructorViewModel model)
 	{
 		if (model == null)
@@ -135,7 +133,6 @@ public class InstructorsManagementController : BaseController
 	}
 
 	[HttpPost]
-    [ValidateAntiForgeryToken]
 	public async Task<IActionResult> Delete(DeleteInstructorViewModel model)
 	{
 		if (model == null || model.Id <= 0)
