@@ -13,285 +13,292 @@ namespace FitnessApp.Services.Data;
 
 public class FitnessEventService : IFitnessEventService
 {
-    private readonly ApplicationDbContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
+	private readonly ApplicationDbContext _context;
+	private readonly UserManager<IdentityUser> _userManager;
 
-    public FitnessEventService(ApplicationDbContext context, UserManager<IdentityUser> userManager)
-    {
-        _context = context;
-        _userManager = userManager;
-    }
+	public FitnessEventService(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+	{
+		_context = context;
+		_userManager = userManager;
+	}
 
-    /// <summary>
-    /// Get all fitness events
-    /// </summary>
-    public async Task<IEnumerable<AllFitnessEventsViewModel>> GetAllFitnessEventsAsync()
-    {
-        return await _context.FitnessEvents
-            .Select(e => new AllFitnessEventsViewModel
-            {
-                Id = e.Id,
-                Title = e.Title,
-                ImageUrl = e.ImageUrl,
-                Location = e.Location,
-                StartDateTime = e.StartDate.ToString(DateTimeFormat),
-                EndDateTime = e.EndDate.ToString(DateTimeFormat)
-            })
-            .AsNoTracking()
-            .ToListAsync();
-    }
+	/// <summary>
+	/// Get all fitness events
+	/// </summary>
+	public async Task<IEnumerable<AllFitnessEventsViewModel>> GetAllFitnessEventsAsync(string? searchTerm = null)
+	{
+		var query = _context.FitnessEvents.AsQueryable();
 
-    /// <summary>
-    /// Get fitness event by id
-    /// </summary>
-    public async Task<FitnessEventViewModel?> GetFitnessEventByIdAsync(int id)
-    {
-        return await _context.FitnessEvents
-            .Where(e => e.Id == id)
-            .Select(e => new FitnessEventViewModel
-            {
-                Id = e.Id,
-                Title = e.Title,
-                Description = e.Description,
-                Location = e.Location,
-                ImageUrl = e.ImageUrl,
-                StartDate = e.StartDate.ToString(DateTimeFormat),
-                EndDate = e.EndDate.ToString(DateTimeFormat)
-            })
-            .FirstOrDefaultAsync();
-    }
+		if (!string.IsNullOrEmpty(searchTerm))
+		{
+			query = query.Where(e => e.Title.Contains(searchTerm) || e.Location.Contains(searchTerm));
+		}
 
-    /// <summary>
-    /// Get fitness event details
-    /// </summary>
-    public async Task<FitnessEventDetailsViewModel?> GetFitnessEventDetailsAsync(int id)
-    {
-        return await _context.FitnessEvents
-            .Where(e => e.Id == id)
-            .Select(e => new FitnessEventDetailsViewModel
-            {
-                Id = e.Id,
-                Title = e.Title,
-                ImageUrl = e.ImageUrl,
-                Location = e.Location,
-                Description = e.Description,
-                StartDateTime = e.StartDate.ToString(DateTimeFormat),
-                EndDateTime = e.EndDate.ToString(DateTimeFormat)
-            })
-            .FirstOrDefaultAsync();
-    }
+		return await query
+			.Select(e => new AllFitnessEventsViewModel
+			{
+				Id = e.Id,
+				Title = e.Title,
+				ImageUrl = e.ImageUrl,
+				Location = e.Location,
+				StartDateTime = e.StartDate.ToString(DateTimeFormat),
+				EndDateTime = e.EndDate.ToString(DateTimeFormat)
+			})
+			.AsNoTracking()
+			.ToListAsync();
+	}
 
-    /// <summary>
-    /// Get user's fitness events
-    /// </summary>
-    public async Task<IEnumerable<AllFitnessEventsViewModel>> GetMyFitnessEventsAsync(string userId)
-    {
-        return await _context.EventRegistrations
-            .Where(r => r.MemberId == userId)
-            .Select(r => new AllFitnessEventsViewModel
-            {
-                Id = r.FitnessEvent.Id,
-                Title = r.FitnessEvent.Title,
-                ImageUrl = r.FitnessEvent.ImageUrl,
-                Location = r.FitnessEvent.Location,
-                StartDateTime = r.FitnessEvent.StartDate.ToString(DateTimeFormat),
-                EndDateTime = r.FitnessEvent.EndDate.ToString(DateTimeFormat)
-            })
-            .AsNoTracking()
-            .ToListAsync();
-    }
+	/// <summary>
+	/// Get fitness event by id
+	/// </summary>
+	public async Task<FitnessEventViewModel?> GetFitnessEventByIdAsync(int id)
+	{
+		return await _context.FitnessEvents
+			.Where(e => e.Id == id)
+			.Select(e => new FitnessEventViewModel
+			{
+				Id = e.Id,
+				Title = e.Title,
+				Description = e.Description,
+				Location = e.Location,
+				ImageUrl = e.ImageUrl,
+				StartDate = e.StartDate.ToString(DateTimeFormat),
+				EndDate = e.EndDate.ToString(DateTimeFormat)
+			})
+			.FirstOrDefaultAsync();
+	}
 
-    /// <summary>
-    /// Add fitness event to user's fitness events
-    /// </summary>
-    public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
-    {
-        var user = await _context.Users.FindAsync(userId);
-        var isMember = user != null && await _userManager.IsInRoleAsync(user, MemberRole);
+	/// <summary>
+	/// Get fitness event details
+	/// </summary>
+	public async Task<FitnessEventDetailsViewModel?> GetFitnessEventDetailsAsync(int id)
+	{
+		return await _context.FitnessEvents
+			.Where(e => e.Id == id)
+			.Select(e => new FitnessEventDetailsViewModel
+			{
+				Id = e.Id,
+				Title = e.Title,
+				ImageUrl = e.ImageUrl,
+				Location = e.Location,
+				Description = e.Description,
+				StartDateTime = e.StartDate.ToString(DateTimeFormat),
+				EndDateTime = e.EndDate.ToString(DateTimeFormat)
+			})
+			.FirstOrDefaultAsync();
+	}
 
-        if (!isMember)
-        {
-            throw new InvalidOperationException(OnlyMembersCanRegisterForThisEvent);
-        }
+	/// <summary>
+	/// Get user's fitness events
+	/// </summary>
+	public async Task<IEnumerable<AllFitnessEventsViewModel>> GetMyFitnessEventsAsync(string userId)
+	{
+		return await _context.EventRegistrations
+			.Where(r => r.MemberId == userId)
+			.Select(r => new AllFitnessEventsViewModel
+			{
+				Id = r.FitnessEvent.Id,
+				Title = r.FitnessEvent.Title,
+				ImageUrl = r.FitnessEvent.ImageUrl,
+				Location = r.FitnessEvent.Location,
+				StartDateTime = r.FitnessEvent.StartDate.ToString(DateTimeFormat),
+				EndDateTime = r.FitnessEvent.EndDate.ToString(DateTimeFormat)
+			})
+			.AsNoTracking()
+			.ToListAsync();
+	}
 
-        var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
+	/// <summary>
+	/// Add fitness event to user's fitness events
+	/// </summary>
+	public async Task AddToMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
+	{
+		var user = await _context.Users.FindAsync(userId);
+		var isMember = user != null && await _userManager.IsInRoleAsync(user, MemberRole);
 
-        if (fitnessEvent == null)
-        {
-            throw new InvalidOperationException(FitnessEventDoesNotExist);
-        }
+		if (!isMember)
+		{
+			throw new InvalidOperationException(OnlyMembersCanRegisterForThisEvent);
+		}
 
-        var existingRegistration = await _context.EventRegistrations
-            .FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);
+		var fitnessEvent = await _context.FitnessEvents.FindAsync(fitnessEventViewModel.Id);
 
-        if (existingRegistration != null)
-        {
-            throw new InvalidOperationException(AlreadyRegisteredForEvent);
-        }
+		if (fitnessEvent == null)
+		{
+			throw new InvalidOperationException(FitnessEventDoesNotExist);
+		}
 
-        var eventRegistration = new EventRegistration
-        {
-            MemberId = userId,
-            EventId = fitnessEventViewModel.Id
-        };
+		var existingRegistration = await _context.EventRegistrations
+			.FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);
 
-        await _context.EventRegistrations.AddAsync(eventRegistration);
-        await _context.SaveChangesAsync();
-    }
+		if (existingRegistration != null)
+		{
+			throw new InvalidOperationException(AlreadyRegisteredForEvent);
+		}
 
-    /// <summary>
-    /// Remove fitness event from user's fitness events
-    /// </summary>
-    public async Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
-    {
-        var registration = await _context.EventRegistrations
-            .FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);
+		var eventRegistration = new EventRegistration
+		{
+			MemberId = userId,
+			EventId = fitnessEventViewModel.Id
+		};
 
-        if (registration == null)
-        {
-            throw new InvalidOperationException(UserNotRegisteredForEvent);
-        }
+		await _context.EventRegistrations.AddAsync(eventRegistration);
+		await _context.SaveChangesAsync();
+	}
 
-        _context.EventRegistrations.Remove(registration);
-        await _context.SaveChangesAsync();
-    }
+	/// <summary>
+	/// Remove fitness event from user's fitness events
+	/// </summary>
+	public async Task RemoveFromMyFitnessEventsAsync(string userId, FitnessEventViewModel? fitnessEventViewModel)
+	{
+		var registration = await _context.EventRegistrations
+			.FirstOrDefaultAsync(er => er.MemberId == userId && er.EventId == fitnessEventViewModel.Id);
 
-    /// <summary>
-    /// Get fitness event for add
-    /// </summary>
-    public async Task<AddFitnessEventViewModel> GetFitnessEventForAddAsync()
-    {
-        var model = new AddFitnessEventViewModel
-        {
-            Title = string.Empty,
-            Description = string.Empty,
-            Location = string.Empty,
-            ImageUrl = string.Empty,
-            StartDate = DateTime.Now.ToString(DateTimeFormat),
-            EndDate = DateTime.Now.AddHours(1).ToString(DateTimeFormat)
-        };
+		if (registration == null)
+		{
+			throw new InvalidOperationException(UserNotRegisteredForEvent);
+		}
 
-        return await Task.FromResult(model);
-    }
+		_context.EventRegistrations.Remove(registration);
+		await _context.SaveChangesAsync();
+	}
 
-    /// <summary>
-    /// Аdd fitness event
-    /// </summary>
-    public async Task AddFitnessEventAsync(AddFitnessEventViewModel model, string userId)
-    {
-        if (model == null)
-        {
-            throw new ArgumentNullException(nameof(model));
-        }
+	/// <summary>
+	/// Get fitness event for add
+	/// </summary>
+	public async Task<AddFitnessEventViewModel> GetFitnessEventForAddAsync()
+	{
+		var model = new AddFitnessEventViewModel
+		{
+			Title = string.Empty,
+			Description = string.Empty,
+			Location = string.Empty,
+			ImageUrl = string.Empty,
+			StartDate = DateTime.Now.ToString(DateTimeFormat),
+			EndDate = DateTime.Now.AddHours(1).ToString(DateTimeFormat)
+		};
 
-        var user = await _userManager.FindByIdAsync(userId);
-        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+		return await Task.FromResult(model);
+	}
 
-        if (!isAdmin)
-        {
-            throw new UnauthorizedAccessException(YouAreNotAuthorizedToAdd);
-        }
+	/// <summary>
+	/// Аdd fitness event
+	/// </summary>
+	public async Task AddFitnessEventAsync(AddFitnessEventViewModel model, string userId)
+	{
+		if (model == null)
+		{
+			throw new ArgumentNullException(nameof(model));
+		}
 
-        var startDate = DateTime.Parse(model.StartDate);
-        var endDate = DateTime.Parse(model.EndDate);
+		var user = await _userManager.FindByIdAsync(userId);
+		var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
 
-        if (endDate <= startDate)
-        {
-            throw new InvalidOperationException(EndDateMustBeLaterThanStartDate);
-        }
+		if (!isAdmin)
+		{
+			throw new UnauthorizedAccessException(YouAreNotAuthorizedToAdd);
+		}
 
-        var fitnessEvent = new FitnessEvent
-        {
-            Title = model.Title,
-            Description = model.Description,
-            Location = model.Location,
-            ImageUrl = model.ImageUrl,
-            StartDate = startDate,
-            EndDate = endDate
-        };
+		var startDate = DateTime.Parse(model.StartDate);
+		var endDate = DateTime.Parse(model.EndDate);
 
-        await _context.FitnessEvents.AddAsync(fitnessEvent);
-        await _context.SaveChangesAsync();
-    }
+		if (endDate <= startDate)
+		{
+			throw new InvalidOperationException(EndDateMustBeLaterThanStartDate);
+		}
 
-    /// <summary>
-    /// Edit fitness event
-    /// </summary>
-    public async Task EditFitnessEventAsync(FitnessEventViewModel model, string userId)
-    {
-        var user = await _userManager.FindByIdAsync(userId);
-        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+		var fitnessEvent = new FitnessEvent
+		{
+			Title = model.Title,
+			Description = model.Description,
+			Location = model.Location,
+			ImageUrl = model.ImageUrl,
+			StartDate = startDate,
+			EndDate = endDate
+		};
 
-        if (!isAdmin)
-        {
-            throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
-        }
+		await _context.FitnessEvents.AddAsync(fitnessEvent);
+		await _context.SaveChangesAsync();
+	}
 
-        var fitnessEvent = await _context.FitnessEvents.FindAsync(model.Id);
+	/// <summary>
+	/// Edit fitness event
+	/// </summary>
+	public async Task EditFitnessEventAsync(FitnessEventViewModel model, string userId)
+	{
+		var user = await _userManager.FindByIdAsync(userId);
+		var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
 
-        if (fitnessEvent == null)
-        {
-            throw new InvalidOperationException(FitnessEventDoesNotExist);
-        }
+		if (!isAdmin)
+		{
+			throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
+		}
 
-        var startDate = DateTime.Parse(model.StartDate);
-        var endDate = DateTime.Parse(model.EndDate);
+		var fitnessEvent = await _context.FitnessEvents.FindAsync(model.Id);
 
-        if (endDate <= startDate)
-        {
-            throw new InvalidOperationException(EndDateMustBeLaterThanStartDate);
-        }
+		if (fitnessEvent == null)
+		{
+			throw new InvalidOperationException(FitnessEventDoesNotExist);
+		}
 
-        fitnessEvent.Title = model.Title;
-        fitnessEvent.Description = model.Description;
-        fitnessEvent.Location = model.Location;
-        fitnessEvent.ImageUrl = model.ImageUrl;
-        fitnessEvent.StartDate = startDate;
-        fitnessEvent.EndDate = endDate;
+		var startDate = DateTime.Parse(model.StartDate);
+		var endDate = DateTime.Parse(model.EndDate);
 
-        _context.FitnessEvents.Update(fitnessEvent);
-        await _context.SaveChangesAsync();
-    }
+		if (endDate <= startDate)
+		{
+			throw new InvalidOperationException(EndDateMustBeLaterThanStartDate);
+		}
 
-    /// <summary>
-    /// Get fitness event for delete
-    /// </summary>
-    public async Task<DeleteFitnessEventViewModel?> GetFitnessEventForDeleteAsync(int id)
-    {
-        return await _context.FitnessEvents
-            .Where(fe => fe.Id == id)
-            .Select(fe => new DeleteFitnessEventViewModel
-            {
-                Id = fe.Id,
-                Title = fe.Title,
-                Description = fe.Description
-            })
-            .FirstOrDefaultAsync();
-    }
+		fitnessEvent.Title = model.Title;
+		fitnessEvent.Description = model.Description;
+		fitnessEvent.Location = model.Location;
+		fitnessEvent.ImageUrl = model.ImageUrl;
+		fitnessEvent.StartDate = startDate;
+		fitnessEvent.EndDate = endDate;
 
-    /// <summary>
-    /// Delete fitness event
-    /// </summary>
-    public async Task DeleteFitnessEventAsync(int id, string userId)
-    {
-        var user = await _userManager.FindByIdAsync(userId);
-        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+		_context.FitnessEvents.Update(fitnessEvent);
+		await _context.SaveChangesAsync();
+	}
 
-        if (!isAdmin)
-        {
-            throw new UnauthorizedAccessException(YouAreNotAuthorizedToDelete);
-        }
+	/// <summary>
+	/// Get fitness event for delete
+	/// </summary>
+	public async Task<DeleteFitnessEventViewModel?> GetFitnessEventForDeleteAsync(int id)
+	{
+		return await _context.FitnessEvents
+			.Where(fe => fe.Id == id)
+			.Select(fe => new DeleteFitnessEventViewModel
+			{
+				Id = fe.Id,
+				Title = fe.Title,
+				Description = fe.Description
+			})
+			.FirstOrDefaultAsync();
+	}
 
-        var fitnessEvent = await _context.FitnessEvents.FindAsync(id);
+	/// <summary>
+	/// Delete fitness event
+	/// </summary>
+	public async Task DeleteFitnessEventAsync(int id, string userId)
+	{
+		var user = await _userManager.FindByIdAsync(userId);
+		var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
 
-        if (fitnessEvent != null)
-        {
-            _context.FitnessEvents.Remove(fitnessEvent);
-            await _context.SaveChangesAsync();
-        }
-        else
-        {
-            throw new InvalidOperationException(FitnessEventDoesNotExist);
-        }
-    }
+		if (!isAdmin)
+		{
+			throw new UnauthorizedAccessException(YouAreNotAuthorizedToDelete);
+		}
+
+		var fitnessEvent = await _context.FitnessEvents.FindAsync(id);
+
+		if (fitnessEvent != null)
+		{
+			_context.FitnessEvents.Remove(fitnessEvent);
+			await _context.SaveChangesAsync();
+		}
+		else
+		{
+			throw new InvalidOperationException(FitnessEventDoesNotExist);
+		}
+	}
 }

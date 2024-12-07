@@ -4,7 +4,7 @@ namespace FitnessApp.Services.Data.Contracts;
 
 public interface IFitnessEventService
 {
-    Task<IEnumerable<AllFitnessEventsViewModel>> GetAllFitnessEventsAsync();
+	Task<IEnumerable<AllFitnessEventsViewModel>> GetAllFitnessEventsAsync(string? searchTerm = null);
     Task<FitnessEventViewModel?> GetFitnessEventByIdAsync(int id);
     Task<FitnessEventDetailsViewModel?> GetFitnessEventDetailsAsync(int id);
     Task<IEnumerable<AllFitnessEventsViewModel>> GetMyFitnessEventsAsync(string userId);

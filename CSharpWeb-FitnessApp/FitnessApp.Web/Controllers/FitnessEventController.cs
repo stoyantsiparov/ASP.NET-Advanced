@@ -12,17 +12,17 @@ namespace FitnessApp.Web.Controllers
         public FitnessEventController(IFitnessEventService fitnessEventService)
         {
             _fitnessEventService = fitnessEventService;
-        }
+        }   
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchQuery = null)
         {
-            var model = await _fitnessEventService.GetAllFitnessEventsAsync();
+	        var model = await _fitnessEventService.GetAllFitnessEventsAsync(searchQuery);
 
-            return View(model);
+	        return View(model);
         }
 
-        public async Task<IActionResult> MyFitnessEvents()
+		public async Task<IActionResult> MyFitnessEvents()
         {
             var userId = GetUserId();
 
