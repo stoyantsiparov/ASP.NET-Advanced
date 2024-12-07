@@ -23,34 +23,41 @@ public class SpaProcedureService : ISpaProcedureService
         _userManager = userManager;
     }
 
-	/// <summary>
-	/// Get all spa procedures
-	/// </summary>
-	public async Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync(string? searchQuery = null)
-	{
-		var query = _context.SpaProcedures.AsQueryable();
+    /// <summary>
+    /// Get all spa procedures
+    /// </summary>
+    public async Task<(IEnumerable<AllSpaProceduresViewModel> SpaProcedures, int TotalPages)> GetAllSpaProceduresAsync(string? searchQuery = null, int pageNumber = 1, int pageSize = 4)
+    {
+        var query = _context.SpaProcedures.AsQueryable();
 
-		if (!string.IsNullOrEmpty(searchQuery))
-		{
-			query = query.Where(e => e.Name.Contains(searchQuery));
-		}
+        if (!string.IsNullOrEmpty(searchQuery))
+        {
+            query = query.Where(e => e.Name.Contains(searchQuery));
+        }
 
-		return await query
-			.Select(sp => new AllSpaProceduresViewModel
-			{
-				Id = sp.Id,
-				Name = sp.Name,
-				ImageUrl = sp.ImageUrl,
-				Description = sp.Description
-			})
-			.AsNoTracking()
-			.ToListAsync();
-	}
+        var totalProcedures = await query.CountAsync();
+        var totalPages = (int)Math.Ceiling(totalProcedures / (double)pageSize);
 
-	/// <summary>
-	/// Get spa procedure by id
-	/// </summary>
-	public async Task<SpaProceduresViewModel?> GetSpaProceduresByIdAsync(int id)
+        var spaProcedures = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(sp => new AllSpaProceduresViewModel
+            {
+                Id = sp.Id,
+                Name = sp.Name,
+                ImageUrl = sp.ImageUrl,
+                Description = sp.Description
+            })
+            .AsNoTracking()
+            .ToListAsync();
+
+        return (spaProcedures, totalPages);
+    }
+
+    /// <summary>
+    /// Get spa procedure by id
+    /// </summary>
+    public async Task<SpaProceduresViewModel?> GetSpaProceduresByIdAsync(int id)
 	{
 		return await _context.SpaProcedures
 			.Where(sp => sp.Id == id)

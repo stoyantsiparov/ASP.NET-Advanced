@@ -1,44 +1,55 @@
-﻿@model IEnumerable<FitnessApp.Web.ViewModels.SpaProcedureViewModels.AllSpaProceduresViewModel>
+﻿@model FitnessApp.Web.ViewModels.SpaProcedureViewModels.PaginatedSpaProceduresViewModel
 
 @{
-	ViewBag.Title = "Available Spa Procedures";
+    ViewBag.Title = "Available Spa Procedures";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <form method="get" asp-controller="SpaProcedure" asp-action="Index" class="mb-4">
-	<div class="input-group">
-		<input type="text" name="searchQuery" class="form-control" placeholder="Search Spa Procedure..." />
-		<button type="submit" class="btn btn-outline-secondary">Search</button>
-		<a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-outline-secondary">Clear</a>
-	</div>
+    <div class="input-group">
+        <input type="text" name="searchQuery" class="form-control" placeholder="Search procedures..." value="@Model.SearchQuery" />
+        <button type="submit" class="btn btn-outline-secondary">Search</button>
+        <a asp-controller="SpaProcedure" asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+    </div>
 </form>
 
 <div class="text-center row">
-	@foreach (var procedure in Model)
-	{
-		<div class="card col-4" style="width: 20rem;">
-			<div class="card-body d-flex flex-column" style="height: 100%;">
-				<h5 class="card-title mt-1">@procedure.Name</h5>
-				<img class="card-img-top" src="@procedure.ImageUrl" alt="Spa Procedure Image" style="max-height: 200px; object-fit: cover; width: 100%;">
+    @foreach (var procedure in Model.SpaProcedures)
+    {
+        <div class="card col-4" style="width: 20rem;">
+            <div class="card-body d-flex flex-column" style="height: 100%;">
+                <h5 class="card-title mt-1">@procedure.Name</h5>
+                <img class="card-img-top" src="@procedure.ImageUrl" alt="Spa Procedure Image" style="max-height: 200px; object-fit: cover; width: 100%;">
 
-				<hr class="mt-2 mb-2" />
+                <hr class="mt-2 mb-2" />
 
-				<p class="mt-2 flex-grow-1">@procedure.Description</p>
+                <p class="mt-2 flex-grow-1">@procedure.Description</p>
 
-				<div class="mt-auto">
-					<form method="post" asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id">
-						<button type="submit" class="btn btn-success w-100 mb-2">Book Now</button>
-					</form>
+                <div class="mt-auto">
+                    <form method="post" asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id">
+                        <button type="submit" class="btn btn-success w-100 mb-2">Book Now</button>
+                    </form>
 
-					<a asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id" class="btn btn-success w-100">View Details</a>
-				</div>
-			</div>
-		</div>
-	}
+                    <a asp-controller="SpaProcedure" asp-action="Details" asp-route-id="@procedure.Id" class="btn btn-success w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
+<nav aria-label="Page navigation" class="mt-4">
+    <ul class="pagination justify-content-center">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                <a class="page-link" asp-action="Index" asp-route-pageNumber="@i" asp-route-pageSize="4" asp-route-searchQuery="@Model.SearchQuery">@i</a>
+            </li>
+        }
+    </ul>
+</nav>
+
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }
