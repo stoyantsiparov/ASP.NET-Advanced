@@ -13,7 +13,7 @@ namespace FitnessApp.Services.Data;
 
 public class SpaProcedureService : ISpaProcedureService
 {
-	private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext _context;
     private readonly UserManager<IdentityUser> _userManager;
 
 
@@ -26,21 +26,47 @@ public class SpaProcedureService : ISpaProcedureService
     /// <summary>
     /// Get all spa procedures
     /// </summary>
-    public async Task<(IEnumerable<AllSpaProceduresViewModel> SpaProcedures, int TotalPages)> GetAllSpaProceduresAsync(string? searchQuery = null, int pageNumber = 1, int pageSize = 4)
+    public async Task<PaginatedSpaProceduresViewModel> GetAllSpaProceduresPaginationAsync(string? searchQuery, int pageNumber, int pageSize)
     {
         var query = _context.SpaProcedures.AsQueryable();
 
         if (!string.IsNullOrEmpty(searchQuery))
         {
-            query = query.Where(e => e.Name.Contains(searchQuery));
+            query = query.Where(sp => sp.Name.Contains(searchQuery) || sp.Description.Contains(searchQuery));
         }
 
         var totalProcedures = await query.CountAsync();
         var totalPages = (int)Math.Ceiling(totalProcedures / (double)pageSize);
 
-        var spaProcedures = await query
+        List<AllSpaProceduresViewModel> spaProcedures = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .Select(sp => new AllSpaProceduresViewModel
+            {
+                Id = sp.Id,
+                Name = sp.Name,
+                Description = sp.Description,
+                ImageUrl = sp.ImageUrl,
+                AppointmentDateTime = sp.AppointmentDateTime.ToString(AppointmentDateTimeFormat)
+            })
+            .AsNoTracking()
+            .ToListAsync();
+
+        var model = new PaginatedSpaProceduresViewModel
+        {
+            SpaProcedures = spaProcedures,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalPages = totalPages,
+            SearchQuery = searchQuery
+        };
+
+        return model;
+    }
+
+    public async Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync()
+    {
+        return await _context.SpaProcedures
             .Select(sp => new AllSpaProceduresViewModel
             {
                 Id = sp.Id,
@@ -50,68 +76,66 @@ public class SpaProcedureService : ISpaProcedureService
             })
             .AsNoTracking()
             .ToListAsync();
-
-        return (spaProcedures, totalPages);
     }
 
     /// <summary>
     /// Get spa procedure by id
     /// </summary>
     public async Task<SpaProceduresViewModel?> GetSpaProceduresByIdAsync(int id)
-	{
-		return await _context.SpaProcedures
-			.Where(sp => sp.Id == id)
-			.Select(sp => new SpaProceduresViewModel
-			{
-				Id = sp.Id,
-				Name = sp.Name,
-				ImageUrl = sp.ImageUrl,
-				Description = sp.Description,
-				Price = sp.Price,
-				Duration = sp.Duration,
-				AppointmentDateTime = sp.AppointmentDateTime.ToString(AppointmentDateTimeFormat)
-			})
-			.FirstOrDefaultAsync();
-	}
+    {
+        return await _context.SpaProcedures
+            .Where(sp => sp.Id == id)
+            .Select(sp => new SpaProceduresViewModel
+            {
+                Id = sp.Id,
+                Name = sp.Name,
+                ImageUrl = sp.ImageUrl,
+                Description = sp.Description,
+                Price = sp.Price,
+                Duration = sp.Duration,
+                AppointmentDateTime = sp.AppointmentDateTime.ToString(AppointmentDateTimeFormat)
+            })
+            .FirstOrDefaultAsync();
+    }
 
-	/// <summary>
-	/// Get spa procedure details
-	/// </summary>
-	public async Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id)
-	{
-		return await _context.SpaProcedures
-			.Where(x => x.Id == id)
-			.Select(x => new SpaProceduresDetailsViewModel
-			{
-				Id = x.Id,
-				Name = x.Name,
-				ImageUrl = x.ImageUrl,
-				Description = x.Description,
-				Price = x.Price,
-				Duration = x.Duration,
-				AppointmentDateTime = null
-			})
-			.FirstOrDefaultAsync();
-	}
+    /// <summary>
+    /// Get spa procedure details
+    /// </summary>
+    public async Task<SpaProceduresDetailsViewModel?> GetSpaProceduresDetailsAsync(int id)
+    {
+        return await _context.SpaProcedures
+            .Where(x => x.Id == id)
+            .Select(x => new SpaProceduresDetailsViewModel
+            {
+                Id = x.Id,
+                Name = x.Name,
+                ImageUrl = x.ImageUrl,
+                Description = x.Description,
+                Price = x.Price,
+                Duration = x.Duration,
+                AppointmentDateTime = null
+            })
+            .FirstOrDefaultAsync();
+    }
 
-	/// <summary>
-	/// Get user's spa procedures
-	/// </summary>
-	public async Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId)
-	{
-		return await _context.SpaRegistrations
-			.Where(sr => sr.MemberId == userId)
-			.Select(sr => new AllSpaProceduresViewModel
-			{
-				Id = sr.SpaProcedureId,
-				Name = sr.SpaProcedure.Name,
-				ImageUrl = sr.SpaProcedure.ImageUrl,
-				Description = sr.SpaProcedure.Description,
-				AppointmentDateTime = sr.SpaProcedure.AppointmentDateTime.ToString(AppointmentDateTimeFormat)
-			})
-			.AsNoTracking()
-			.ToListAsync();
-	}
+    /// <summary>
+    /// Get user's spa procedures
+    /// </summary>
+    public async Task<IEnumerable<AllSpaProceduresViewModel>> GetMySpaProceduresAsync(string userId)
+    {
+        return await _context.SpaRegistrations
+            .Where(sr => sr.MemberId == userId)
+            .Select(sr => new AllSpaProceduresViewModel
+            {
+                Id = sr.SpaProcedureId,
+                Name = sr.SpaProcedure.Name,
+                ImageUrl = sr.SpaProcedure.ImageUrl,
+                Description = sr.SpaProcedure.Description,
+                AppointmentDateTime = sr.SpaProcedure.AppointmentDateTime.ToString(AppointmentDateTimeFormat)
+            })
+            .AsNoTracking()
+            .ToListAsync();
+    }
 
     /// <summary>
     /// Add spa procedure to user's appointments
@@ -160,35 +184,35 @@ public class SpaProcedureService : ISpaProcedureService
     /// Remove spa procedure from user's appointments
     /// </summary>
     public async Task RemoveFromMySpaAppointmentsAsync(string userId, SpaProceduresViewModel spaProcedure)
-	{
-		var registration = await _context.SpaRegistrations
-			.FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
+    {
+        var registration = await _context.SpaRegistrations
+            .FirstOrDefaultAsync(sr => sr.MemberId == userId && sr.SpaProcedureId == spaProcedure.Id);
 
-		if (registration == null)
-		{
-			throw new InvalidOperationException(SpaAppointmentNotBooked);
-		}
+        if (registration == null)
+        {
+            throw new InvalidOperationException(SpaAppointmentNotBooked);
+        }
 
-		_context.SpaRegistrations.Remove(registration);
-		await _context.SaveChangesAsync();
-	}
+        _context.SpaRegistrations.Remove(registration);
+        await _context.SaveChangesAsync();
+    }
 
-	/// <summary>
-	/// Get spa procedure for add
-	/// </summary>
-	public async Task<AddSpaProcedureViewModel> GetSpaProcedureForAddAsync()
-	{
-		var model = new AddSpaProcedureViewModel
-		{
-			Name = string.Empty,
-			ImageUrl = string.Empty,
-			Description = string.Empty,
-			Duration = 0,
-			Price = 0.0m,
-		};
+    /// <summary>
+    /// Get spa procedure for add
+    /// </summary>
+    public async Task<AddSpaProcedureViewModel> GetSpaProcedureForAddAsync()
+    {
+        var model = new AddSpaProcedureViewModel
+        {
+            Name = string.Empty,
+            ImageUrl = string.Empty,
+            Description = string.Empty,
+            Duration = 0,
+            Price = 0.0m,
+        };
 
-		return await Task.FromResult(model);
-	}
+        return await Task.FromResult(model);
+    }
 
     /// <summary>
     /// Add spa procedure
@@ -250,17 +274,17 @@ public class SpaProcedureService : ISpaProcedureService
     /// Get spa procedure for delete
     /// </summary>
     public async Task<DeleteSpaProcedureViewModel?> GetSpaProcedureForDeleteAsync(int id)
-	{
-		return await _context.SpaProcedures
-			.Where(sp => sp.Id == id)
-			.Select(sp => new DeleteSpaProcedureViewModel
-			{
-				Id = sp.Id,
-				Name = sp.Name,
-				Description = sp.Description
-			})
-			.FirstOrDefaultAsync();
-	}
+    {
+        return await _context.SpaProcedures
+            .Where(sp => sp.Id == id)
+            .Select(sp => new DeleteSpaProcedureViewModel
+            {
+                Id = sp.Id,
+                Name = sp.Name,
+                Description = sp.Description
+            })
+            .FirstOrDefaultAsync();
+    }
 
     /// <summary>
     /// Delete spa procedure

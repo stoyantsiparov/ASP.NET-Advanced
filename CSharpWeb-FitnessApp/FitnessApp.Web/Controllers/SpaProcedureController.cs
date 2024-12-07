@@ -1,5 +1,4 @@
 ﻿using FitnessApp.Services.Data.Contracts;
-using FitnessApp.Web.ViewModels.SpaProcedureViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FitnessApp.Common.ErrorMessages.SpaProcedure;
@@ -19,16 +18,7 @@ public class SpaProcedureController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> Index(string? searchQuery = null, int pageNumber = 1, int pageSize = 4)
     {
-        var (spaProcedures, totalPages) = await _spaService.GetAllSpaProceduresAsync(searchQuery, pageNumber, pageSize);
-
-        var model = new PaginatedSpaProceduresViewModel
-        {
-            SpaProcedures = spaProcedures,
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            TotalPages = totalPages,
-            SearchQuery = searchQuery
-        };
+        var model = await _spaService.GetAllSpaProceduresPaginationAsync(searchQuery, pageNumber, pageSize);
 
         return View(model);
     }
