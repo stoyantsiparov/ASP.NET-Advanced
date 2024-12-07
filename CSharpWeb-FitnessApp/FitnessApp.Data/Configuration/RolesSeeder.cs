@@ -35,7 +35,7 @@ public class RolesSeeder
 		string adminEmail = configuration["AdminSettings:Username"];
 		string adminPassword = configuration["AdminSettings:Password"];
 
-		var existingAdmin = userManager.FindByEmailAsync(adminEmail).GetAwaiter().GetResult();
+		var existingAdmin = userManager.FindByEmailAsync(adminEmail!).GetAwaiter().GetResult();
 
 		if (existingAdmin == null)
 		{
@@ -45,7 +45,7 @@ public class RolesSeeder
 				Email = adminEmail
 			};
 
-			var result = userManager.CreateAsync(adminUser, adminPassword).GetAwaiter().GetResult();
+			var result = userManager.CreateAsync(adminUser, adminPassword!).GetAwaiter().GetResult();
 
 			if (result.Succeeded)
 			{
