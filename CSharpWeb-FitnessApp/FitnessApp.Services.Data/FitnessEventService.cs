@@ -22,7 +22,7 @@ public class FitnessEventService : IFitnessEventService
 		_userManager = userManager;
 	}
 
-	/// <summary>
+    /// <summary>
 	/// Get all fitness events
 	/// </summary>
 	public async Task<IEnumerable<AllFitnessEventsViewModel>> GetAllFitnessEventsAsync(string? searchTerm = null)
