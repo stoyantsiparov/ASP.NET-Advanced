@@ -9,18 +9,18 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FitnessApp.Web.Data.Migrations
+namespace FitnessApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241121133034_AddedImageUrlToInstructorModel")]
-    partial class AddedImageUrlToInstructorModel
+    [Migration("20241208111613_CreanUpMigrations")]
+    partial class CreanUpMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -58,6 +58,11 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasColumnType("nvarchar(30)")
                         .HasComment("Name of the fitness class");
 
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)")
+                        .HasComment("Price for the fitness class");
+
                     b.Property<DateTime>("Schedule")
                         .HasColumnType("datetime2")
                         .HasComment("Date and time of the fitness class");
@@ -67,6 +72,74 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasIndex("InstructorId");
 
                     b.ToTable("Classes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A calm and peaceful yoga session to start your day.",
+                            Duration = 60,
+                            ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg",
+                            InstructorId = 1,
+                            Name = "Morning Yoga",
+                            Price = 50.00m,
+                            Schedule = new DateTime(2024, 12, 5, 7, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "An intense, high-energy interval training session.",
+                            Duration = 45,
+                            ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQjZQw/2.jpg",
+                            InstructorId = 2,
+                            Name = "HIIT Challenge",
+                            Price = 50.00m,
+                            Schedule = new DateTime(2024, 12, 5, 18, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A fun and energetic Zumba dance class for all levels.",
+                            Duration = 60,
+                            ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw",
+                            InstructorId = 3,
+                            Name = "Zumba Dance",
+                            Price = 90.00m,
+                            Schedule = new DateTime(2024, 12, 6, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Strengthen your core and improve posture with this Pilates class.",
+                            Duration = 60,
+                            ImageUrl = "https://media.self.com/photos/5b9c24c208e0b96633983ce8/2:1/w_2580,c_limit/pilates-butt-core-workout.jpg",
+                            InstructorId = 4,
+                            Name = "Pilates Core",
+                            Price = 85.00m,
+                            Schedule = new DateTime(2024, 12, 7, 8, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "An introductory strength training session focusing on weightlifting techniques.",
+                            Duration = 45,
+                            ImageUrl = "https://www.jefit.com/_next/image?url=https%3A%2F%2Fcdn.jefit.com%2Fuc%2Ffile%2Fc34238b8cd6e3cf7%2F1.jpg&w=3840&q=75",
+                            InstructorId = 5,
+                            Name = "Strength Training Basics",
+                            Price = 95.00m,
+                            Schedule = new DateTime(2024, 12, 7, 17, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Learn the basics of ММА in this high-energy and engaging class.",
+                            Duration = 30,
+                            ImageUrl = "https://mf.b37mrtl.ru/rbthmedia/images/2018.02/article/5a93bf3385600a57b0096f7e.jpg",
+                            InstructorId = 6,
+                            Name = "ММА Essentials",
+                            Price = 150.00m,
+                            Schedule = new DateTime(2024, 12, 8, 20, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.ClassRegistration", b =>
@@ -77,14 +150,9 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("MemberId1")
-                        .HasColumnType("int");
-
                     b.HasKey("ClassId", "MemberId");
 
                     b.HasIndex("MemberId");
-
-                    b.HasIndex("MemberId1");
 
                     b.ToTable("ClassesRegistrations");
                 });
@@ -97,14 +165,9 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("MemberId1")
-                        .HasColumnType("int");
-
                     b.HasKey("EventId", "MemberId");
 
                     b.HasIndex("MemberId");
-
-                    b.HasIndex("MemberId1");
 
                     b.ToTable("EventRegistrations");
                 });
@@ -156,32 +219,62 @@ namespace FitnessApp.Web.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "A calm and peaceful yoga session to start your day.",
-                            EndDate = new DateTime(2024, 12, 5, 8, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://yogajala.com/wp-content/uploads/8-Benefits-Of-Morning-Yoga.jpg",
-                            Location = "Gym 1",
-                            StartDate = new DateTime(2024, 12, 5, 7, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Morning Yoga"
+                            Description = "Join us for a thrilling 10K spring marathon through the city streets.",
+                            EndDate = new DateTime(2025, 4, 12, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://www.chicagospringhalf.com/wp-content/uploads/sites/32/2023/05/2022_SPRCHI_RaceDay_Ali_282-1024x683.jpg",
+                            Location = "Downtown City Center",
+                            StartDate = new DateTime(2025, 4, 12, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Spring City Marathon"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "An intense, high-energy interval training session.",
-                            EndDate = new DateTime(2024, 12, 5, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://i.ytimg.com/vi/66_hHeSUrzU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB88ucCUVHp_EFpv6T47y7oJRpRsQ",
-                            Location = "Gym 2",
-                            StartDate = new DateTime(2024, 12, 5, 18, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "HIIT Challenge"
+                            Description = "A challenging hike to the top of the mountain with stunning views.",
+                            EndDate = new DateTime(2025, 7, 15, 15, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://www.reserveamerica.com/articles/wp-content/uploads/2024/07/11174967-1e85-45df-8097-ac30b3bb1c34.jpg",
+                            Location = "Rocky Mountain Trail",
+                            StartDate = new DateTime(2025, 7, 15, 6, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Mountain Peak Hike"
                         },
                         new
                         {
                             Id = 3,
-                            Description = "A fun and energetic Zumba dance class for all levels.",
-                            EndDate = new DateTime(2024, 12, 6, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            ImageUrl = "https://i.ytimg.com/vi/N3wBXogMYfM/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgUihUMA8=&rs=AOn4CLD9yvCPKa7mHvL_lLUQr-TvnlNYRw",
-                            Location = "Gym 3",
-                            StartDate = new DateTime(2024, 12, 6, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Zumba Party"
+                            Description = "A scenic walk around the beautiful autumn lake. Perfect for relaxation and exercise.",
+                            EndDate = new DateTime(2025, 10, 8, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://images.stockcake.com/public/c/a/0/ca09354d-17f0-4693-b9d3-fb2d399a07c1_large/autumn-lakeside-walk-stockcake.jpg",
+                            Location = "Autumn Lake Park",
+                            StartDate = new DateTime(2025, 10, 8, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Autumn Lake Walk"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "A festive 5K run through a snowy winter park.",
+                            EndDate = new DateTime(2025, 12, 5, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://cdn.shopify.com/s/files/1/0203/9788/3467/files/Craft_AW22_ADV_SubZ_Wool-LS-Tee_4_1024x1024.jpg?v=1695349527",
+                            Location = "Snowy Pines Park",
+                            StartDate = new DateTime(2025, 12, 5, 8, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Winter Wonderland Run"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "Relax and stretch with a peaceful yoga session on the beach.",
+                            EndDate = new DateTime(2025, 6, 20, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://www.townofbethanybeach.com/ImageRepository/Document?documentID=7156",
+                            Location = "Golden Sands Beach",
+                            StartDate = new DateTime(2025, 6, 20, 7, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Summer Beach Yoga"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Description = "Diving is the sport of jumping or falling into water from a platform or springboard, often with acrobatics. It is part of the Olympic Games and also enjoyed recreationally as a non-competitive activity.",
+                            EndDate = new DateTime(2025, 9, 25, 16, 0, 0, 0, DateTimeKind.Unspecified),
+                            ImageUrl = "https://daysym.com/wp-content/uploads/2024/01/dream-about-scuba-diving.jpg",
+                            Location = "Blue hole",
+                            StartDate = new DateTime(2025, 9, 25, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Title = "Diving"
                         });
                 });
 
@@ -193,6 +286,12 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasComment("Primary key");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Biography of the fitness instructor");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -219,54 +318,77 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Instructors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Bio = "Natalie is a certified yoga instructor with over 10 years of experience. She is passionate about helping others achieve their fitness goals and improve their overall well-being.",
+                            FirstName = "Natalie",
+                            ImageUrl = "https://horizonweekly.ca/wp-content/uploads/2021/01/Nat-2.jpg",
+                            LastName = "Asatryan",
+                            Specialization = "Yoga"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bio = "Warren is a certified personal trainer and fitness coach. He specializes in high-intensity interval training (HIIT) and enjoys helping clients push their limits and reach their full potential.",
+                            FirstName = "Warren",
+                            ImageUrl = "https://images.squarespace-cdn.com/content/v1/651489d366d19e59b7bbf9cf/a68428a6-992f-45a4-adfc-1b5a75e5cfda/Warren_square500.jpg",
+                            LastName = "Scott",
+                            Specialization = "HIIT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Bio = "Emily is a certified Zumba instructor with a background in dance and fitness. She loves creating a fun and inclusive environment where everyone can enjoy the benefits of Zumba.",
+                            FirstName = "Emily",
+                            ImageUrl = "https://d29za44huniau5.cloudfront.net/uploads/2023/11/first-class-mobile.png",
+                            LastName = "Johnson",
+                            Specialization = "Zumba"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Bio = "Olivia is a certified Pilates instructor with a passion for helping individuals improve their core strength and flexibility.",
+                            FirstName = "Olivia",
+                            ImageUrl = "https://www.clubpilates.com/hubfs/Leah-Pfrommer-Club-Pilates-instructor-exclusive-interview-with-Athletech-News-1.jpg",
+                            LastName = "Williams",
+                            Specialization = "Pilates"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Bio = "Wolff is a certified strength training coach. He specializes in weightlifting and conditioning, helping clients build muscle and endurance.",
+                            FirstName = "Wolff",
+                            ImageUrl = "https://jwfitnesssystems.com/wp-content/uploads/2023/02/CW1_7335-scaled.jpg",
+                            LastName = "Jameson",
+                            Specialization = "Strength Training"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Bio = "Conor Anthony McGregor (born 14 July 1988) is an Irish professional mixed martial artist, professional boxer, businessman and actor. He is a former Ultimate Fighting Championship (UFC) Featherweight and Lightweight Champion, becoming the first UFC fighter to hold UFC championships in two weight classes simultaneously.",
+                            FirstName = "Conor",
+                            ImageUrl = "https://a.espncdn.com/i/headshots/mma/players/full/3022677.png",
+                            LastName = "McGregor",
+                            Specialization = "ММА"
+                        });
                 });
 
-            modelBuilder.Entity("FitnessApp.Data.Models.Member", b =>
+            modelBuilder.Entity("FitnessApp.Data.Models.MembershipRegistration", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasComment("Primary key");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasComment("Email of the member");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasComment("First name of the member");
-
-                    b.Property<DateTime>("JoinDate")
-                        .HasColumnType("datetime2")
-                        .HasComment("Date whn the member joined the gym");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasComment("Last name of the member");
-
                     b.Property<int>("MembershipTypeId")
-                        .HasColumnType("int")
-                        .HasComment("Membership type of the member");
+                        .HasColumnType("int");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)")
-                        .HasComment("Phone number of the member");
+                    b.Property<string>("MemberId")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.HasKey("MembershipTypeId", "MemberId");
 
-                    b.HasIndex("MembershipTypeId");
+                    b.HasIndex("MemberId");
 
-                    b.ToTable("Members");
+                    b.ToTable("MembershipRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
@@ -278,9 +400,19 @@ namespace FitnessApp.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Description of the membership type");
+
                     b.Property<int>("Duration")
                         .HasColumnType("int")
                         .HasComment("Duration of the membership type in days");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("Image URL of the membership type");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -296,6 +428,44 @@ namespace FitnessApp.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MembershipTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "A basic membership that grants access to all regular classes and gym facilities.",
+                            Duration = 30,
+                            ImageUrl = "https://i0.wp.com/poolstats.co/wp-content/uploads/2019/01/Basic-Membership.png?fit=400%2C327&ssl=1",
+                            Name = "Basic",
+                            Price = 59.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "An elite membership offering access to all classes, gym facilities, and spa treatments.",
+                            Duration = 60,
+                            ImageUrl = "https://cdn.vectorstock.com/i/500p/49/16/elite-gold-label-vector-2944916.jpg",
+                            Name = "Elite",
+                            Price = 99.99m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "A premium membership offering access to all classes, gym facilities, and spa treatments.",
+                            Duration = 180,
+                            ImageUrl = "https://thumbs.dreamstime.com/b/premium-membership-badge-stamp-golden-red-ribbon-text-30827692.jpg",
+                            Name = "Premium",
+                            Price = 299.99m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "An exclusive membership with additional perks including priority booking for events and personal training.",
+                            Duration = 365,
+                            ImageUrl = "https://cdn11.bigcommerce.com/s-2ooutu2zpl/images/stencil/original/products/35315/51564/VIP_Badge_2__62906.1641934958.png?c=2",
+                            Name = "VIP",
+                            Price = 499.99m
+                        });
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
@@ -370,6 +540,36 @@ namespace FitnessApp.Web.Data.Migrations
                             ImageUrl = "https://elementsmassage.com/files/shared/AZ%20-%20Elements%20Massage%205-1864269.jpg",
                             Name = "Aromatherapy Session",
                             Price = 30.00m
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AppointmentDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A therapeutic massage using smooth, heated stones to ease tension.",
+                            Duration = 75,
+                            ImageUrl = "https://images-prod.healthline.com/hlcmsresource/images/topic_centers/1296x728_HEADER_benefits-of-hot-stone-massage.jpg",
+                            Name = "Hot Stone Massage",
+                            Price = 70.00m
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AppointmentDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A massage targeting deeper layers of muscle tissue to release chronic tension.",
+                            Duration = 60,
+                            ImageUrl = "https://propelphysiotherapy.com/wp-content/uploads/2023/08/what-is-deep-tissue-massage-therapy-propel-physiotherapy.jpg",
+                            Name = "Deep Tissue Massage",
+                            Price = 60.00m
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AppointmentDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A detoxifying wrap using nutrient-rich seaweed to revitalize your skin.",
+                            Duration = 90,
+                            ImageUrl = "https://s3.amazonaws.com/salonclouds-uploads/blog/blog_1605466361125864114.png",
+                            Name = "Seaweed Body Wrap",
+                            Price = 85.00m
                         });
                 });
 
@@ -381,14 +581,9 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Property<string>("MemberId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("MemberId1")
-                        .HasColumnType("int");
-
                     b.HasKey("SpaProcedureId", "MemberId");
 
                     b.HasIndex("MemberId");
-
-                    b.HasIndex("MemberId1");
 
                     b.ToTable("SpaRegistrations");
                 });
@@ -538,12 +733,10 @@ namespace FitnessApp.Web.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -580,12 +773,10 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -620,10 +811,6 @@ namespace FitnessApp.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FitnessApp.Data.Models.Member", null)
-                        .WithMany("ClassRegistrations")
-                        .HasForeignKey("MemberId1");
-
                     b.Navigation("Class");
 
                     b.Navigation("Member");
@@ -643,22 +830,26 @@ namespace FitnessApp.Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FitnessApp.Data.Models.Member", null)
-                        .WithMany("EventRegistrations")
-                        .HasForeignKey("MemberId1");
-
                     b.Navigation("FitnessEvent");
 
                     b.Navigation("Member");
                 });
 
-            modelBuilder.Entity("FitnessApp.Data.Models.Member", b =>
+            modelBuilder.Entity("FitnessApp.Data.Models.MembershipRegistration", b =>
                 {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FitnessApp.Data.Models.MembershipType", "MembershipType")
-                        .WithMany("Members")
+                        .WithMany("MembershipRegistrations")
                         .HasForeignKey("MembershipTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Member");
 
                     b.Navigation("MembershipType");
                 });
@@ -670,10 +861,6 @@ namespace FitnessApp.Web.Data.Migrations
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("FitnessApp.Data.Models.Member", null)
-                        .WithMany("SpaRegistrations")
-                        .HasForeignKey("MemberId1");
 
                     b.HasOne("FitnessApp.Data.Models.SpaProcedure", "SpaProcedure")
                         .WithMany("SpaRegistrations")
@@ -752,18 +939,9 @@ namespace FitnessApp.Web.Data.Migrations
                     b.Navigation("Classes");
                 });
 
-            modelBuilder.Entity("FitnessApp.Data.Models.Member", b =>
-                {
-                    b.Navigation("ClassRegistrations");
-
-                    b.Navigation("EventRegistrations");
-
-                    b.Navigation("SpaRegistrations");
-                });
-
             modelBuilder.Entity("FitnessApp.Data.Models.MembershipType", b =>
                 {
-                    b.Navigation("Members");
+                    b.Navigation("MembershipRegistrations");
                 });
 
             modelBuilder.Entity("FitnessApp.Data.Models.SpaProcedure", b =>
