@@ -28,15 +28,15 @@ public class ClassService : IClassService
     /// Get all classes
     /// </summary>
     public async Task<IEnumerable<AllClassesViewModel>> GetAllClassesAsync(
-        string? searchQuery = null, 
-        int? minDuration = null, 
+        string? searchQuery = null,
+        int? minDuration = null,
         int? maxDuration = null)
     {
         var query = _context.Classes.AsQueryable();
 
         if (!string.IsNullOrEmpty(searchQuery))
         {
-            query = query.Where(c => c.Name.Contains(searchQuery));
+            query = query.Where(c => c.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
         }
 
         if (minDuration.HasValue)
@@ -88,28 +88,36 @@ public class ClassService : IClassService
     /// </summary>
     public async Task<ClassesDetailsViewModel?> GetClassDetailsAsync(int id)
     {
-        return await _context.Classes
-            .Where(c => c.Id == id)
-            .Select(c => new ClassesDetailsViewModel
+        var classEntity = await _context.Classes
+            .Include(c => c.Instructor)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+        if (classEntity == null)
+        {
+            return null;
+        }
+
+        var classDetails = new ClassesDetailsViewModel
+        {
+            Id = classEntity.Id,
+            Name = classEntity.Name,
+            Description = classEntity.Description,
+            Price = classEntity.Price,
+            ImageUrl = classEntity.ImageUrl,
+            Schedule = classEntity.Schedule.ToString(ScheduleDateTimeFormat),
+            Duration = classEntity.Duration,
+            Instructor = new InstructorViewModel
             {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                Price = c.Price,
-                ImageUrl = c.ImageUrl,
-                Schedule = c.Schedule.ToString(ScheduleDateTimeFormat),
-                Duration = c.Duration,
-                Instructor = new InstructorViewModel
-                {
-                    Id = c.Instructor.Id,
-                    FirstName = c.Instructor.FirstName,
-                    LastName = c.Instructor.LastName,
-                    ImageUrl = c.Instructor.ImageUrl,
-                    Bio = c.Instructor.Bio,
-                    Specialization = c.Instructor.Specialization
-                }
-            })
-            .FirstOrDefaultAsync();
+                Id = classEntity.Instructor.Id,
+                FirstName = classEntity.Instructor.FirstName,
+                LastName = classEntity.Instructor.LastName,
+                ImageUrl = classEntity.Instructor.ImageUrl,
+                Bio = classEntity.Instructor.Bio,
+                Specialization = classEntity.Instructor.Specialization
+            }
+        };
+
+        return classDetails;
     }
 
     /// <summary>
