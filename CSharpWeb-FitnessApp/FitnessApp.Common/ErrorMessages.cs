@@ -17,6 +17,7 @@ public static class ErrorMessages
         public const string AlreadyRegisteredForEvent = "You have already signed up for this event.";
         public const string UserNotRegisteredForEvent = "You are not registered for this event.";
         public const string EndDateMustBeLaterThanStartDate = "End Date must be later than Start Date.";
+        public const string StartDateCannotBeInThePast = "Start Date cannot be in the past.";
         public const string OnlyMembersCanRegisterForThisEvent = "Only members can register for fitness events.";
     }
 
@@ -37,14 +38,14 @@ public static class ErrorMessages
     {
         public const string MembershipTypeDoesNotExist = "The membership type does not exist.";
         public const string OnlyOneMembershipTypeAllowed = "You can only have one membership type at a time.";
-        public const string MembershipNotPurchased = "You have not purchased a membership";
+        public const string MembershipNotPurchased = "You have not purchased a membership.";
         public const string FailedToAssignMemberRole = "Failed to assign Member role.";
         public const string FailedToRemoveMemberRole = "Failed to remove Member role.";
     }
 
     public static class Instructor
     {
-        public const string InstructorNotFound = "Instructor not found";
+        public const string InstructorNotFound = "Instructor not found.";
         public const string InstructorViewModelCannotBeNull = "Instructor view model cannot be null.";
         public const string UserIdCannotBeEmpty = "User ID cannot be null or empty.";
         public const string InstructorAddError = "An error occurred while adding the instructor.";
