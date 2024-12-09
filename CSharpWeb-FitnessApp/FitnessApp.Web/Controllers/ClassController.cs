@@ -45,30 +45,28 @@ public class ClassController : BaseController
 		return View(model);
 	}
 
-	public async Task<IActionResult> AddToMyClasses(int id)
-	{
-		var userId = GetUserId();
+    public async Task<IActionResult> AddToMyClasses(int id)
+    {
+        var userId = GetUserId();
 
-		try
-		{
-			var model = await _classService.GetClassByIdAsync(id);
+        var model = await _classService.GetClassByIdAsync(id);
+        if (model == null)
+        {
+            ModelState.AddModelError(string.Empty, FitnessClassDoesNotExist);
+            return RedirectToAction(nameof(Details), new { id });
+        }
 
-			if (model == null)
-			{
-				ModelState.AddModelError(string.Empty, FitnessClassDoesNotExist);
-				return RedirectToAction(nameof(Details));
-			}
-
-			await _classService.AddToMyClassesAsync(userId, model);
-
-			return RedirectToAction(nameof(MyClasses));
-		}
-		catch (InvalidOperationException ex)
-		{
-			TempData["ErrorMessage"] = ex.Message;
-			return RedirectToAction(nameof(Details));
-		}
-	}
+        try
+        {
+            await _classService.AddToMyClassesAsync(userId, model);
+            return RedirectToAction(nameof(MyClasses));
+        }
+        catch (InvalidOperationException ex)
+        {
+            TempData["ErrorMessage"] = ex.Message;
+            return RedirectToAction(nameof(Details), new { id });
+        }
+    }
 
 	public async Task<IActionResult> RemoveFromMyClasses(int id)
 	{
