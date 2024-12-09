@@ -24,7 +24,7 @@ public class SpaProcedureService : ISpaProcedureService
     }
 
     /// <summary>
-    /// Get all spa procedures
+    /// Get all spa procedures with pagination
     /// </summary>
     public async Task<PaginatedSpaProceduresViewModel> GetAllSpaProceduresPaginationAsync(string? searchQuery, int pageNumber, int pageSize)
     {
@@ -64,6 +64,9 @@ public class SpaProcedureService : ISpaProcedureService
         return model;
     }
 
+    /// <summary>
+    /// Get all spa procedures
+    /// </summary>
     public async Task<IEnumerable<AllSpaProceduresViewModel>> GetAllSpaProceduresAsync()
     {
         return await _context.SpaProcedures
