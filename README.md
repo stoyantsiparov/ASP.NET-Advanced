@@ -3,31 +3,35 @@ FitnessApp is a modern fitness and wellness application designed to simplify the
 
 Features
 Membership Management
-Browse available membership types with detailed information and pricing.
-Track and manage your memberships.
-Administrators can add, edit, or delete membership types.
+🏷 Browse available membership types with detailed information and pricing.
+📋 Track and manage your memberships.
+🛠 Administer membership types: Add, edit, or delete.
 Class Management
-Search and filter fitness classes by name or duration.
-View class schedules, instructors, and other details.
-Register for classes or remove existing registrations.
-Administrators can manage class records including adding, editing, and deleting classes.
+🔍 Search and filter fitness classes by name or duration.
+📅 View schedules and instructor details.
+✅ Register or remove registrations for classes.
+🛠 Administer classes: Add, edit, or delete records.
 Fitness Event Management
-Explore fitness events with options to search by name or location.
-View detailed event descriptions, schedules, and locations.
-Register or unregister for events.
-Administrators can add, edit, and remove fitness events.
+🌟 Explore events with search options by name or location.
+🗺 View detailed descriptions, schedules, and locations.
+✅ Register or unregister for events.
+🛠 Administer events: Add, edit, or delete events.
 Spa Procedure Management
-Browse a variety of spa procedures with descriptions and pricing.
-Book and manage spa appointments.
-Administrators can manage spa procedures including adding, editing, and deleting records.
+💆 Browse spa procedures with detailed descriptions and pricing.
+🕒 Book and manage spa appointments.
+🛠 Administer spa procedures: Add, edit, or delete records.
 Instructor Management
-View and manage instructors with detailed profiles.
-Administrators can add, edit, or delete instructors.
+👩‍🏫 View instructor profiles with specialization details.
+🛠 Administer instructors: Add, edit, or delete records.
 User Management (Admin Area)
-View all users and assign or remove roles.
-Delete users when necessary.
-
+👥 View all users and manage their roles.
+🔒 Assign or remove roles.
+❌ Delete users when necessary.
 Technologies
-Backend: ASP.NET Core, Entity Framework Core
-Frontend: HTML, CSS, JavaScript (or selected JavaScript framework/library)
-Database: SQL Server
+Backend
+🌐 ASP.NET Core for API and business logic.
+🛠 Entity Framework Core for database interactions.
+Frontend
+🎨 Razor Views with HTML, CSS, and Bootstrap for responsive design.
+Database
+💾 SQL Server for secure and efficient data storage.
