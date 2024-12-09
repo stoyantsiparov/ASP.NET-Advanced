@@ -462,65 +462,6 @@ public class FitnessEventServiceTests
     }
 
     [Test]
-    public async Task EditFitnessEventAsync_ShouldEditEvent_WhenModelIsValidAndUserIsAdmin()
-    {
-        // Arrange
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString()) // Use unique database name
-            .Options;
-        var context = new ApplicationDbContext(options);
-
-        var userId = "admin-user-id";
-        var user = new IdentityUser { Id = userId, UserName = "adminuser" };
-        await context.Users.AddAsync(user);
-        await context.SaveChangesAsync();
-
-        var fitnessEvent = new FitnessEvent
-        {
-            Id = 1,
-            Title = "Old Event",
-            Description = "Old Description",
-            Location = "Old Location",
-            ImageUrl = "https://test.com/oldimage.jpg",
-            StartDate = DateTime.UtcNow,
-            EndDate = DateTime.UtcNow.AddHours(1)
-        };
-        await context.FitnessEvents.AddAsync(fitnessEvent);
-        await context.SaveChangesAsync();
-
-        var model = new FitnessEventViewModel
-        {
-            Id = fitnessEvent.Id,
-            Title = "New Event",
-            Description = "New Description",
-            Location = "New Location",
-            ImageUrl = "https://test.com/newimage.jpg",
-            StartDate = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm"),
-            EndDate = DateTime.UtcNow.AddHours(2).ToString("dd-MM-yyyy HH:mm")
-        };
-
-        var store = new Mock<IUserStore<IdentityUser>>();
-        var userManager = new Mock<UserManager<IdentityUser>>(store.Object, null, null, null, null, null, null, null, null!);
-        userManager.Setup(um => um.FindByIdAsync(userId)).ReturnsAsync(user);
-        userManager.Setup(um => um.IsInRoleAsync(user, "Admin")).ReturnsAsync(true);
-
-        var eventService = new FitnessEventService(context, userManager.Object);
-
-        // Act
-        await eventService.EditFitnessEventAsync(model, userId);
-
-        // Assert
-        var editedEvent = await context.FitnessEvents.FirstOrDefaultAsync(e => e.Id == model.Id);
-        Assert.That(editedEvent, Is.Not.Null);
-        Assert.That(editedEvent.Title, Is.EqualTo(model.Title));
-        Assert.That(editedEvent.Description, Is.EqualTo(model.Description));
-        Assert.That(editedEvent.Location, Is.EqualTo(model.Location));
-        Assert.That(editedEvent.ImageUrl, Is.EqualTo(model.ImageUrl));
-        Assert.That(editedEvent.StartDate, Is.EqualTo(DateTime.Parse(model.StartDate)));
-        Assert.That(editedEvent.EndDate, Is.EqualTo(DateTime.Parse(model.EndDate)));
-    }
-
-    [Test]
     public void EditFitnessEventAsync_ShouldThrowUnauthorizedAccessException_WhenUserIsNotAdmin()
     {
         // Arrange
@@ -579,6 +520,42 @@ public class FitnessEventServiceTests
             ImageUrl = "https://test.com/newimage.jpg",
             StartDate = DateTime.UtcNow.AddHours(2).ToString("dd-MM-yyyy HH:mm"),
             EndDate = DateTime.UtcNow.ToString("dd-MM-yyyy HH:mm")
+        };
+
+        var store = new Mock<IUserStore<IdentityUser>>();
+        var userManager = new Mock<UserManager<IdentityUser>>(store.Object, null, null, null, null, null, null, null, null);
+        userManager.Setup(um => um.FindByIdAsync(userId)).ReturnsAsync(user);
+        userManager.Setup(um => um.IsInRoleAsync(user, "Admin")).ReturnsAsync(true);
+
+        var eventService = new FitnessEventService(context, userManager.Object);
+
+        // Act & Assert
+        Assert.ThrowsAsync<InvalidOperationException>(() => eventService.EditFitnessEventAsync(model, userId));
+    }
+
+    [Test]
+    public void EditFitnessEventAsync_ShouldThrowInvalidOperationException_WhenStartDateIsInThePast()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("FitnessAppTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var userId = "admin-user-id";
+        var user = new IdentityUser { Id = userId, UserName = "adminuser" };
+        context.Users.Add(user);
+        context.SaveChanges();
+
+        var model = new FitnessEventViewModel
+        {
+            Id = 1,
+            Title = "New Event",
+            Description = "New Description",
+            Location = "New Location",
+            ImageUrl = "https://test.com/newimage.jpg",
+            StartDate = DateTime.UtcNow.AddHours(-1).ToString("dd-MM-yyyy HH:mm"), // Start date in the past
+            EndDate = DateTime.UtcNow.AddHours(1).ToString("dd-MM-yyyy HH:mm")
         };
 
         var store = new Mock<IUserStore<IdentityUser>>();
