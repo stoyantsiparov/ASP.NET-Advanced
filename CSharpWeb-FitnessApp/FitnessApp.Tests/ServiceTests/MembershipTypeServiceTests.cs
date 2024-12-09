@@ -391,7 +391,7 @@ public class MembershipTypeServiceTests
 
         // Act & Assert
         var ex = Assert.ThrowsAsync<InvalidOperationException>(() => service.RemoveMyMembershipAsync(userId, membershipTypeViewModel));
-        Assert.That(ex.Message, Is.EqualTo("You have not purchased a membership"));
+        Assert.That(ex.Message, Is.EqualTo("You have not purchased a membership."));
     }
 
     [Test]
