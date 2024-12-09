@@ -34,6 +34,7 @@ public class Program
             .AddDefaultTokenProviders()
             .AddDefaultUI();
 
+        // Configure security settings
         builder.Services.AddControllersWithViews(cfg =>
         {
             cfg.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
