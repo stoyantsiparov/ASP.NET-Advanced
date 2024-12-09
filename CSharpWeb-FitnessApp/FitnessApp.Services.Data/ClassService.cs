@@ -36,7 +36,7 @@ public class ClassService : IClassService
 
         if (!string.IsNullOrEmpty(searchQuery))
         {
-            query = query.Where(c => c.Name.Contains(searchQuery, StringComparison.OrdinalIgnoreCase));
+            query = query.Where(c => c.Name.Contains(searchQuery));
         }
 
         if (minDuration.HasValue)
