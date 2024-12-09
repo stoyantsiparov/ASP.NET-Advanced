@@ -25,10 +25,15 @@
     <ProjectReference Include="..\FitnessApp.Data\FitnessApp.Data.csproj" />
     <ProjectReference Include="..\FitnessApp.Services.Data\FitnessApp.Services.Data.csproj" />
     <ProjectReference Include="..\FitnessApp.Web.ViewModels\FitnessApp.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\FitnessApp.Web\FitnessApp.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ControllerTests\" />
   </ItemGroup>
 
 </Project>
