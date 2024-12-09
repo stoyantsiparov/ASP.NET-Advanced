@@ -7,7 +7,7 @@ using MockQueryable;
 using MockQueryable.Moq;
 using Moq;
 
-namespace FitnessApp.Tests;
+namespace FitnessApp.Tests.ServiceTests;
 
 [TestFixture]
 public class UserServiceTests

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace FitnessApp.Tests;
+namespace FitnessApp.Tests.ServiceTests;
 
 [TestFixture]
 public class MembershipTypeServiceTests

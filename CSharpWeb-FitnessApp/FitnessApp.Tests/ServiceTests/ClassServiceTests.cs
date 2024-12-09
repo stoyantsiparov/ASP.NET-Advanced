@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 
-namespace FitnessApp.Tests;
+namespace FitnessApp.Tests.ServiceTests;
 
 [TestFixture]
 public class ClassServiceTests
