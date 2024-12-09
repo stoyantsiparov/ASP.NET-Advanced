@@ -221,44 +221,49 @@ public class FitnessEventService : IFitnessEventService
 		await _context.SaveChangesAsync();
 	}
 
-	/// <summary>
-	/// Edit fitness event
-	/// </summary>
-	public async Task EditFitnessEventAsync(FitnessEventViewModel model, string userId)
-	{
-		var user = await _userManager.FindByIdAsync(userId);
-		var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
+    /// <summary>
+    /// Edit fitness event
+    /// </summary>
+    public async Task EditFitnessEventAsync(FitnessEventViewModel model, string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        var isAdmin = user != null && await _userManager.IsInRoleAsync(user, AdminRole);
 
-		if (!isAdmin)
-		{
-			throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
-		}
+        if (!isAdmin)
+        {
+            throw new UnauthorizedAccessException(YouAreNotAuthorizedToEdit);
+        }
 
-		var fitnessEvent = await _context.FitnessEvents.FindAsync(model.Id);
+        var fitnessEvent = await _context.FitnessEvents.FindAsync(model.Id);
 
-		if (fitnessEvent == null)
-		{
-			throw new InvalidOperationException(FitnessEventDoesNotExist);
-		}
+        if (fitnessEvent == null)
+        {
+            throw new InvalidOperationException(FitnessEventDoesNotExist);
+        }
 
-		var startDate = DateTime.Parse(model.StartDate);
-		var endDate = DateTime.Parse(model.EndDate);
+        var startDate = DateTime.Parse(model.StartDate);
+        var endDate = DateTime.Parse(model.EndDate);
 
-		if (endDate <= startDate)
-		{
-			throw new InvalidOperationException(EndDateMustBeLaterThanStartDate);
-		}
+        if (endDate <= startDate)
+        {
+            throw new InvalidOperationException(EndDateMustBeLaterThanStartDate);
+        }
 
-		fitnessEvent.Title = model.Title;
-		fitnessEvent.Description = model.Description;
-		fitnessEvent.Location = model.Location;
-		fitnessEvent.ImageUrl = model.ImageUrl;
-		fitnessEvent.StartDate = startDate;
-		fitnessEvent.EndDate = endDate;
+        if (startDate < DateTime.Now)
+        {
+            throw new InvalidOperationException(StartDateCannotBeInThePast);
+        }
 
-		_context.FitnessEvents.Update(fitnessEvent);
-		await _context.SaveChangesAsync();
-	}
+        fitnessEvent.Title = model.Title;
+        fitnessEvent.Description = model.Description;
+        fitnessEvent.Location = model.Location;
+        fitnessEvent.ImageUrl = model.ImageUrl;
+        fitnessEvent.StartDate = startDate;
+        fitnessEvent.EndDate = endDate;
+
+        _context.FitnessEvents.Update(fitnessEvent);
+        await _context.SaveChangesAsync();
+    }
 
 	/// <summary>
 	/// Get fitness event for delete
