@@ -5,6 +5,8 @@ using FitnessApp.Services.Data.Contracts;
 using FitnessApp.Web.ViewModels.ClassViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace FitnessApp.Tests;
@@ -844,6 +846,213 @@ public class ClassServiceTests
 
         // Act & Assert
         Assert.ThrowsAsync<UnauthorizedAccessException>(() => classService.DeleteClassAsync(1, "testUserId"));
+    }
+
+    [Test]
+    public async Task GetClassByIdAsync_ShouldReturnNull_WhenClassDoesNotExist()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("GetClassByIdTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var classService = new ClassService(context, null);
+
+        // Act
+        var result = await classService.GetClassByIdAsync(999); // Non-existing ID
+
+        // Assert
+        Assert.That(result, Is.Null);
+    }
+
+    [Test]
+    public async Task GetMyClassesAsync_ShouldReturnUserClasses()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("GetMyClassesTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var userManagerMock = new Mock<UserManager<IdentityUser>>(
+            new Mock<IUserStore<IdentityUser>>().Object,
+            new Mock<IOptions<IdentityOptions>>().Object,
+            new Mock<IPasswordHasher<IdentityUser>>().Object,
+            new IUserValidator<IdentityUser>[0],
+            new IPasswordValidator<IdentityUser>[0],
+            new Mock<ILookupNormalizer>().Object,
+            new Mock<IdentityErrorDescriber>().Object,
+            new Mock<IServiceProvider>().Object,
+            new Mock<ILogger<UserManager<IdentityUser>>>().Object);
+
+        var user = new IdentityUser { Id = "testUserId" };
+        userManagerMock.Setup(um => um.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(user);
+
+        var classService = new ClassService(context, userManagerMock.Object);
+
+        var classEntity = new Class
+        {
+            Id = 1,
+            Name = "Morning Yoga",
+            ImageUrl = "http://example.com/image.jpg",
+            Schedule = DateTime.Now,
+            Duration = 60,
+            Description = "A relaxing morning yoga session."
+        };
+        context.Classes.Add(classEntity);
+
+        var classRegistration = new ClassRegistration
+        {
+            ClassId = 1,
+            MemberId = "testUserId"
+        };
+        context.ClassesRegistrations.Add(classRegistration);
+
+        await context.SaveChangesAsync();
+
+        // Act
+        var result = await classService.GetMyClassesAsync("testUserId");
+
+        // Assert
+        Assert.That(result, Is.Not.Null);
+        Assert.That(result.Count(), Is.EqualTo(1));
+        var classViewModel = result.First();
+        Assert.That(classViewModel.Id, Is.EqualTo(1));
+        Assert.That(classViewModel.Name, Is.EqualTo("Morning Yoga"));
+        Assert.That(classViewModel.ImageUrl, Is.EqualTo("http://example.com/image.jpg"));
+        Assert.That(classViewModel.Schedule, Is.EqualTo(classEntity.Schedule.ToString("dd-MM-yyyy HH:mm")));
+        Assert.That(classViewModel.Duration, Is.EqualTo(60));
+    }
+
+    [Test]
+    public async Task AddToMyClassesAsync_ShouldAddClassRegistrationSuccessfully()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("AddToMyClassesTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var userManagerMock = new Mock<UserManager<IdentityUser>>(
+            new Mock<IUserStore<IdentityUser>>().Object, null, null, null, null, null, null, null, null);
+        var user = new IdentityUser { Id = "testUserId" };
+        userManagerMock.Setup(um => um.FindByIdAsync(It.IsAny<string>())).ReturnsAsync(user);
+        userManagerMock.Setup(um => um.GetRolesAsync(It.IsAny<IdentityUser>())).ReturnsAsync(new List<string> { "Member" });
+
+        var classService = new ClassService(context, userManagerMock.Object);
+
+        var classEntity = new Class
+        {
+            Id = 1,
+            Name = "Morning Yoga",
+            Description = "A refreshing morning yoga session.",
+            Price = 30.00m,
+            ImageUrl = "https://example.com/morning-yoga.jpg",
+            Schedule = DateTime.Now,
+            Duration = 60,
+            InstructorId = 1
+        };
+        context.Classes.Add(classEntity);
+        await context.SaveChangesAsync();
+
+        var model = new ClassesViewModel
+        {
+            Id = 1,
+            Name = "Morning Yoga",
+            Description = "A refreshing morning yoga session.",
+            Price = 30.00m,
+            ImageUrl = "https://example.com/morning-yoga.jpg",
+            Schedule = DateTime.Now.ToString(),
+            Duration = 60,
+            InstructorId = 1
+        };
+
+        // Act
+        await classService.AddToMyClassesAsync("testUserId", model);
+
+        // Assert
+        var registration = await context.ClassesRegistrations
+            .FirstOrDefaultAsync(cr => cr.MemberId == "testUserId" && cr.ClassId == 1);
+        Assert.That(registration, Is.Not.Null);
+    }
+
+    [Test]
+    public void AddToMyClassesAsync_ShouldThrowArgumentException_WhenUserIdIsEmpty()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("AddToMyClassesTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var userManagerMock = new Mock<UserManager<IdentityUser>>(
+            new Mock<IUserStore<IdentityUser>>().Object, null, null, null, null, null, null, null, null);
+
+        var classService = new ClassService(context, userManagerMock.Object);
+
+        var model = new ClassesViewModel
+        {
+            Id = 1,
+            Name = "Morning Yoga",
+            Description = "A refreshing morning yoga session.",
+            Price = 30.00m,
+            ImageUrl = "https://example.com/morning-yoga.jpg",
+            Schedule = DateTime.Now.ToString(),
+            Duration = 60,
+            InstructorId = 1
+        };
+
+        // Act & Assert
+        Assert.ThrowsAsync<ArgumentException>(() => classService.AddToMyClassesAsync("", model));
+    }
+
+    [Test]
+    public void AddToMyClassesAsync_ShouldThrowArgumentNullException_WhenClassesViewModelIsNull()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("AddToMyClassesTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var userManagerMock = new Mock<UserManager<IdentityUser>>(
+            new Mock<IUserStore<IdentityUser>>().Object, null, null, null, null, null, null, null, null);
+
+        var classService = new ClassService(context, userManagerMock.Object);
+
+        // Act & Assert
+        Assert.ThrowsAsync<ArgumentNullException>(() => classService.AddToMyClassesAsync("testUserId", null));
+    }
+
+    [Test]
+    public async Task AddToMyClassesAsync_ShouldThrowInvalidOperationException_WhenClassDoesNotExist()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase("AddToMyClassesTestDb")
+            .Options;
+        var context = new ApplicationDbContext(options);
+
+        var userManagerMock = new Mock<UserManager<IdentityUser>>(
+            new Mock<IUserStore<IdentityUser>>().Object, null, null, null, null, null, null, null, null);
+
+        var classService = new ClassService(context, userManagerMock.Object);
+
+        var model = new ClassesViewModel
+        {
+            Id = 999, // Non-existing class ID
+            Name = "Morning Yoga",
+            Description = "A refreshing morning yoga session.",
+            Price = 30.00m,
+            ImageUrl = "https://example.com/morning-yoga.jpg",
+            Schedule = DateTime.Now.ToString(),
+            Duration = 60,
+            InstructorId = 1
+        };
+
+        // Act & Assert
+        Assert.ThrowsAsync<InvalidOperationException>(() => classService.AddToMyClassesAsync("testUserId", model));
     }
 
     [TearDown]
