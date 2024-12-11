@@ -6,5 +6,7 @@
         public const string UserRole = "User";
         public const string MemberRole = "Member";
         public const string AdminRole = "Admin";
+        public const string InvalidData = "Invalid data. Please correct the errors and try again.";
+
     }
 }
