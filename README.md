@@ -38,3 +38,18 @@ FitnessApp is a modern fitness and wellness application designed to simplify the
 * 🎨 Razor Views with HTML, CSS, and Bootstrap for responsive design.
 #### Database
 * 💾 SQL Server for secure and efficient data storage.
+## Installation
+* Clone the repository:
+```bash
+git clone <repo-url>
+```
+* Set up the database connection in appsettings.json.
+* Run database migrations:
+```bash
+dotnet ef database update
+```
+* Launch the application:
+```bash
+dotnet run
+```
+
