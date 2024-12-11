@@ -28,130 +28,137 @@ public class InstructorsManagementController : BaseController
     }
 
     [HttpGet]
-	public async Task<IActionResult> Add()
-	{
-		var model = await _instructorService.GetInstructorForAddAsync();
+    public async Task<IActionResult> Add()
+    {
+        var model = await _instructorService.GetInstructorForAddAsync();
 
-		return View(model);
-	}
+        return View(model);
+    }
 
-	[HttpPost]
-	public async Task<IActionResult> Add(AddInstructorViewModel model)
-	{
-		if (model == null)
-		{
-			ModelState.AddModelError(string.Empty, InstructorViewModelCannotBeNull);
-			return View(model);
-		}
+    [HttpPost]
+    public async Task<IActionResult> Add(AddInstructorViewModel model)
+    {
+        if (model == null)
+        {
+            TempData["ErrorMessage"] = InstructorViewModelCannotBeNull;
+            return View(model);
+        }
 
-		if (!ModelState.IsValid)
-		{
-			return View(model);
-		}
+        if (!ModelState.IsValid)
+        {
+            TempData["ErrorMessage"] = InvalidData;
+            return View(model);
+        }
 
-		try
-		{
-			var userId = GetUserId();
-			if (string.IsNullOrEmpty(userId))
-			{
-				ModelState.AddModelError(string.Empty, UserIdCannotBeEmpty);
-				return View(model);
-			}
+        try
+        {
+            var userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                TempData["ErrorMessage"] = UserIdCannotBeEmpty;
+                return View(model);
+            }
 
-			await _instructorService.AddInstructorAsync(model, userId);
-			return RedirectToAction(nameof(Index));
-		}
-		catch (Exception)
-		{
-			ModelState.AddModelError(string.Empty, InstructorAddError);
-			return View(model);
-		}
-	}
+            await _instructorService.AddInstructorAsync(model, userId);
+            TempData["SuccessMessage"] = InstructorAddedSuccessfully;
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = InstructorAddError;
+            return View(model);
+        }
+    }
 
-	[HttpGet]
-	public async Task<IActionResult> Edit(int id)
-	{
-		if (id <= 0)
-		{
-			return RedirectToAction(nameof(Index));
-		}
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        if (id <= 0)
+        {
+            TempData["ErrorMessage"] = InvalidInstructorId;
+            return RedirectToAction(nameof(Index));
+        }
 
-		var model = await _instructorService.GetInstructorByIdAsync(id);
+        var model = await _instructorService.GetInstructorByIdAsync(id);
 
-		if (model == null)
-		{
-			return RedirectToAction(nameof(Index));
-		}
+        if (model == null)
+        {
+            TempData["ErrorMessage"] = InstructorNotFound;
+            return RedirectToAction(nameof(Index));
+        }
 
-		return View(model);
-	}
+        return View(model);
+    }
 
-	[HttpPost]
-	public async Task<IActionResult> Edit(InstructorViewModel model)
-	{
-		if (model == null)
-		{
-			ModelState.AddModelError(string.Empty, InstructorViewModelCannotBeNull);
-			return View(model);
-		}
+    [HttpPost]
+    public async Task<IActionResult> Edit(InstructorViewModel model)
+    {
+        if (model == null)
+        {
+            TempData["ErrorMessage"] = InstructorViewModelCannotBeNull;
+            return View(model);
+        }
 
-		if (!ModelState.IsValid)
-		{
-			return View(model);
-		}
+        if (!ModelState.IsValid)
+        {
+            TempData["ErrorMessage"] = InvalidData;
+            return View(model);
+        }
 
-		var userId = GetUserId();
+        try
+        {
+            var userId = GetUserId();
+            await _instructorService.EditInstructorAsync(model, userId);
+            TempData["SuccessMessage"] = InstructorUpdatedSuccessfully;
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = InstructorEditError;
+            return View(model);
+        }
+    }
 
-		try
-		{
-			await _instructorService.EditInstructorAsync(model, userId);
-			return RedirectToAction(nameof(Index));
-		}
-		catch (Exception)
-		{
-			ModelState.AddModelError(string.Empty, InstructorEditError);
-			return View(model);
-		}
-	}
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+        if (id <= 0)
+        {
+            TempData["ErrorMessage"] = InvalidInstructorId;
+            return RedirectToAction(nameof(Index));
+        }
 
-	[HttpGet]
-	public async Task<IActionResult> Delete(int id)
-	{
-		if (id <= 0)
-		{
-			return RedirectToAction(nameof(Index));
-		}
+        var model = await _instructorService.GetInstructorForDeleteAsync(id);
 
-		var model = await _instructorService.GetInstructorForDeleteAsync(id);
+        if (model == null)
+        {
+            TempData["ErrorMessage"] = InstructorNotFound;
+            return RedirectToAction(nameof(Index));
+        }
 
-		if (model == null)
-		{
-			return RedirectToAction(nameof(Index));
-		}
+        return View(model);
+    }
 
-		return View(model);
-	}
+    [HttpPost]
+    public async Task<IActionResult> Delete(DeleteInstructorViewModel model)
+    {
+        if (model == null || model.Id <= 0)
+        {
+            TempData["ErrorMessage"] = InvalidInstructorId;
+            return RedirectToAction(nameof(Index));
+        }
 
-	[HttpPost]
-	public async Task<IActionResult> Delete(DeleteInstructorViewModel model)
-	{
-		if (model == null || model.Id <= 0)
-		{
-			return RedirectToAction(nameof(Index));
-		}
+        try
+        {
+            var userId = GetUserId();
+            await _instructorService.DeleteInstructorAsync(model.Id, userId);
+            TempData["SuccessMessage"] = InstructorDeletedSuccessfully;
+        }
+        catch (Exception)
+        {
+            TempData["ErrorMessage"] = InstructorDeleteError;
+        }
 
-		var userId = GetUserId();
-
-		try
-		{
-			await _instructorService.DeleteInstructorAsync(model.Id, userId);
-			TempData["SuccessMessage"] = InstructorDeletedSuccessfully;
-		}
-		catch (Exception)
-		{
-			TempData["ErrorMessage"] = InstructorDeleteError;
-		}
-
-		return RedirectToAction(nameof(Index));
-	}
+        return RedirectToAction(nameof(Index));
+    }
 }
