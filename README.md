@@ -41,7 +41,7 @@ FitnessApp is a modern fitness and wellness application designed to simplify the
 ## Installation
 * Clone the repository:
 ```bash
-git clone <repo-url>
+git clone https://github.com/stoyantsiparov/Fitness-App.git
 ```
 * Set up the database connection in appsettings.json.
 * Run database migrations:
