@@ -26,13 +26,6 @@
 			<p><strong>Bio:</strong> @Model.Bio</p>
 			<p><strong>Specialization:</strong> @Model.Specialization</p>
 
-			@if (TempData["ErrorMessage"] != null)
-			{
-				<div class="alert alert-danger" role="alert">
-					@TempData["ErrorMessage"]
-				</div>
-			}
-
 			<a asp-controller="Instructor" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
 		</div>
 	</div>

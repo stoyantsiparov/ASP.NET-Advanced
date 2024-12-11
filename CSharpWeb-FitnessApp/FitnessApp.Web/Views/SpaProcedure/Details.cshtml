@@ -23,13 +23,6 @@
 			<p><strong>Price:</strong> @Model.Price.ToString("C")</p>
 			<p><strong>Duration:</strong> @Model.Duration minutes</p>
 
-			@if (TempData["ErrorMessage"] != null)
-			{
-				<div class="alert alert-danger" role="alert">
-					@TempData["ErrorMessage"]
-				</div>
-			}
-
 			<form method="post" asp-action="AddToMySpaAppointments" asp-route-id="@Model.Id">
 				<div class="form-group">
 					<label for="appointmentDateTime">Select Appointment Date and Time</label>

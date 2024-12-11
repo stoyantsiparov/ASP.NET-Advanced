@@ -24,13 +24,6 @@
 			<p><strong>Schedule:</strong> @Model.Schedule</p>
 			<p><strong>Duration:</strong> @Model.Duration minutes</p>
 
-			@if (TempData["ErrorMessage"] != null)
-			{
-				<div class="alert alert-danger">
-					@TempData["ErrorMessage"]
-				</div>
-			}
-
 			<form method="post" asp-action="AddToMyClasses" asp-route-id="@Model.Id">
 				<button type="submit" class="btn btn-primary mt-2 w-100">Register</button>
 				<a asp-controller="Class" asp-action="Index" class="btn btn-success mt-2 w-100" style="border: none;">Back</a>
