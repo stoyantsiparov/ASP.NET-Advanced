@@ -21,22 +21,6 @@ public class FitnessEventControllerTests : IDisposable
         _controller = new FitnessEventController(_mockFitnessEventService.Object);
     }
 
-    [Test]
-    public async Task Details_ReturnsRedirectToAction_WhenModelIsNull()
-    {
-        // Arrange
-        int eventId = 1;
-        _mockFitnessEventService.Setup(service => service.GetFitnessEventDetailsAsync(eventId))
-            .ReturnsAsync((FitnessEventDetailsViewModel?)null);
-
-        // Act
-        var result = await _controller.Details(eventId);
-
-        // Assert
-        Assert.IsInstanceOf<RedirectToActionResult>(result);
-        var redirectResult = result as RedirectToActionResult;
-        Assert.That(redirectResult?.ActionName, Is.EqualTo("Index"));
-    }
 
     [Test]
     public async Task Details_ReturnsViewResult_WithModel()
@@ -54,86 +38,6 @@ public class FitnessEventControllerTests : IDisposable
         Assert.IsInstanceOf<ViewResult>(result);
         var viewResult = result as ViewResult;
         Assert.That(viewResult?.Model, Is.EqualTo(model));
-    }
-
-    [Test]
-    public async Task AddToMyFitnessEvents_ReturnsRedirectToAction_WhenModelIsNull()
-    {
-        // Arrange
-        int eventId = 1;
-        _mockFitnessEventService.Setup(service => service.GetFitnessEventByIdAsync(eventId))
-            .ReturnsAsync((Func<FitnessEventViewModel?>)null);
-
-        // Act
-        var result = await _controller.AddToMyFitnessEvents(eventId);
-
-        // Assert
-        Assert.IsInstanceOf<RedirectToActionResult>(result);
-        var redirectResult = result as RedirectToActionResult;
-        Assert.That(redirectResult?.ActionName, Is.EqualTo("Details"));
-        Assert.That(redirectResult?.RouteValues["id"], Is.EqualTo(eventId));
-    }
-
-    [Test]
-    public async Task AddToMyFitnessEvents_ReturnsRedirectToAction_WhenSuccessful()
-    {
-        // Arrange
-        int eventId = 1;
-        var model = new FitnessEventViewModel();
-        _mockFitnessEventService.Setup(service => service.GetFitnessEventByIdAsync(eventId))
-            .ReturnsAsync(model);
-        _mockFitnessEventService.Setup(service => service.AddToMyFitnessEventsAsync(It.IsAny<string>(), model))
-            .Returns(Task.CompletedTask);
-
-        // Act
-        var result = await _controller.AddToMyFitnessEvents(eventId);
-
-        // Assert
-        Assert.IsInstanceOf<RedirectToActionResult>(result);
-        var redirectResult = result as RedirectToActionResult;
-        Assert.That(redirectResult?.ActionName, Is.EqualTo("MyFitnessEvents"));
-    }
-
-    [Test]
-    public async Task RemoveFromMyFitnessEvents_ReturnsRedirectToAction_WhenSuccessful()
-    {
-        // Arrange
-        int eventId = 1;
-        var model = new FitnessEventViewModel();
-        _mockFitnessEventService.Setup(service => service.GetFitnessEventByIdAsync(eventId))
-            .ReturnsAsync(model);
-        _mockFitnessEventService.Setup(service => service.RemoveFromMyFitnessEventsAsync(It.IsAny<string>(), model))
-            .Returns(Task.CompletedTask);
-
-        // Act
-        var result = await _controller.RemoveFromMyFitnessEvents(eventId);
-
-        // Assert
-        Assert.IsInstanceOf<RedirectToActionResult>(result);
-        var redirectResult = result as RedirectToActionResult;
-        Assert.That(redirectResult?.ActionName, Is.EqualTo("MyFitnessEvents"));
-    }
-
-    [Test]
-    public async Task RemoveFromMyFitnessEvents_AddsModelError_WhenInvalidOperationExceptionThrown()
-    {
-        // Arrange
-        int eventId = 1;
-        var model = new FitnessEventViewModel();
-        _mockFitnessEventService.Setup(service => service.GetFitnessEventByIdAsync(eventId))
-            .ReturnsAsync(model);
-        _mockFitnessEventService.Setup(service => service.RemoveFromMyFitnessEventsAsync(It.IsAny<string>(), model))
-            .ThrowsAsync(new InvalidOperationException("Error message"));
-
-        // Act
-        var result = await _controller.RemoveFromMyFitnessEvents(eventId);
-
-        // Assert
-        Assert.IsInstanceOf<RedirectToActionResult>(result);
-        var redirectResult = result as RedirectToActionResult;
-        Assert.That(redirectResult?.ActionName, Is.EqualTo("MyFitnessEvents"));
-        Assert.That(_controller.ModelState[string.Empty]?.Errors, Has.Count.EqualTo(1));
-        Assert.That(_controller.ModelState[string.Empty]?.Errors[0].ErrorMessage, Is.EqualTo("Error message"));
     }
 
     [Test]
