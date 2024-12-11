@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static FitnessApp.Common.ErrorMessages.FitnessEvent;
+using static FitnessApp.Common.SuccessfulValidationMessages.FitnessEvent;
 
 namespace FitnessApp.Web.Controllers;
 
@@ -12,7 +13,7 @@ public class FitnessEventController : BaseController
     public FitnessEventController(IFitnessEventService fitnessEventService)
     {
         _fitnessEventService = fitnessEventService;
-    }   
+    }
 
     [AllowAnonymous]
     public async Task<IActionResult> Index(string? searchQuery = null)
@@ -38,6 +39,7 @@ public class FitnessEventController : BaseController
 
         if (model == null)
         {
+            TempData["ErrorMessage"] = UserNotRegisteredForEvent;
             return RedirectToAction(nameof(Index));
         }
 
@@ -46,39 +48,52 @@ public class FitnessEventController : BaseController
 
     public async Task<IActionResult> AddToMyFitnessEvents(int id)
     {
-        var userId = GetUserId();
-
         var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
+
         if (model == null)
         {
-            ModelState.AddModelError(string.Empty, FitnessEventDoesNotExist);
+            TempData["ErrorMessage"] = UserNotRegisteredForEvent;
             return RedirectToAction(nameof(Details), new { id });
         }
+
+        var userId = GetUserId();
 
         try
         {
             await _fitnessEventService.AddToMyFitnessEventsAsync(userId, model);
-            return RedirectToAction(nameof(MyFitnessEvents));
+            TempData["SuccessMessage"] = FitnessEventAddedSuccessfully;
+
         }
         catch (InvalidOperationException ex)
         {
             TempData["ErrorMessage"] = ex.Message;
             return RedirectToAction(nameof(Details), new { id });
         }
+
+        return RedirectToAction(nameof(MyFitnessEvents));
     }
 
     public async Task<IActionResult> RemoveFromMyFitnessEvents(int id)
     {
+        var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
+
+        if (model == null)
+        {
+            TempData["ErrorMessage"] = UserNotRegisteredForEvent;
+            return RedirectToAction(nameof(MyFitnessEvents));
+        }
+
         var userId = GetUserId();
 
         try
         {
-            var model = await _fitnessEventService.GetFitnessEventByIdAsync(id);
             await _fitnessEventService.RemoveFromMyFitnessEventsAsync(userId, model);
+            TempData["SuccessMessage"] = FitnessEventRemovedSuccessfully;
         }
         catch (InvalidOperationException ex)
         {
-            ModelState.AddModelError(string.Empty, ex.Message);
+            TempData["ErrorMessage"] = ex.Message;
+            return RedirectToAction(nameof(MyFitnessEvents));
         }
 
         return RedirectToAction(nameof(MyFitnessEvents));
